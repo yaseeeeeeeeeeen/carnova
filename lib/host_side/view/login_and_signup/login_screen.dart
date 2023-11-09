@@ -159,12 +159,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 BlocConsumer<LoginBloc, LoginBlocState>(
                                   listener: (context, state) {
                                     if (state is LoginSuccsessState) {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const CoustomNavBar()));
+                                      navigateToHome(context);
+                                    } else if (state is LoginProcessState) {
+                                      navigateToHome(context);
                                     } else if (state is LoginFailedState) {
-                                      print("Login Failed");
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(customSnackbar(
                                               context, false, "Login Failed"));
@@ -225,5 +223,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         )))))));
   }
 
-  // sign user in method
+  navigateToHome(context) {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const CoustomNavBar()),
+        (route) => false);
+  }
 }

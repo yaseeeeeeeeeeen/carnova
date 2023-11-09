@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/host_side/blocs/login/login_bloc_bloc.dart';
+import 'package:second_project/host_side/blocs/otp_verifiaction/otp_verfication_bloc.dart';
 import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
 
 import 'package:second_project/host_side/resources/constants/colors.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
-
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginBloc(),
         ),
+        BlocProvider(
+          create: (context) => HostOtpVerficationBloc(),
+        )
       ],
       child: const MaterialApp(
           debugShowCheckedModeBanner: false, home: LoginScreen()),

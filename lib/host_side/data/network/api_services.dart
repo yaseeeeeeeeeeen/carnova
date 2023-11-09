@@ -14,8 +14,9 @@ class ApiServiceHost {
     final body = jsonEncode(hostDetails);
 
     final response = await http.post(url, body: body, headers: headers);
+    // ignore: avoid_print
     print(response.statusCode);
-    print(response.body);
+
     return response;
   }
 

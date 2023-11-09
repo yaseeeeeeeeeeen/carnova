@@ -6,6 +6,7 @@ import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/host_side/resources/components/custom_button.dart';
 import 'package:second_project/host_side/resources/components/custom_textfield.dart';
 import 'package:second_project/host_side/resources/constants/colors.dart';
+import 'package:second_project/host_side/utils/snackbar.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
 import 'package:second_project/host_side/view/login_and_signup/signup_otp.dart';
 
@@ -125,16 +126,20 @@ class SignupScreen extends StatelessWidget {
                               BlocConsumer<SignupBloc, SignupBlocState>(
                                 listener: (context, state) {
                                   if (state is SignupSuccsessState) {
-                                    print('ALlll setttt');
+                                    customSnackbar(
+                                        context, true, "Welcome To Carnova.");
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 SignupOtpScreen(
-                                                    email: userData["email"])));
+                                                    email: userData["email"]
+                                                        .toString())));
                                   } else if (state is SignupFaildState) {
-                                    print("erorrrrrr");
+                                    customSnackbar(context, false,
+                                        "SignIn Failed Try again");
                                   } else if (state is SignupErrorState) {
-                                    print('something wrong');
+                                    customSnackbar(
+                                        context, false, "Something Wrong");
                                   }
                                 },
                                 builder: (context, state) {

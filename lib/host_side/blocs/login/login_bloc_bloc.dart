@@ -15,10 +15,13 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
       LoginClickedEvent event, Emitter<LoginBlocState> emit) async {
     emit(LoginLoadingState());
     final response = await ApiServiceHost.instance.hostLogin(event.mailandpass);
+    // ignore: avoid_print
     print("body:  ${response.body}---- statusCode: ${response.statusCode}");
     if (response.statusCode == 200) {
       emit(LoginSuccsessState());
     } else if (response.statusCode == 400) {
+      emit(LoginProcessState());
+    } else if (response.statusCode == 404) {
       emit(LoginFailedState());
     } else {
       emit(LoginErrorState());

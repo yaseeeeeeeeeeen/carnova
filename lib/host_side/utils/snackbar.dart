@@ -12,7 +12,7 @@ SnackBar customSnackbar(context, bool error, String messege) {
         error ? CupertinoColors.activeGreen : CupertinoColors.destructiveRed,
     duration: const Duration(seconds: 3),
     behavior: SnackBarBehavior.floating,
-    margin: EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
   );
 }
