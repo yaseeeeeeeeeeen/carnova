@@ -4,20 +4,21 @@ import 'package:advance_animated_progress_indicator/advance_animated_progress_in
 import 'package:dotted_border/dotted_border.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:second_project/host_side/blocs/document_upload/document_upload_bloc.dart';
+
 import 'package:second_project/host_side/resources/components/custom_button.dart';
 import 'package:second_project/host_side/resources/components/custom_navbar.dart';
-import 'package:second_project/host_side/utils/image_picker.dart';
+import 'package:second_project/host_side/utils/snackbar.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
 
 // ignore: must_be_immutable
 class DocumetUpload extends StatelessWidget {
   DocumetUpload({super.key});
 
-  File? selectImage;
+  bool imageSelected = false;
 
   String? selectImagePath;
 
@@ -54,92 +55,133 @@ class DocumetUpload extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: GestureDetector(
                             onTap: () async {
-                              final pickedimage = await ImagePickService()
-                                  .pickCropImage(
-                                      cropAspectRatio: const CropAspectRatio(
-                                          ratioX: 16, ratioY: 9),
-                                      imageSource: ImageSource.gallery);
-                              if (pickedimage != null) {}
+                              context.read<DocumentUploadBloc>().add(
+                                  DocumentUploadClicked(imageUploaded: true));
                             },
                             child: Stack(
                               children: [
-                                Container(
-                                    color: Colors.grey,
-                                    height:
-                                        MediaQuery.sizeOf(context).height / 4.5,
-                                    width: MediaQuery.sizeOf(context).width,
-                                    child: selectImagePath != null
-                                        ? Image(
-                                            image: FileImage(
-                                                File(selectImagePath!)))
-                                        : Center(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const SizedBox(),
-                                                const Icon(
-                                                    Icons.file_upload_outlined,
-                                                    color: Colors.black,
-                                                    size: 80),
-                                                Text(
-                                                  'Browse to upload',
-                                                  style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 20),
-                                                )
-                                              ],
-                                            ),
-                                          )),
+                                BlocConsumer<DocumentUploadBloc,
+                                    DocumentUploadState>(
+                                  listener: (context, state) {
+                                    if (state is DocumentUploadSuccsessState) {
+                                      selectImagePath = state.imagePath;
+                                    } else if (state
+                                        is DocumentUploadFailedState) {
+                                      customSnackbar(context, false,
+                                          "Something Wrong Try Again");
+                                    } else if (state is DocumentClearedState) {
+                                      selectImagePath = null;
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return Container(
+                                        color: Colors.grey,
+                                        height:
+                                            MediaQuery.sizeOf(context).height /
+                                                4.5,
+                                        width: MediaQuery.sizeOf(context).width,
+                                        child: selectImagePath != null
+                                            ? Image(
+                                                image: FileImage(
+                                                    File(selectImagePath!)),
+                                                fit: BoxFit.cover)
+                                            : Center(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    const SizedBox(),
+                                                    const Icon(
+                                                        Icons
+                                                            .file_upload_outlined,
+                                                        color: Colors.black,
+                                                        size: 80),
+                                                    Text(
+                                                      'Browse to upload',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 20),
+                                                    )
+                                                  ],
+                                                ),
+                                              ));
+                                  },
+                                ),
                                 Positioned(
-                                  top: 10,
-                                  right: 10,
-                                  child: InkWell(
-                                    onTap: () {
-                                      // selectImagePath = null;
-                                    },
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                      ),
-                                      child: const Icon(
-                                        Icons.close,
-                                        size: 20,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                    top: 10,
+                                    right: 10,
+                                    child: InkWell(
+                                        onTap: () {
+                                          context
+                                              .read<DocumentUploadBloc>()
+                                              .add(ImageClearButton());
+                                        },
+                                        child: Container(
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white,
+                                            ),
+                                            child: const Icon(
+                                              Icons.close,
+                                              size: 20,
+                                              color: Colors.black,
+                                            ))))
                               ],
                             ),
                           )),
                     ),
-                    //space for progress indicator
-                    Container(
-                      width: 320,
-                      height: 100,
-                      margin:
-                          const EdgeInsets.only(top: 10, left: 10, right: 10),
-                      child: AnimatedLinearProgressIndicator(
-                        indicatorColor: Colors.green,
-                        indicatorBackgroundColor: Colors.black,
-                        labelStyle: GoogleFonts.poppins(color: Colors.black),
-                        percentageTextStyle:
-                            const TextStyle(color: Colors.black),
-                        percentage: selectImagePath == null ? 0 : 1,
-                        animationDuration: const Duration(
-                          seconds: 1,
-                        ),
-                        label: 'Document',
-                      ),
+                    BlocBuilder<DocumentUploadBloc, DocumentUploadState>(
+                      builder: (context, state) {
+                        if (state is DocumentUploadSuccsessState) {
+                          imageSelected = true;
+                        } else {
+                          imageSelected = false;
+                        }
+                        return Container(
+                          width: 320,
+                          height: 100,
+                          margin: const EdgeInsets.only(
+                              top: 10, left: 10, right: 10),
+                          child: AnimatedLinearProgressIndicator(
+                            indicatorColor: Colors.green,
+                            indicatorBackgroundColor: Colors.black,
+                            labelStyle:
+                                GoogleFonts.poppins(color: Colors.black),
+                            percentageTextStyle:
+                                const TextStyle(color: Colors.black),
+                            percentage: imageSelected ? 1 : 0,
+                            animationDuration: const Duration(
+                              seconds: 1,
+                            ),
+                            label: 'Document',
+                          ),
+                        );
+                      },
                     ),
-                    MyButton(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const CoustomNavBar()));
-                        },
-                        title: 'SUBMIT'),
+                    BlocConsumer<DocumentUploadBloc, DocumentUploadState>(
+                        listener: (context, state) {
+                      if (state is DocumentAllSuccsessState) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const CoustomNavBar()));
+                      } else if (state is DocumentUploadFailedState) {
+                        customSnackbar(context, false, "Upload Your Document");
+                      } else {
+                        customSnackbar(context, false, "Somethin Wrong");
+                      }
+                    }, builder: (context, state) {
+                      bool isLoading = state is DocumentUploadLoadingState;
+                      return MyLoadingButton(
+                          isLoading: isLoading,
+                          onTap: () {
+                            context
+                                .read<DocumentUploadBloc>()
+                                .add(DocumentSubmitClicked());
+                          },
+                          title: 'SUBMIT');
+                    }),
                     const SizedBox()
                   ],
                 ),

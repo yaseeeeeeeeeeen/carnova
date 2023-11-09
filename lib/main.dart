@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_project/host_side/blocs/document_upload/document_upload_bloc.dart';
 import 'package:second_project/host_side/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/host_side/blocs/otp_verifiaction/otp_verfication_bloc.dart';
 import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
 
 import 'package:second_project/host_side/resources/constants/colors.dart';
+import 'package:second_project/host_side/view/document_upload.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
 
 main() async {
@@ -32,10 +34,13 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HostOtpVerficationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DocumentUploadBloc(),
         )
       ],
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: LoginScreen()),
+      child:
+          MaterialApp(debugShowCheckedModeBanner: false, home: DocumetUpload()),
     );
   }
 }
