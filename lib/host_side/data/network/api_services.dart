@@ -34,4 +34,14 @@ class ApiServiceHost {
     final response = await http.post(url, body: body, headers: headers);
     return response;
   }
+
+  getHostDetails(String token) async {
+    final url = Uri.parse("http://10.4.3.48:3000/host/host-details");
+    final header = {
+      'Authorization': 'Bearer $token',
+    };
+    final response = await http.get(url, headers: header);
+    final body = jsonDecode(response.body);
+    return body;
+  }
 }

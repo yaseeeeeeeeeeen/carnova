@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:second_project/host_side/resources/components/list_tile.dart';
-import 'package:second_project/host_side/resources/constants/colors.dart';
+
 import 'package:second_project/host_side/resources/constants/text_styles.dart';
+import 'package:second_project/host_side/utils/alertbox.dart';
+import 'package:second_project/host_side/utils/appbar.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
+import 'package:second_project/host_side/view/profile_edit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -13,11 +16,7 @@ class ProfileScreen extends StatelessWidget {
     double height = MediaQuery.sizeOf(context).height;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-            backgroundColor: appbarColor,
-            centerTitle: true,
-            elevation: 0,
-            title: Text('PROFILE', style: GoogleFonts.poppins())),
+        appBar: customAppBar('PROFILE'),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -33,8 +32,7 @@ class ProfileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.3)
-                                  ,
+                                  Colors.black.withOpacity(0.3),
                                   BlendMode.darken),
                               image: AssetImage(image.appLogo),
                               fit: BoxFit.cover),
@@ -67,16 +65,38 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
+              Expanded(
                   flex: 9,
                   child: Column(
                     children: [
-                      ListTileWidget(icon: Icons.person, title: 'My Profile'),
                       ListTileWidget(
-                          icon: Icons.lock_person_rounded, title: 'Privacy'),
+                        isLogout: false,
+                        icon: Icons.person,
+                        title: 'Profile Edit',
+                        navigation: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ProfileEditScreen()));
+                        },
+                      ),
                       ListTileWidget(
-                          icon: Icons.live_help_rounded, title: 'Help & Info'),
-                      ListTileWidget(icon: Icons.settings, title: 'Settings')
+                          isLogout: false,
+                          icon: Icons.lock_person_rounded,
+                          title: 'Privacy'),
+                      ListTileWidget(
+                          isLogout: false,
+                          icon: Icons.live_help_rounded,
+                          title: 'Help & Info'),
+                      ListTileWidget(
+                          isLogout: false,
+                          icon: Icons.settings,
+                          title: 'Settings'),
+                      ListTileWidget(
+                          navigation: () {
+                            signoutConfirmation(context);
+                          },
+                          isLogout: true,
+                          icon: Icons.exit_to_app_outlined,
+                          title: 'Logout')
                     ],
                   )),
             ],

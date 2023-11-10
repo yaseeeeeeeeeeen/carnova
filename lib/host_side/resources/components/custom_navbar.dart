@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:second_project/host_side/resources/constants/colors.dart';
 import 'package:second_project/host_side/view/home_screen.dart';
 import 'package:second_project/host_side/view/profile_screen.dart';
-import 'package:second_project/host_side/view/vehicle_screen.dart';
+import 'package:second_project/host_side/view/vehicles_screen/vehicle_screen.dart';
 
 class CoustomNavBar extends StatefulWidget {
   const CoustomNavBar({super.key});

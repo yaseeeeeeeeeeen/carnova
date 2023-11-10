@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/host_side/resources/components/custom_textfield2.dart';
-import 'package:second_project/host_side/resources/constants/colors.dart';
-import 'package:second_project/host_side/view/vehicle_add2.dart';
+import 'package:second_project/host_side/utils/appbar.dart';
+import 'package:second_project/host_side/view/vehicles_screen/vehicle_add2.dart';
 
 // ignore: must_be_immutable
 class AddVehicle extends StatelessWidget {
@@ -20,15 +20,7 @@ class AddVehicle extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: appbarColor,
-          title: Text(
-            'Add Vehicle Details',
-            style: GoogleFonts.poppins(),
-          ),
-          centerTitle: true,
-        ),
+        appBar: customAppBar('Add Vehicle Details'),
         body: Container(
           padding: const EdgeInsets.all(10),
           height: height,
@@ -38,9 +30,7 @@ class AddVehicle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextfield(
-                    hint: 'Name',
-                    isSufix: false,
-                    controller: _nameController),
+                    hint: 'Name', isSufix: false, controller: _nameController),
                 CustomTextfield(
                     hint: 'Brand',
                     isSufix: false,

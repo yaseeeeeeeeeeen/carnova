@@ -37,9 +37,9 @@ class DocumentUploadBloc
   FutureOr<void> documentSubmitClicked(
       DocumentSubmitClicked event, Emitter<DocumentUploadState> emit) async {
     emit(DocumentUploadLoadingState());
+
     //api upload
 
-    
-    emit(DocumentAllSuccsessState());
+//     emit(DocumentAllSuccsessState());
   }
 }

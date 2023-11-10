@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 
 import 'package:second_project/host_side/data/network/api_services.dart';
+import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
 
 part 'otp_verfication_event.dart';
 part 'otp_verfication_state.dart';
@@ -18,6 +20,13 @@ class HostOtpVerficationBloc
     emit(HostOtpVerificationLoadingState());
     final response = await ApiServiceHost.instance.hostOtp(event.otp);
     if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      String token = body['token'];
+      print(token);
+      await SharedPreference.instance.storeToken(token);
+
+      final userData = await ApiServiceHost.instance.getHostDetails(token);
+      print('user data $userData');
       emit(HostOtpVerificationSuccsessState());
     } else {
       emit(HostOtpVerificationFailedState());

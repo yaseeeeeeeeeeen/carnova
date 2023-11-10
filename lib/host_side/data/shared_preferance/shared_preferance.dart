@@ -22,4 +22,8 @@ class SharedPreference {
   removeToken() async {
     await sharedPref.remove(token);
   }
+
+  String? getToken() {
+   return sharedPref.getString(token);
+  }
 }

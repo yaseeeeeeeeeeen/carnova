@@ -137,6 +137,8 @@ class DocumetUpload extends StatelessWidget {
                       builder: (context, state) {
                         if (state is DocumentUploadSuccsessState) {
                           imageSelected = true;
+                        } else if (state is DocumentUploadLoadingState) {
+                          imageSelected = true;
                         } else {
                           imageSelected = false;
                         }
