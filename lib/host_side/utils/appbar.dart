@@ -9,5 +9,5 @@ PreferredSizeWidget customAppBar(
       backgroundColor: appbarColor,
       centerTitle: true,
       elevation: 0,
-      title: Text('$title', style: GoogleFonts.poppins()));
+      title: Text(title, style: GoogleFonts.poppins()));
 }

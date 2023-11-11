@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:second_project/host_side/resources/api_urls/host_url.dart';
 
 class ApiServiceHost {
   ApiServiceHost._();
@@ -10,7 +11,7 @@ class ApiServiceHost {
   final headers = {'Content-Type': 'application/json'};
 
   Future<http.Response> hostSignup(Map<String, dynamic> hostDetails) async {
-    final url = Uri.parse("http://10.4.3.48:3000/host/signup");
+    final url = Uri.parse("${HostUrl.baseUrlHost}/host/signup");
     final body = jsonEncode(hostDetails);
 
     final response = await http.post(url, body: body, headers: headers);
@@ -21,7 +22,7 @@ class ApiServiceHost {
   }
 
   Future<http.Response> hostOtp(Map<String, int?> otp) async {
-    final url = Uri.parse("http://10.4.3.48:3000/host/verify-otp");
+    final url = Uri.parse("${HostUrl.baseUrlHost}/host/verify-otp");
     final body = jsonEncode(otp);
     final response = await http.post(url, body: body, headers: headers);
     // print(response.body);
@@ -29,14 +30,16 @@ class ApiServiceHost {
   }
 
   Future<http.Response> hostLogin(Map<String, String> mailAndPass) async {
-    final url = Uri.parse("http://10.4.3.48:3000/host/login");
+    final url = Uri.parse("${HostUrl.baseUrlHost}/host/login");
     final body = jsonEncode(mailAndPass);
     final response = await http.post(url, body: body, headers: headers);
     return response;
   }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   getHostDetails(String token) async {
-    final url = Uri.parse("http://10.4.3.48:3000/host/host-details");
+    print(token);
+    final url = Uri.parse("${HostUrl.baseUrlHost}/host/host-details");
     final header = {
       'Authorization': 'Bearer $token',
     };

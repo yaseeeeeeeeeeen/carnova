@@ -57,7 +57,7 @@ class SignupScreen extends StatelessWidget {
                                   child: Center(
                                       child: Icon(
                                     color: mainColor,
-                                    Icons.person,
+                              Icons.directions_car_filled,
                                     size: 35,
                                   )),
                                 ),

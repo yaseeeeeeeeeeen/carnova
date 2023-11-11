@@ -10,6 +10,8 @@ class LoginProcessState extends LoginBlocState{}
 
 class LoginSuccsessState extends LoginBlocState{}
 
+class LoginWrongPasswordState extends LoginBlocState{}
+
 class LoginFailedState extends LoginBlocState{}
 
 class LoginErrorState extends LoginBlocState{}

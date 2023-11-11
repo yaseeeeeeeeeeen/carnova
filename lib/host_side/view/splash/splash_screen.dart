@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/host_side/data/network/api_services.dart';
 import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/host_side/modals/host_data_modal.dart';
 import 'package:second_project/host_side/resources/components/custom_navbar.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
 
@@ -20,10 +21,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Carnova'),
-      ),
+          child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(image.appLogoBlack), fit: BoxFit.cover)),
+        height: 200,
+        width: 300,
+      )),
     );
   }
 
@@ -32,11 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = SharedPreference.instance.getToken();
     if (token != null) {
       // Get host details call
-      final userData = await ApiServiceHost.instance.getHostDetails(token);
-      if (userData != null) {
-        //Data add modal
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const CoustomNavBar()),
+      final hostData = await ApiServiceHost.instance.getHostDetails(token);
+      if (hostData != null) {
+        HostModel data = HostModel.fromJson(hostData);
+                Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const ScreenParant()),
             (route) => false);
       } else {
         //Token Expirity checking
@@ -48,11 +54,11 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } else {
       // no token
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
-            ),
-            (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+          (route) => false);
     }
   }
 }

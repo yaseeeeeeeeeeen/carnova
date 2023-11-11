@@ -62,7 +62,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: Icon(
-                            Icons.person,
+                        Icons.directions_car_filled,
                             color: mainColor,
                             size: 35,
                           ),

@@ -8,7 +8,8 @@ import 'package:second_project/host_side/blocs/otp_verifiaction/otp_verfication_
 import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/host_side/resources/constants/colors.dart';
-import 'package:second_project/host_side/view/profile_screen.dart';
+
+import 'package:second_project/host_side/view/splash/splash_screen.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,24 +26,14 @@ class MyApp extends StatelessWidget {
         SystemUiOverlayStyle(statusBarColor: appbarColor));
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SignupBloc(),
-        ),
-        BlocProvider(
-          create: (context) => LoginBloc(),
-        ),
-        BlocProvider(
-          create: (context) => HostOtpVerficationBloc(),
-        ),
-        BlocProvider(
-          create: (context) => DocumentUploadBloc(),
-        ),
-        BlocProvider(
-          create: (context) => ProfileEditBloc(),
-        )
+        BlocProvider(create: (context) => SignupBloc()),
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => HostOtpVerficationBloc()),
+        BlocProvider(create: (context) => DocumentUploadBloc()),
+        BlocProvider(create: (context) => ProfileEditBloc())
       ],
       child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: ProfileScreen()),
+          debugShowCheckedModeBanner: false, home: SplashScreen()),
     );
   }
 }

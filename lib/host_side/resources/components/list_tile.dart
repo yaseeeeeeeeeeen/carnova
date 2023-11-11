@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,7 +6,7 @@ class ListTileWidget extends StatelessWidget {
   final IconData icon;
   final String title;
   bool isLogout;
-  void Function()? navigation = () {};
+  void Function()? navigation;
   ListTileWidget(
       {super.key,
       required this.title,
@@ -35,8 +34,7 @@ class ListTileWidget extends StatelessWidget {
             style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
                 color: isLogout
-                    ? const
-                     Color.fromARGB(255, 230, 11, 0)
+                    ? const Color.fromARGB(255, 230, 11, 0)
                     : Colors.black),
           ),
           trailing: const Icon(Icons.arrow_forward_ios),

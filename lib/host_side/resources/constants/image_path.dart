@@ -1,6 +1,7 @@
 class ImageUrl {
   //Application Logo
   String appLogo = 'assets/image/logoWhite-removebg-preview.png';
+  String appLogoBlack = 'assets/image/applogoBlack.png';
   //intro images
   String intro1 = 'assets/image/introoooooooooo.jpeg';
   String intro2 = 'assets/image/intro33.jpeg';

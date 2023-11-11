@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/host_side/modals/host_data_modal.dart';
 
 import 'package:second_project/host_side/resources/components/list_tile.dart';
 
@@ -10,6 +11,8 @@ import 'package:second_project/host_side/view/profile_edit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           const PopinsTextWidget(
                               isBold: false,
-                              text: 'Yaseen',
+                              text: 'yaseen',
                               size: 16,
                               color: Colors.white,
                               left: 0,
@@ -93,6 +96,7 @@ class ProfileScreen extends StatelessWidget {
                       ListTileWidget(
                           navigation: () {
                             signoutConfirmation(context);
+                            // signoutConfirmation(context);
                           },
                           isLogout: true,
                           icon: Icons.exit_to_app_outlined,

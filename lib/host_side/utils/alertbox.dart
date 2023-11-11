@@ -23,7 +23,7 @@ signoutConfirmation(context) {
               Padding(
                 padding: const EdgeInsets.only(bottom: 30, top: 20),
                 child: Text(
-                  'Logout your account',
+                  'Logout your account?',
                   style: GoogleFonts.poppins(
                     fontSize: 23,
                     color: Colors.black,
@@ -37,8 +37,10 @@ signoutConfirmation(context) {
               TextButton(
                 onPressed: () async {
                   await SharedPreference.instance.removeToken();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const LoginScreen()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                      (route) => false);
                 },
                 child: Text('Logout', style: logoutbuttonstyle),
               ),

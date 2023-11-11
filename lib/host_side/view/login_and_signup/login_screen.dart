@@ -60,19 +60,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     child: Center(
                                       child: Icon(
-                                        Icons.person,
+                                        Icons.directions_car_filled,
                                         color: mainColor,
                                         size: 35,
                                       ),
                                     ),
                                   ),
                                 ),
-
-                                // // logo
-                                // const Icon(
-                                //   Icons.lock,
-                                //   size: 100,
-                                // ),
 
                                 const SizedBox(height: 10),
 
@@ -161,7 +155,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (state is LoginSuccsessState) {
                                       navigateToHome(context);
                                     } else if (state is LoginProcessState) {
-                                      navigateToHome(context);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(customSnackbar(
+                                              context,
+                                              false,
+                                              "Your Profile Under Verification"));
+                                    } else if (state
+                                        is LoginWrongPasswordState) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(customSnackbar(context,
+                                              false, "Wrong Password"));
                                     } else if (state is LoginFailedState) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(customSnackbar(
@@ -225,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   navigateToHome(context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const CoustomNavBar()),
+        MaterialPageRoute(builder: (context) => const ScreenParant()),
         (route) => false);
   }
 }

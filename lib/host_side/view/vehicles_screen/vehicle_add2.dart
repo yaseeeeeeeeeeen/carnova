@@ -10,6 +10,7 @@ import 'package:second_project/host_side/resources/components/custom_textfield2.
 import 'package:second_project/host_side/resources/components/drop_down.dart';
 import 'package:second_project/host_side/utils/appbar.dart';
 import 'package:second_project/host_side/utils/image_picker.dart';
+import 'package:second_project/host_side/view/document_upload.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
 
 // ignore: must_be_immutable
@@ -124,14 +125,17 @@ class AddVehicle2 extends StatelessWidget {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DocumetUpload()));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     fixedSize: Size(width, 50),
                   ),
-                  child: Text('SUMBIT',
+                  child: Text('NEXT',
                       style: GoogleFonts.aBeeZee(
                           fontSize: 18, fontWeight: FontWeight.w500)),
                 )

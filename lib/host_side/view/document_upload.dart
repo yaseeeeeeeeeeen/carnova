@@ -167,7 +167,7 @@ class DocumetUpload extends StatelessWidget {
                         listener: (context, state) {
                       if (state is DocumentAllSuccsessState) {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const CoustomNavBar()));
+                            builder: (context) =>  ScreenParant()));
                       } else if (state is DocumentUploadFailedState) {
                         customSnackbar(context, false, "Upload Your Document");
                       } else {
