@@ -55,9 +55,9 @@ class ProfileScreen extends StatelessWidget {
                               backgroundImage: AssetImage(image.car2),
                             ),
                           ),
-                          const PopinsTextWidget(
+                           PopinsTextWidget(
                               isBold: false,
-                              text: 'yaseen',
+                              text: hostModelData!.name,
                               size: 16,
                               color: Colors.white,
                               left: 0,

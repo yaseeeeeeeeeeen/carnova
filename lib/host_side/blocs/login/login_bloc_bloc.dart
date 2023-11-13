@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_project/host_side/data/network/api_services.dart';
+import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/host_side/repositories/login_host_repo.dart';
 
 part 'login_bloc_event.dart';
 part 'login_bloc_state.dart';
@@ -15,12 +16,14 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
   FutureOr<void> loginClickedEvent(
       LoginClickedEvent event, Emitter<LoginBlocState> emit) async {
     emit(LoginLoadingState());
-    final response = await ApiServiceHost.instance.hostLogin(event.mailandpass);
+
+    final response = await HostLoginRepo().hostLogin(event.mailandpass);
+
     // ignore: avoid_print
     print("body:  ${response.body}---- statusCode: ${response.statusCode}");
     final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      
+      await SharedPreference.instance.storeToken(body['token']);
       emit(LoginSuccsessState());
     } else if (response.statusCode == 400 &&
         body["message"] == "Wrong Password") {

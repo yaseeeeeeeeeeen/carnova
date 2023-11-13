@@ -5,5 +5,6 @@ class HostUrl {
   static const String baseUrlHost = "http://10.4.3.48:3000";
   static const String signUpHost = "$baseUrlHost/host/signup";
   static const String verifyOtpHost = "$baseUrlHost/host/verify-otp";
-  static const String login = "$baseUrlHost/host/login";
+  static const String hostLogin = "$baseUrlHost/host/login";
+  static const String getHostData = "$baseUrlHost/host/host-details";
 }

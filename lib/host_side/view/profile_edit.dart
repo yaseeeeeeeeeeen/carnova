@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/host_side/blocs/Profile_edit/profile_edit_bloc.dart';
+import 'package:second_project/host_side/modals/host_data_modal.dart';
 import 'package:second_project/host_side/resources/components/custom_button.dart';
 import 'package:second_project/host_side/resources/components/custom_textfield2.dart';
 import 'package:second_project/host_side/resources/constants/colors.dart';
@@ -51,14 +52,18 @@ class ProfileEditScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             CustomTextfield(
-                hint: "Name", isSufix: false, controller: nameController),
+                hint: hostModelData!.name,
+                isSufix: false,
+                controller: nameController),
             const SizedBox(height: 10),
             CustomTextfield(
-                hint: "email", isSufix: false, controller: emailController),
+                hint: hostModelData!.email,
+                isSufix: false,
+                controller: emailController),
             const SizedBox(height: 10),
             CustomTextfield(
                 keybordtype: TextInputType.number,
-                hint: "Phone Number",
+                hint: hostModelData!.phone.toString(),
                 isSufix: true,
                 controller: phoneController),
             const SizedBox(height: 10),

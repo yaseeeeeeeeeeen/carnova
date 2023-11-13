@@ -160,6 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               context,
                                               false,
                                               "Your Profile Under Verification"));
+                                    
                                     } else if (state
                                         is LoginWrongPasswordState) {
                                       ScaffoldMessenger.of(context)

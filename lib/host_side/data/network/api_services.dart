@@ -11,7 +11,7 @@ class ApiServiceHost {
   final headers = {'Content-Type': 'application/json'};
 
   Future<http.Response> hostSignup(Map<String, dynamic> hostDetails) async {
-    final url = Uri.parse("${HostUrl.baseUrlHost}/host/signup");
+    final url = Uri.parse(HostUrl.signUpHost);
     final body = jsonEncode(hostDetails);
 
     final response = await http.post(url, body: body, headers: headers);
@@ -22,7 +22,7 @@ class ApiServiceHost {
   }
 
   Future<http.Response> hostOtp(Map<String, int?> otp) async {
-    final url = Uri.parse("${HostUrl.baseUrlHost}/host/verify-otp");
+    final url = Uri.parse(HostUrl.verifyOtpHost);
     final body = jsonEncode(otp);
     final response = await http.post(url, body: body, headers: headers);
     // print(response.body);
@@ -30,16 +30,14 @@ class ApiServiceHost {
   }
 
   Future<http.Response> hostLogin(Map<String, String> mailAndPass) async {
-    final url = Uri.parse("${HostUrl.baseUrlHost}/host/login");
+    final url = Uri.parse(HostUrl.hostLogin);
     final body = jsonEncode(mailAndPass);
     final response = await http.post(url, body: body, headers: headers);
     return response;
   }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   getHostDetails(String token) async {
-    print(token);
-    final url = Uri.parse("${HostUrl.baseUrlHost}/host/host-details");
+    final url = Uri.parse(HostUrl.getHostData);
     final header = {
       'Authorization': 'Bearer $token',
     };

@@ -1,3 +1,5 @@
+ HostModel? hostModelData;
+
 class HostModel {
   String id;
   String name;
@@ -36,7 +38,6 @@ class HostModel {
       };
 }
 
-HostModel? hostData;
 
 // To parse this JSON data, do
 // final hostModel = hostModelFromJson(jsonString);
