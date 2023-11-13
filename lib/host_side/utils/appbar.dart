@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/host_side/resources/constants/colors.dart';
 
-PreferredSizeWidget customAppBar(
+PreferredSizeWidget customAppBarH(
   String title,
 ) {
   return AppBar(
-      backgroundColor: appbarColor,
+      backgroundColor: appbarColorH,
       centerTitle: true,
       elevation: 0,
       title: Text(title, style: GoogleFonts.poppins()));

@@ -56,7 +56,7 @@ class SignupOtpScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Icon(
-                                  color: mainColor,
+                                  color: mainColorH,
                                   Icons.person,
                                   size: 35,
                                 ),

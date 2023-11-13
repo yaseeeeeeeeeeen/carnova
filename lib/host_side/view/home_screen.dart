@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             elevation: 0,
             title: Text('HOME', style: GoogleFonts.poppins()),
             centerTitle: true,
-            backgroundColor: appbarColor),
+            backgroundColor: appbarColorH),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: SingleChildScrollView(

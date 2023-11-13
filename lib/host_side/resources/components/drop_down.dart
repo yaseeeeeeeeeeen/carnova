@@ -6,7 +6,7 @@ class DropDownWid extends StatelessWidget {
   DropDownWid({super.key, required this.fuel, required this.controller});
   final bool fuel;
   final TextEditingController controller;
-  final List<String> fuelList = ['Electric', 'Petrol', 'Disel'];
+  final List<String> fuelList = ['Electric', 'Petrol', 'Disel','hybraid'];
   final List<String> transList = ['Automatic', 'Manual', 'Semi-Auto', 'Other'];
 
   final TextStyle _labelStyle =

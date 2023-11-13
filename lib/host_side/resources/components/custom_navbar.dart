@@ -58,7 +58,7 @@ class NavBar extends StatelessWidget {
         margin: const EdgeInsets.only(left: 10, right: 10, bottom: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: bottomNavColor,
+          color: bottomNavColorH,
         ),
         height: 60,
         child: Row(
@@ -78,7 +78,7 @@ class NavBar extends StatelessWidget {
         child: InkWell(
       onTap: ontap,
       child:
-          Icon(icon, color: selected ? mainColor : mainColor.withOpacity(0.4)),
+          Icon(icon, color: selected ? mainColorH : mainColorH.withOpacity(0.4)),
     ));
   }
 }

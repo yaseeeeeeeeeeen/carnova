@@ -51,12 +51,12 @@ class SignupScreen extends StatelessWidget {
                                   height: 60,
                                   width: 60,
                                   decoration: BoxDecoration(
-                                    color: secondColor,
+                                    color: secondColorH,
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: Center(
                                       child: Icon(
-                                    color: mainColor,
+                                    color: mainColorH,
                               Icons.directions_car_filled,
                                     size: 35,
                                   )),

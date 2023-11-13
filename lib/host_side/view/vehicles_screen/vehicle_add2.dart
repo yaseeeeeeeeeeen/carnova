@@ -29,7 +29,7 @@ class AddVehicle2 extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return SafeArea(
       child: Scaffold(
-        appBar: customAppBar('Add Vehicle Details'),
+        appBar: customAppBarH('Add Vehicle Details'),
         body: Container(
           padding: const EdgeInsets.all(10),
           height: height,

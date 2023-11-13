@@ -30,7 +30,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         title:  Text(
           "Forgot Password",
           style: TextStyle(
-            color: secondColor,
+            color: secondColorH,
             fontWeight: FontWeight.w600,
             fontSize: 18,
             letterSpacing: 0.5,
@@ -57,13 +57,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                         height: 60,
                         width: 60,
                         decoration: BoxDecoration(
-                          color: secondColor,
+                          color: secondColorH,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Center(
                           child: Icon(
                         Icons.directions_car_filled,
-                            color: mainColor,
+                            color: mainColorH,
                             size: 35,
                           ),
                         ))),

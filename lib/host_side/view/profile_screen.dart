@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
     double height = MediaQuery.sizeOf(context).height;
     return SafeArea(
       child: Scaffold(
-        appBar: customAppBar('PROFILE'),
+        appBar: customAppBarH('PROFILE'),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(

@@ -55,13 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     height: 60,
                                     width: 60,
                                     decoration: BoxDecoration(
-                                      color: secondColor,
+                                      color: secondColorH,
                                       borderRadius: BorderRadius.circular(30),
                                     ),
                                     child: Center(
                                       child: Icon(
                                         Icons.directions_car_filled,
-                                        color: mainColor,
+                                        color: mainColorH,
                                         size: 35,
                                       ),
                                     ),
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Text(
                                       ' CARNOVA.',
                                       style: GoogleFonts.poppins(
-                                          color: secondColor,
+                                          color: secondColorH,
                                           fontSize: 25,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: Text(
                                           'Forgot Password?',
                                           style: TextStyle(
-                                            color: secondColor,
+                                            color: secondColorH,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -219,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           },
                                           child: Text('Register now',
                                               style: TextStyle(
-                                                color: secondColor,
+                                                color: secondColorH,
                                                 fontWeight: FontWeight.bold,
                                               )))
                                     ])

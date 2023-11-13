@@ -20,7 +20,7 @@ class ProfileEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("PROFILE EDIT"),
+      appBar: customAppBarH("PROFILE EDIT"),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -36,7 +36,7 @@ class ProfileEditScreen extends StatelessWidget {
                   },
                   child: CircleAvatar(
                       radius: 85,
-                      backgroundColor: appbarColor,
+                      backgroundColor: appbarColorH,
                       child: imagePath != null
                           ? CircleAvatar(
                               backgroundImage: FileImage(File(imagePath!)),
