@@ -2,6 +2,7 @@ class UserSideImages {
   String mapImg = "assets/image/map_bg.jpeg";
   String userPhoto = "assets/image/staticCover.jpg";
   String carDemo = "assets/image/currentlyUsing.jpg";
+  String profileBg = "assets/image/profileBg.jpeg";
   Map<String, dynamic> vehicleData = {
     "coverPhoto": "assets/image/currentlyUsing1.jpg",
     "name": "Porsche 911",
