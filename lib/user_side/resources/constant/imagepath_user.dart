@@ -11,6 +11,7 @@ class UserSideImages {
     "vehicleNumber": "KL12 1122",
     "fuel": "hybraid",
     "transmission": "Automatic",
-    "price": "1800"
+    "price": "1800",
+    "vehicleImages": ["assets/image/currentlyUsing1.jpg","assets/image/currentlyUsing.jpg"]
   };
 }

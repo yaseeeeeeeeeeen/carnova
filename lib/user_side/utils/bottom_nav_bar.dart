@@ -7,6 +7,7 @@ import 'package:second_project/user_side/view/home_screen.dart';
 import 'package:second_project/user_side/view/second_screen.dart';
 import 'package:second_project/user_side/view/user_profile.dart';
 
+// ignore: must_be_immutable
 class ScreenParantU extends StatefulWidget {
   ScreenParantU({super.key, this.index});
   int? index;

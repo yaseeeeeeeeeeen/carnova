@@ -7,8 +7,6 @@ import 'package:second_project/host_side/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/host_side/blocs/otp_verifiaction/otp_verfication_bloc.dart';
 import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/user_side/resources/constant/colors_userside.dart';
-import 'package:second_project/user_side/utils/appbar.dart';
 import 'package:second_project/user_side/utils/bottom_nav_bar.dart';
 
 main() async {
@@ -32,8 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DocumentUploadBloc()),
         BlocProvider(create: (context) => ProfileEditBloc())
       ],
-      child:  MaterialApp(
-          debugShowCheckedModeBanner: false, home: ScreenParantU()),
+      child:
+          MaterialApp(debugShowCheckedModeBanner: false, home: ScreenParantU(),),
     );
   }
 }

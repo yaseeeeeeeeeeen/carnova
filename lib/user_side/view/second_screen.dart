@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:second_project/host_side/utils/appbar.dart';
 import 'package:second_project/user_side/utils/appbar.dart';
 
 class FindVehicleU extends StatelessWidget {

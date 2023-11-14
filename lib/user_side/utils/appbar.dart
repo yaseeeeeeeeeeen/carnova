@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/host_side/view/login_and_signup/login_screen.dart';
-import 'package:second_project/user_side/resources/components/profile_tile_button.dart';
 import 'package:second_project/user_side/resources/constant/colors_userside.dart';
-import 'package:second_project/user_side/resources/constant/text_styles.dart';
+import 'package:second_project/user_side/utils/profile_sheet.dart';
 import 'package:second_project/user_side/view/home_screen.dart';
 
 PreferredSizeWidget customAppBarU(context) {
@@ -14,6 +12,10 @@ PreferredSizeWidget customAppBarU(context) {
         GestureDetector(
           onTap: () {
             showModalBottomSheet(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15))),
               isScrollControlled: true,
               context: context,
               builder: (context) {
@@ -35,60 +37,16 @@ PreferredSizeWidget customAppBarU(context) {
           child: Image(image: AssetImage(image.appLogo), fit: BoxFit.cover)));
 }
 
-Widget bottomsheetWid(double height, context) {
-  return Container(
-    padding: const EdgeInsets.all(5),
-    height: height / 1.6,
-    child: Column(children: [
-      Container(
-          padding: const EdgeInsets.only(left: 5),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(imageU.profileBg), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black, width: 1),
-            color: Colors.white,
-          ),
-          height: height / 6,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleAvatar(
-                radius: 47,
-                backgroundColor: Colors.black,
-                child: CircleAvatar(
-                    backgroundImage: AssetImage(imageU.userPhoto),
-                    radius: 45,
-                    backgroundColor: Colors.black),
-              ),
-              Container(
-                width: MediaQuery.sizeOf(context).width / 1.5,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Muhammed Yaseen",
-                          style: style5, overflow: TextOverflow.ellipsis),
-                      Text("muahhammedyasDDDDDDDDDDDDDDDDDDeen@gmail.com",
-                          overflow: TextOverflow.ellipsis, style: style6),
-                    ]),
-              )
-            ],
-          )),
-      ListTileToggle(text: "Dark Mode"),
-      ListTilePwid(
-          title: "Change Password",
-          icon: const Icon(Icons.lock_clock_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "Clear data",
-          icon: const Icon(Icons.delete_forever_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "Help",
-          icon: const Icon(Icons.help_center_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "About",
-          icon: const Icon(Icons.info_outline_rounded, color: Colors.black)),
-    ]),
-  );
+
+PreferredSizeWidget customAppBarText(String title, context) {
+  return AppBar(
+      leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_outlined, color: Colors.white)),
+      backgroundColor: appbarColorU,
+      centerTitle: true,
+      elevation: 0,
+      title: Text(title, style: GoogleFonts.poppins()));
 }
