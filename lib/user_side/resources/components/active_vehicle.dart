@@ -3,7 +3,6 @@ import 'package:second_project/user_side/modals/vehicle_data._modal.dart';
 import 'package:second_project/user_side/resources/components/title_text_wid.dart';
 import 'package:second_project/user_side/resources/constant/colors_userside.dart';
 import 'package:second_project/user_side/resources/constant/text_styles.dart';
-import 'package:second_project/user_side/view/home_screen.dart';
 
 class ActivatedVehicle extends StatelessWidget {
   const ActivatedVehicle({super.key});
@@ -11,8 +10,6 @@ class ActivatedVehicle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// just added in vehicle data list
-    final mappp = VehicleDataModal.fromJson(imageU.vehicleDataMap1);
-    vehiclesData.add(mappp);
     final data = vehiclesData[0];
     ////////////////////////////////////////////////////////////////
     double heigth = MediaQuery.sizeOf(context).height;

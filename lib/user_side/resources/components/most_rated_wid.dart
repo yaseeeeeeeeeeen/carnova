@@ -116,16 +116,16 @@ class MostRatedDemo extends StatelessWidget {
                   ),
                   height: 30,
                   width: 50,
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         size: 15,
                         color: Colors.yellow,
                       ),
                       //rating
-                      Text("4.8",
+                      Text(vehicledata.rating.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 15))
                     ],
                   ),

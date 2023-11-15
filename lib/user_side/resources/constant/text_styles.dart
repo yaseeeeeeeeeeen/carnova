@@ -21,3 +21,9 @@ TextStyle style5 = GoogleFonts.poppins(
     color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600);
 TextStyle style6 = GoogleFonts.poppins(
     color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
+
+TextStyle style7 = GoogleFonts.poppins(
+    color: Colors.white, fontSize: 25, fontWeight: FontWeight.w800);
+
+TextStyle reviweTitle = GoogleFonts.halant(
+    color: Colors.white, fontSize: 25, fontWeight: FontWeight.w800);

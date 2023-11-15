@@ -12,6 +12,7 @@ class UserSideImages {
     "fuel": "hybraid",
     "transmission": "Automatic",
     "price": "1800",
+    "rating": 4.9,
     "vehicleImages": [
       "https://s2.dmcdn.net/v/PeZ891X-EzhhDOMdY/x1080",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcGhLnoKYhBw0oUQUziqqZMBzgghAkiUuq628cCUDz6G6ERCBJ-4NIb1PxzGDt4Ew1UQw&usqp=CAU",
@@ -27,6 +28,7 @@ class UserSideImages {
     "modal": "E30 M3",
     "vehicleNumber": "KL12 1122",
     "fuel": "Petrol",
+    "rating": 4.3,
     "transmission": "Semi-Auto",
     "price": "2900",
     "vehicleImages": [
@@ -47,6 +49,7 @@ class UserSideImages {
     "fuel": "Hybraid",
     "transmission": "Automatic",
     "price": "4700",
+    "rating": 4.8,
     "vehicleImages": [
       "https://robbreport.com/wp-content/uploads/2022/04/1-5.jpg?w=1000",
       "https://67cdn.co.uk/137/3/250573/16539263626294e9da4d0a7_img-9495-large.jpg?width=480",

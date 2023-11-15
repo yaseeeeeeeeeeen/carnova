@@ -1,4 +1,5 @@
 class VehicleDataModal {
+  final double rating;
   final String name;
   final String brand;
   final String modal;
@@ -9,7 +10,8 @@ class VehicleDataModal {
   final String coverPhoto;
   final List<String> images;
   VehicleDataModal(
-      {required this.images,
+      {required this.rating,
+        required this.images,
       required this.coverPhoto,
       required this.name,
       required this.brand,
@@ -20,7 +22,8 @@ class VehicleDataModal {
       required this.price});
   factory VehicleDataModal.fromJson(Map<String, dynamic> data) =>
       VehicleDataModal(
-        images: data["vehicleImages"],
+        rating: data["rating"],
+          images: data["vehicleImages"],
           coverPhoto: data["coverPhoto"],
           name: data["name"],
           brand: data["brand"],
