@@ -3,7 +3,7 @@ import 'package:second_project/host_side/data/shared_preferance/shared_preferanc
 
 class HostDataRepo {
   getHostData() async {
-    final token = await SharedPreference.instance.getToken();
+    final token = SharedPreference.instance.getToken();
     if (token != null) {
       final userData = await ApiServiceHost.instance.getHostDetails(token);
       return userData;

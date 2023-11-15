@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:second_project/user_side/modals/vehicle_data._modal.dart';
 import 'package:second_project/user_side/resources/constant/colors_userside.dart';
 import 'package:second_project/user_side/view/history_screen.dart';
 import 'package:second_project/user_side/view/home_screen.dart';
@@ -18,13 +19,20 @@ class ScreenParantU extends StatefulWidget {
 class _ScreenParantState extends State<ScreenParantU> {
   int currentPage = 0;
   List<Widget> pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const FindVehicleU(),
     const HistoryScreen(),
     const UserProfile()
   ];
   @override
   void initState() {
+    final mapppp1 = VehicleDataModal.fromJson(imageU.vehicleDataMap1);
+    vehiclesData.add(mapppp1);
+    final mapppp2 = VehicleDataModal.fromJson(imageU.vehicleDataMap2);
+    vehiclesData.add(mapppp2);
+        final mapppp3 = VehicleDataModal.fromJson(imageU.vehicleDataMap3);
+    vehiclesData.add(mapppp3);
+
     if (widget.index != null) {
       currentPage = widget.index!;
     }

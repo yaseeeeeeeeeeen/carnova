@@ -6,13 +6,11 @@ import 'package:second_project/user_side/resources/components/most_rated_wid.dar
 import 'package:second_project/user_side/resources/components/title_text_wid.dart';
 import 'package:second_project/user_side/resources/constant/imagepath_user.dart';
 import 'package:second_project/user_side/utils/appbar.dart';
-import 'package:second_project/user_side/view/car_details_screen.dart';
 
 UserSideImages imageU = UserSideImages();
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     double heigth = MediaQuery.sizeOf(context).height;
@@ -38,20 +36,15 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return GestureDetector(
-                            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CarDataShow(vehicleData: vehiclesData[0]))),
-                            child: MostRatedDemo(vehicledata: vehiclesData[0]));
-                        } else {
-                          return const MostRatedWid();
-                        }
+                        return MostRatedDemo(
+                            vehicledata: vehiclesData[index]);
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),
-                      itemCount: 3,
+                      itemCount: vehiclesData.length,
                       scrollDirection: Axis.horizontal),
                 ),
-                SizedBox(height: 70)
+                const SizedBox(height: 70)
               ],
             ),
           ),

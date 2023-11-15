@@ -11,7 +11,7 @@ class ActivatedVehicle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// just added in vehicle data list
-    final mappp = VehicleDataModal.fromJson(imageU.vehicleData);
+    final mappp = VehicleDataModal.fromJson(imageU.vehicleDataMap1);
     vehiclesData.add(mappp);
     final data = vehiclesData[0];
     ////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ class ActivatedVehicle extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                    image: AssetImage(data.coverPhoto), fit: BoxFit.cover)),
+                    image: NetworkImage(data.coverPhoto), fit: BoxFit.cover)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

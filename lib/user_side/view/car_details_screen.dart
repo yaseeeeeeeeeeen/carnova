@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/user_side/modals/vehicle_data._modal.dart';
@@ -6,6 +7,7 @@ import 'package:second_project/user_side/resources/constant/colors_userside.dart
 import 'package:second_project/user_side/resources/constant/text_styles.dart';
 import 'package:second_project/user_side/utils/appbar.dart';
 
+// ignore: must_be_immutable
 class CarDataShow extends StatelessWidget {
   CarDataShow({super.key, required this.vehicleData});
   VehicleDataModal vehicleData;
@@ -31,15 +33,14 @@ class CarDataShow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: vehicleData.name,
-              child: Container(
-                  height: heigth / 3.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: AssetImage(vehicleData.images[1]),
-                          fit: BoxFit.cover))),
-            ),
+                tag: vehicleData.name,
+                child: Container(
+                    height: heigth / 3.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: NetworkImage(vehicleData.images[0]),
+                            fit: BoxFit.cover)))),
             const SizedBox(height: 5),
             HomeTitles(titles: "Car Details"),
             SizedBox(
@@ -52,7 +53,7 @@ class CarDataShow extends StatelessWidget {
                   width: 150,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.black.withOpacity(0.3)),
+                      color: Colors.black.withOpacity(0.2)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -66,6 +67,22 @@ class CarDataShow extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
               ),
+            ),
+            HomeTitles(titles: "More Images"),
+            CarouselSlider(
+              options: CarouselOptions(height: heigth / 5, autoPlay: true),
+              items: vehicleData.images.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        margin: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                                image: NetworkImage(i), fit: BoxFit.cover)));
+                  },
+                );
+              }).toList(),
             )
           ],
         ),
