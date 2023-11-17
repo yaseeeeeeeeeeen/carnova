@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_project/host_side/blocs/Profile_edit/profile_edit_bloc.dart';
-import 'package:second_project/host_side/blocs/document_upload/document_upload_bloc.dart';
-import 'package:second_project/host_side/blocs/login/login_bloc_bloc.dart';
-import 'package:second_project/host_side/blocs/otp_verifiaction/otp_verfication_bloc.dart';
-import 'package:second_project/host_side/blocs/signup/signup_bloc_bloc.dart';
-import 'package:second_project/host_side/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/user_side/utils/bottom_nav_bar.dart';
+import 'package:second_project/blocs/document_upload/document_upload_bloc.dart';
+import 'package:second_project/blocs/login/login_bloc_bloc.dart';
+import 'package:second_project/blocs/otp_verifiaction/otp_verfication_bloc.dart';
+import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
+import 'package:second_project/blocs/signup/signup_bloc_bloc.dart';
+import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/resources/components/custom_navbar.dart';
+
+
+
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +33,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DocumentUploadBloc()),
         BlocProvider(create: (context) => ProfileEditBloc())
       ],
-      child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: ScreenParantU(),),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:ScreenParant(),
+      ),
     );
   }
 }
