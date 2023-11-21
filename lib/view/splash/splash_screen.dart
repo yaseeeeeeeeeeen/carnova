@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/repositories/host_data_repo.dart';
-import 'package:second_project/resources/components/custom_navbar.dart';
+import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -36,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
 
     final hostData = await HostDataRepo().getHostData();
-
     if (hostData != null) {
+      print('hostData get');
       HostModel data = HostModel.fromJson(hostData);
       hostModelData = data;
       Navigator.of(context).pushAndRemoveUntil(
@@ -45,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
           (route) => false);
     } else {
       //Token Expirity checking
+      print('hostData didi not get');
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const LoginScreen(),

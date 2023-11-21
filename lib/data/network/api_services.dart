@@ -36,13 +36,13 @@ class ApiServiceHost {
     return response;
   }
 
-  getHostDetails(String token) async {
+  Future<http.Response> getHostDetails(String token) async {
     final url = Uri.parse(HostUrl.getHostData);
     final header = {
       'Authorization': 'Bearer $token',
+      'Cookie': 'jwtHost=$token'
     };
     final response = await http.get(url, headers: header);
-    final body = jsonDecode(response.body);
-    return body;
+    return response;
   }
 }

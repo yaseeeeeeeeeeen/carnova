@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
-import 'package:second_project/resources/components/custom_navbar.dart';
+import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/image_path.dart';

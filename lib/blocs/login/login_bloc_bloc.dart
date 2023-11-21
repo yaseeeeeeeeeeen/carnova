@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/repositories/host_data_repo.dart';
 import 'package:second_project/repositories/login_host_repo.dart';
 
 part 'login_bloc_event.dart';
@@ -24,6 +25,7 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
       await SharedPreference.instance.storeToken(body['token']);
+      HostDataRepo().getHostData();
       emit(LoginSuccsessState());
     } else if (response.statusCode == 400 &&
         body["message"] == "Wrong Password") {

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:second_project/blocs/otp_verifiaction/otp_verfication_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
-import 'package:second_project/resources/components/custom_navbar.dart';
+import 'package:second_project/utils/custom_navbar.dart';
 
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/snackbar.dart';

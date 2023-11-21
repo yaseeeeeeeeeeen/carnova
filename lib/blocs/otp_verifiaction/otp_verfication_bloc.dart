@@ -21,12 +21,15 @@ class HostOtpVerficationBloc
       Emitter<HostOtpVerficationState> emit) async {
     emit(HostOtpVerificationLoadingState());
     final response = await ApiServiceHost.instance.hostOtp(event.otp);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       String token = body['token'];
+      print(token);
       await SharedPreference.instance.storeToken(token);
       final userData = await HostDataRepo().getHostData();
       print('user data $userData');
+      if (userData == null) return null;
       final data = HostModel.fromJson(userData);
       hostModelData = data;
       emit(HostOtpVerificationSuccsessState());

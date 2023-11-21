@@ -7,10 +7,7 @@ import 'package:second_project/blocs/otp_verifiaction/otp_verfication_bloc.dart'
 import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:second_project/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/resources/components/custom_navbar.dart';
-
-
-
+import 'package:second_project/view/splash/splash_screen.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:ScreenParant(),
+        home: SplashScreen(),
       ),
     );
   }

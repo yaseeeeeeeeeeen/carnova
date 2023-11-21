@@ -13,8 +13,9 @@ class AddVehicle extends StatelessWidget {
   final TextEditingController _brandController = TextEditingController();
   final TextEditingController _modalController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
   // final GlobalKey<FormState> addvehicle1 = GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
@@ -39,6 +40,10 @@ class AddVehicle extends StatelessWidget {
                   hint: 'Vehicle Number',
                   isSufix: false,
                   controller: _numberController),
+              CustomTextfield(
+                  hint: 'Location',
+                  isSufix: false,
+                  controller: _locationController),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
@@ -66,8 +71,13 @@ class AddVehicle extends StatelessWidget {
         _modalController.text.isNotEmpty &&
         _nameController.text.isNotEmpty &&
         _numberController.text.isNotEmpty) {
-          VehicleAddData? vehicleDataobj=VehicleAddData( name: _nameController.text, brand: _brandController.text, modal: _modalController.text, vehicleNumber: _numberController.text,);
-     
+      VehicleAddData? vehicleDataobj = VehicleAddData(
+        name: _nameController.text,
+        brand: _brandController.text,
+        modal: _modalController.text,
+        vehicleNumber: _numberController.text,
+      );
+
       print(vehicleDataobj.name);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => AddVehicle2(
