@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
-import 'package:second_project/utils/image_picker.dart';
+import 'package:second_project/utils/functions/image_picker.dart';
 
 part 'document_upload_event.dart';
 part 'document_upload_state.dart';

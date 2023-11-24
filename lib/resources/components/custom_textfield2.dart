@@ -7,8 +7,10 @@ class CustomTextfield extends StatelessWidget {
   bool isSufix;
   TextEditingController controller;
   TextInputType? keybordtype;
+  bool? visiblity = true;
   CustomTextfield(
       {super.key,
+      this.visiblity,
       this.keybordtype,
       required this.hint,
       required this.isSufix,
@@ -25,14 +27,16 @@ class CustomTextfield extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10),
         child: SizedBox(
             height: MediaQuery.sizeOf(context).height / 15,
-            width: MediaQuery.sizeOf(context).width / 1,
+            //  width:double.maxFinite ,
             child: TextFormField(
+              readOnly: visiblity ?? false,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller,
               textInputAction: TextInputAction.next,
               keyboardType: keybordtype,
               style: GoogleFonts.poppins(color: Colors.black),
               decoration: InputDecoration(
+                isDense: true,
                 border: const OutlineInputBorder(),
                 fillColor: Colors.transparent,
                 filled: true,
@@ -41,9 +45,9 @@ class CustomTextfield extends StatelessWidget {
                 errorBorder: const OutlineInputBorder(),
                 focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black)),
-                enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                  borderSide: BorderSide(color: Colors.black, width: 1),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(7)),
+                  borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
                 ),
                 hintText: hint,
                 hintStyle: GoogleFonts.poppins(color: Colors.black),

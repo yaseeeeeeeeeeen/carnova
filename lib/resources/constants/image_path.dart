@@ -2,6 +2,7 @@ class ImageUrl {
   //Application Logo
   String appLogo = 'assets/image/logoWhite-removebg-preview.png';
   String appLogoBlack = 'assets/image/applogoBlack.png';
+  String profilePhotoDemo = 'assets/image/profileDemo.jpg';
   //intro images
   String intro1 = 'assets/image/introoooooooooo.jpeg';
   String intro2 = 'assets/image/intro33.jpeg';
@@ -26,4 +27,7 @@ class ImageUrl {
   //car avatars
   String car1 = 'assets/image/carImg1.jpeg';
   String car2 = 'assets/image/carImg2.jpeg';
+
+  //Vehicle add screen
+  String locationSvg = "assets/svg/global-navigation-12161.svg";
 }

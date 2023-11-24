@@ -21,6 +21,7 @@ class HostOtpVerficationBloc
       Emitter<HostOtpVerficationState> emit) async {
     emit(HostOtpVerificationLoadingState());
     final response = await ApiServiceHost.instance.hostOtp(event.otp);
+    print(response.body);
     print(response.statusCode);
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);

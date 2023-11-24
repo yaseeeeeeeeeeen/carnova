@@ -16,8 +16,7 @@ class HostDataRepo {
         hostModelData = data;
         return body;
       }
-    } else {
-      return null;
     }
+    return null;
   }
 }

@@ -106,15 +106,14 @@ class SignupOtpScreen extends StatelessWidget {
                             if (state is HostOtpVerificationSuccsessState) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                    builder: (context) =>  ScreenParant(),
+                                    builder: (context) => const ScreenParant(),
                                   ),
                                   (route) => false);
                             } else if (state
                                 is HostOtpVerificationFailedState) {
-                              customSnackbar(context, false,
-                                  "Verification Failed Try again");
-                            } else {
-                              customSnackbar(context, false, "Something Wrong");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  customSnackbar(context, false,
+                                      "Verification Failed Try again"));
                             }
                           }, builder: (context, state) {
                             bool isLoading =

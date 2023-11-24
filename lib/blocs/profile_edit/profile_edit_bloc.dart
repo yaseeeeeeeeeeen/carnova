@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:second_project/utils/image_picker.dart';
+import 'package:second_project/utils/functions/image_picker.dart';
 
 part 'profile_edit_event.dart';
 part 'profile_edit_state.dart';

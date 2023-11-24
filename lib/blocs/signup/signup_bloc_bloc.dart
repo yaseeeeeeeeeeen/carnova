@@ -17,7 +17,8 @@ class SignupBloc extends Bloc<SignupBlocEvent, SignupBlocState> {
     emit(SignupLoadingState());
     final response = await HostSignupRepo().hostSignup(event.signupData);
     if (response.statusCode == 200) {
-     await HostDataRepo().getHostData();
+      final data = await HostDataRepo().getHostData();
+      print(data);
       emit(SignupSuccsessState());
     } else {
       emit(SignupFaildState());

@@ -4,15 +4,13 @@ import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/resources/components/list_tile.dart';
 
 import 'package:second_project/resources/constants/text_styles.dart';
-import 'package:second_project/utils/alertbox.dart';
+import 'package:second_project/utils/logout_confirm.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 import 'package:second_project/view/profile_edit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +47,16 @@ class ProfileScreen extends StatelessWidget {
                         CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 55,
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage(image.car2),
+                          child: Hero(
+                            tag: "profilePhoto",
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundImage:
+                                  AssetImage(image.profilePhotoDemo),
+                            ),
                           ),
                         ),
-                         PopinsTextWidget(
+                        PopinsTextWidget(
                             isBold: false,
                             text: hostModelData!.name,
                             size: 16,

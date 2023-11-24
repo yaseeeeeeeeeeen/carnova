@@ -10,7 +10,7 @@ import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
-import 'package:second_project/utils/image_picker.dart';
+import 'package:second_project/utils/functions/image_picker.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';

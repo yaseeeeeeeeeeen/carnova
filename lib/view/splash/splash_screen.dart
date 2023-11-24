@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
           (route) => false);
     } else {
       //Token Expirity checking
-      print('hostData didi not get');
+      print('hostData not get');
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const LoginScreen(),

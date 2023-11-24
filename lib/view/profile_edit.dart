@@ -8,7 +8,7 @@ import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/appbar.dart';
-
+import 'package:second_project/view/login_and_signup/login_screen.dart';
 
 // ignore: must_be_immutable
 class ProfileEditScreen extends StatelessWidget {
@@ -35,19 +35,23 @@ class ProfileEditScreen extends StatelessWidget {
                   onTap: () {
                     context.read<ProfileEditBloc>().add(ImageAddedClicked());
                   },
-                  child: CircleAvatar(
-                      radius: 85,
-                      backgroundColor: appbarColorH,
-                      child: imagePath != null
-                          ? CircleAvatar(
-                              backgroundImage: FileImage(File(imagePath!)),
-                              radius: 80,
-                            )
-                          : const CircleAvatar(
-                              //show previews profile photo
-                              backgroundColor: Colors.black12,
-                              radius: 80,
-                            )),
+                  child: Hero(
+                    tag: "profilePhoto",
+                    child: CircleAvatar(
+                        radius: 85,
+                        backgroundColor: appbarColorH,
+                        child: imagePath != null
+                            ? CircleAvatar(
+                                backgroundImage: FileImage(File(imagePath!)),
+                                radius: 80,
+                              )
+                            : CircleAvatar(
+                                //show previews profile photo
+                                backgroundImage:
+                                    AssetImage(image.profilePhotoDemo),
+                                radius: 80,
+                              )),
+                  ),
                 );
               },
             ),
