@@ -8,7 +8,7 @@ import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:second_project/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/view/splash/splash_screen.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_add1.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => VehicleAddBloc())
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: AddVehicle(),
       ),
     );
   }

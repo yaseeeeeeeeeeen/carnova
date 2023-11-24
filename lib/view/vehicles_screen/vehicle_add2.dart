@@ -1,16 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_cropper/image_cropper.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
-import 'package:second_project/utils/functions/image_picker.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -51,66 +50,88 @@ class AddVehicle2 extends StatelessWidget {
                       isSufix: false,
                       controller: _priceController),
                   const SizedBox(height: 10),
-                  InkWell(
-                    onTap: () async {
-                      final pickedimage = await ImagePickService()
-                          .pickCropImage(
-                              cropAspectRatio:
-                                  const CropAspectRatio(ratioX: 1, ratioY: 1),
-                              imageSource: ImageSource.gallery);
-                      if (pickedimage != null) {
-                        selectedImages.add(pickedimage as File);
+                  BlocConsumer<VehicleAddBloc, VehicleAddState>(
+                    listener: (context, state) {
+                      if (state is ImagePickingSuccsess) {
+                        selectedImages.add(state.pickedImage);
+                        print(selectedImages);
+                      } else if (state is ImagePickingFailed) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            customSnackbar(
+                                context, false, "Something Wrong Try Again"));
                       }
                     },
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(image.bg2), fit: BoxFit.cover),
-                          color: Colors.black26,
-                          borderRadius: BorderRadius.circular(10)),
-                      height: height / 9,
-                      width: width,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Icon(
-                            Icons.camera_alt,
-                            size: 35,
-                            color: Colors.white,
+                    builder: (context, state) {
+                      return InkWell(
+                        onTap: () {
+                          context
+                              .read<VehicleAddBloc>()
+                              .add(ImageAddingButtonClicked());
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(image.bg2),
+                                  fit: BoxFit.cover),
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(10)),
+                          height: height / 9,
+                          width: width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Icon(
+                                Icons.camera_alt,
+                                size: 35,
+                                color: Colors.white,
+                              ),
+                              TitleTexts(
+                                  text: 'ADD YOUR VEHICLE IMAGES',
+                                  size: 19,
+                                  color: Colors.white),
+                            ],
                           ),
-                          TitleTexts(
-                              text: 'ADD YOUR VEHICLE IMAGES',
-                              size: 19,
-                              color: Colors.white),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                  GridView.builder(
-                      shrinkWrap: true,
-                      itemCount: selectedImages.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3, crossAxisSpacing: 1),
-                      itemBuilder: (context, index) {
-                        {
-                          return Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                      colorFilter: ColorFilter.mode(
-                                          Colors.black.withOpacity(0.3),
-                                          BlendMode.darken),
-                                      image: FileImage(
-                                          File(selectedImages[index].path)))),
-                              margin: const EdgeInsets.all(3),
-                              child: Stack(
+                  BlocConsumer<VehicleAddBloc, VehicleAddState>(
+                    listener: (context, state) {
+                      if (state is ImageRemovedSuccsessState) {
+                        selectedImages.removeAt(state.index);
+                      }
+                    },
+                    builder: (context, state) {
+                      return GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: selectedImages.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3, crossAxisSpacing: 1),
+                          itemBuilder: (context, index) {
+                            {
+                              return Stack(
                                 children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      child: Image.file(
+                                        selectedImages[index],
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                      ),
+                                    ),
+                                  ),
                                   Center(
                                     child: IconButton(
                                         onPressed: () {
-                                          selectedImages.removeAt(index);
+                                          context.read<VehicleAddBloc>().add(
+                                              ImageRemoveButtonClicked(
+                                                  index: index));
                                         },
                                         icon: const Icon(
                                           Icons.delete,
@@ -119,9 +140,11 @@ class AddVehicle2 extends StatelessWidget {
                                         )),
                                   )
                                 ],
-                              ));
-                        }
-                      }),
+                              );
+                            }
+                          });
+                    },
+                  ),
                 ],
               ),
               ElevatedButton(
