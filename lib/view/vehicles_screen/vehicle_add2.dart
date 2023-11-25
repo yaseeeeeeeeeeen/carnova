@@ -176,10 +176,11 @@ class AddVehicle2 extends StatelessWidget {
         // selectedImages.isNotEmpty
         ) {
       vehicledatas.fuel = fuelController.text;
+      vehicledatas.price = double.parse(_priceController.text);
       vehicledatas.transmission = transmissionController.text;
-      vehicledatas.images = [];
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DocumetUpload(vehicledatas: vehicledatas)));
+          builder: (context) => DocumetUpload(
+              vehicledatas: vehicledatas, selecedImages: selectedImages)));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(customSnackbar(context, false, "Add all datas"));

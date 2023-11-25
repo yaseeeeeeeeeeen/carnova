@@ -7,4 +7,5 @@ class HostUrl {
   static const String verifyOtpHost = "$baseUrlHost/host/verify-otp";
   static const String hostLogin = "$baseUrlHost/host/login";
   static const String getHostData = "$baseUrlHost/host/host-details";
+  static const String addVehicle = "$baseUrlHost/host/add-vehicle";
 }

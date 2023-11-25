@@ -12,7 +12,11 @@ class ImageClearButton extends DocumentUploadEvent {}
 
 class DocumentSubmitClicked extends DocumentUploadEvent {
   VehicleAddData vehicledata;
+  List<File> vehicleImages;
+  File doc;
   DocumentSubmitClicked({
     required this.vehicledata,
+    required this.vehicleImages,
+    required this.doc,
   });
 }

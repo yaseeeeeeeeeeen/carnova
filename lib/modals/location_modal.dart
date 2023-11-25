@@ -15,8 +15,8 @@ String locationDataToJson(LocationData data) {
 }
 
 class LocationData {
-  num latitude;
-  num longitude;
+  double latitude;
+  double longitude;
   String address;
 
   LocationData({

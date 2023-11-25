@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
+import 'package:second_project/repositories/vehicle_add_repo.dart';
 import 'package:second_project/utils/functions/image_picker.dart';
 
 part 'document_upload_event.dart';
@@ -23,8 +25,7 @@ class DocumentUploadBloc
         cropAspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
         imageSource: ImageSource.gallery);
     if (pickedimage != null) {
-      String imagePicked = pickedimage.path;
-      emit(DocumentUploadSuccsessState(imagePath: imagePicked));
+      emit(DocumentUploadSuccsessState(imagePath: File(pickedimage.path)));
     } else {
       emit(DocumentUploadFailedState());
     }
@@ -40,7 +41,9 @@ class DocumentUploadBloc
     emit(DocumentUploadLoadingState());
     Future.delayed(const Duration(seconds: 2));
     final data = event.vehicledata.toJson();
-    print(data);
+    final response =
+        await VehicleAddRepo().addVehicle(data, event.vehicleImages, event.doc);
+    print(response.statusCode);
 
     //api upload
 

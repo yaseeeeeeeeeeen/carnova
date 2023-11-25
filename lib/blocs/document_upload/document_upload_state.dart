@@ -8,7 +8,7 @@ final class DocumentUploadInitial extends DocumentUploadState {}
 class DocumentUploadLoadingState extends DocumentUploadState {}
 
 class DocumentUploadSuccsessState extends DocumentUploadState {
-  String? imagePath;
+  File? imagePath;
   DocumentUploadSuccsessState({
     this.imagePath,
   });

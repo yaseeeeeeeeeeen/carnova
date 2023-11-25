@@ -43,7 +43,10 @@ class AddVehicle extends StatelessWidget {
               CustomTextfield(
                   hint: 'Brand', isSufix: false, controller: _brandController),
               CustomTextfield(
-                  hint: 'Modal', isSufix: false, controller: _modalController),
+                  hint: 'Modal',
+                  isSufix: false,
+                  controller: _modalController,
+                  keybordtype: TextInputType.number),
               CustomTextfield(
                   hint: 'Vehicle Number',
                   isSufix: false,
@@ -87,7 +90,8 @@ class AddVehicle extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             padding: const EdgeInsets.all(13),
-                            margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+                            margin: const EdgeInsets.only(
+                                top: 10, left: 5, right: 5),
                             height: height / 14,
                             width: width / 5,
                             child: Center(
@@ -131,11 +135,15 @@ class AddVehicle extends StatelessWidget {
     if (_brandController.text.isNotEmpty &&
         _modalController.text.isNotEmpty &&
         _nameController.text.isNotEmpty &&
-        _numberController.text.isNotEmpty) {
+        _numberController.text.isNotEmpty &&
+        _locationController.text.isNotEmpty) {
       VehicleAddData? vehicleDataobj = VehicleAddData(
+        location: _locationController.text,
+        longitude: logitude!,
+        latitude: latitude!,
         name: _nameController.text,
         brand: _brandController.text,
-        modal: _modalController.text,
+        model: num.parse(_modalController.text),
         vehicleNumber: _numberController.text,
       );
 
