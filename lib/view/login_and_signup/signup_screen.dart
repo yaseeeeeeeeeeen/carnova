@@ -57,7 +57,7 @@ class SignupScreen extends StatelessWidget {
                                   child: Center(
                                       child: Icon(
                                     color: mainColorH,
-                              Icons.directions_car_filled,
+                                    Icons.directions_car_filled,
                                     size: 35,
                                   )),
                                 ),
@@ -111,7 +111,7 @@ class SignupScreen extends StatelessWidget {
                                     validations.passwordValidations(p0),
                                 controller: passwordController,
                                 hintText: 'Password',
-                                obscureText: false,
+                                obscureText: true,
                               ),
                               const SizedBox(height: 12),
                               MyTextField(
@@ -120,7 +120,7 @@ class SignupScreen extends StatelessWidget {
                                         p0, passwordController.text),
                                 controller: conformpasswordController,
                                 hintText: 'Conform Password',
-                                obscureText: false,
+                                obscureText: true,
                               ),
                               const SizedBox(height: 20),
                               BlocConsumer<SignupBloc, SignupBlocState>(
@@ -170,10 +170,10 @@ class SignupScreen extends StatelessWidget {
                                       onTap: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: const Text(
+                                      child: Text(
                                         'Sign In',
                                         style: TextStyle(
-                                          color: Colors.blue,
+                                          color: secondColorH,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),

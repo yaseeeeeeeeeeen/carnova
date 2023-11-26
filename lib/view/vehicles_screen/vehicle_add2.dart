@@ -11,7 +11,7 @@ import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/snackbar.dart';
-import 'package:second_project/view/document_upload.dart';
+import 'package:second_project/view/vehicles_screen/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
 // ignore: must_be_immutable
@@ -72,7 +72,7 @@ class AddVehicle2 extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 10, bottom: 10),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(image.bg2),
+                                  image: AssetImage(image.bg1),
                                   fit: BoxFit.cover),
                               color: Colors.black26,
                               borderRadius: BorderRadius.circular(10)),

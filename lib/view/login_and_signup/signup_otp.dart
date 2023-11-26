@@ -51,7 +51,7 @@ class SignupOtpScreen extends StatelessWidget {
                               height: 60,
                               width: 60,
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: secondColorH,
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: Center(

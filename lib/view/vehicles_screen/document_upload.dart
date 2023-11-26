@@ -12,6 +12,7 @@ import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/custom_navbar.dart';
+import 'package:second_project/utils/notice_box.dart';
 import 'package:second_project/utils/snackbar.dart';
 
 // ignore: must_be_immutable
@@ -154,6 +155,8 @@ class DocumetUpload extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const ScreenParant()),
                       (route) => false);
+                  AlertBoxes()
+                      .showSuccessDialog(context, 'Vehicle Added successful');
                 } else if (state is DocumentUploadFailedState) {
                   customSnackbar(context, false, "Upload Your Vehicle RC");
                 } else {
