@@ -41,9 +41,10 @@ class VehicleAddRepo {
     request.fields['lat'] = vehicleData['lat'].toString();
     request.fields['long'] = vehicleData['long'].toString();
     request.fields['location'] = vehicleData['location'];
-    // request.fields['number'] = vehicleData['number'].toString();
+    request.fields["seat"] = vehicleData["seat"];
+    request.fields['number'] = vehicleData['number'].toString();
     request.fields['price'] = vehicleData['price'].toString();
-    request.fields['model'] =vehicleData['model'].toString();
+    request.fields['model'] = vehicleData['model'].toString();
     request.fields['transmission'] = vehicleData['transmission'];
     request.fields['fuel'] = vehicleData['fuel'];
 

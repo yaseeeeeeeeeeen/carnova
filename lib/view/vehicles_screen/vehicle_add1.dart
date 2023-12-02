@@ -6,6 +6,7 @@ import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/location_modal.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
+import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -19,6 +20,7 @@ class AddVehicle extends StatelessWidget {
   final TextEditingController _modalController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _seatController = TextEditingController();
 
   bool isloading = false;
   // final GlobalKey<FormState> addvehicle1 = GlobalKey<FormState>();
@@ -40,13 +42,21 @@ class AddVehicle extends StatelessWidget {
             children: [
               CustomTextfield(
                   hint: 'Name', isSufix: false, controller: _nameController),
-              CustomTextfield(
-                  hint: 'Brand', isSufix: false, controller: _brandController),
+              DropDownWid(
+                  listIndex: 3,
+                  controller: _brandController,
+                  titletext: "Car Brand",
+                  hinttext: "Select Your Vehicle Brand"),
               CustomTextfield(
                   hint: 'Modal',
                   isSufix: false,
                   controller: _modalController,
                   keybordtype: TextInputType.number),
+              DropDownWid(
+                  listIndex: 2,
+                  controller: _seatController,
+                  titletext: "Seat Capacity",
+                  hinttext: "Choose One"),
               CustomTextfield(
                   hint: 'Vehicle Number',
                   isSufix: false,
@@ -135,19 +145,22 @@ class AddVehicle extends StatelessWidget {
     if (_brandController.text.isNotEmpty &&
         _modalController.text.isNotEmpty &&
         _nameController.text.isNotEmpty &&
+        _seatController.text.isNotEmpty &&
         _numberController.text.isNotEmpty &&
         _locationController.text.isNotEmpty) {
       VehicleAddData? vehicleDataobj = VehicleAddData(
+        seat: _seatController.text,
         location: _locationController.text,
         longitude: logitude!,
         latitude: latitude!,
         name: _nameController.text,
         brand: _brandController.text,
-        model: num.parse(_modalController.text),
-        vehicleNumber: _numberController.text,
+        model: _modalController.text,
+        number: _numberController.text,
       );
 
-      print(vehicleDataobj.name);
+      print(vehicleDataobj.seat);
+      print(vehicleDataobj.brand);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => AddVehicle2(
                 vehicledatas: vehicleDataobj,

@@ -42,8 +42,8 @@ class AddVehicle2 extends StatelessWidget {
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.start,
                 children: [
-                  DropDownWid(fuel: true, controller: fuelController),
-                  DropDownWid(fuel: false, controller: transmissionController),
+                  DropDownWid(listIndex:0 , controller: fuelController,hinttext: 'Select Fuel Type',titletext: "Fuel Type"),
+                  DropDownWid(listIndex: 1, controller: transmissionController,hinttext: "Select Transmission Type",titletext: "Transmission"),
                   CustomTextfield(
                       keybordtype: TextInputType.number,
                       hint: 'Price',

@@ -2,8 +2,10 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/resources/components/car_container.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/view/vehicles_screen/account_underverification.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add1.dart';
 
 class MyVehicles extends StatelessWidget {
@@ -18,8 +20,14 @@ class MyVehicles extends StatelessWidget {
             IconButton(
                 tooltip: 'Vehicle Add',
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AddVehicle()));
+                  if (hostModelData!.isVerified) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AddVehicle()));
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const AccountUnderverificationScreen()));
+                  }
                 },
                 icon: const Icon(
                   Icons.add,

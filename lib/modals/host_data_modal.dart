@@ -9,12 +9,11 @@ class HostModel {
   bool isBlocked;
   bool isVerified;
   // File profile;
+  String profile;
 
   HostModel(
-  
-      {
-        // required   this.profile,
-        required this.id,
+      {required this.profile,
+      required this.id,
       required this.name,
       required this.email,
       required this.phone,
@@ -23,8 +22,8 @@ class HostModel {
       required this.isVerified});
 
   factory HostModel.fromJson(Map<String, dynamic> json) => HostModel(
-    // profile: json["profile"],
-    
+      // profile: json["profile"],
+      profile: json["profile"] ?? '',
       id: json["_id"],
       name: json["name"],
       email: json["email"],
@@ -34,6 +33,7 @@ class HostModel {
       isVerified: json['isVerified']);
 
   Map<String, dynamic> toJson() => {
+        "profile": profile,
         "_id": id,
         "name": name,
         "email": email,

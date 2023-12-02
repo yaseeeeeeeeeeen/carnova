@@ -223,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   navigateToHome(context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const ScreenParant()),
+        MaterialPageRoute(builder: (context) =>  ScreenParant()),
         (route) => false);
   }
 }

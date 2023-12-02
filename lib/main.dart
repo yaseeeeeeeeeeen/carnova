@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => VehicleAddBloc())
       ],
-    
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),

@@ -153,7 +153,7 @@ class DocumetUpload extends StatelessWidget {
                 if (state is DocumentAllSuccsessState) {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => const ScreenParant()),
+                          builder: (context) =>  ScreenParant(index: 1)),
                       (route) => false);
                   AlertBoxes()
                       .showSuccessDialog(context, 'Vehicle Added successful');

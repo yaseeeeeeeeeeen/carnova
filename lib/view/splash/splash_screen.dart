@@ -37,11 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final hostData = await HostDataRepo().getHostData();
     if (hostData != null) {
-      print('hostData get');
       HostModel data = HostModel.fromJson(hostData);
       hostModelData = data;
+      print(hostData);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const ScreenParant()),
+          MaterialPageRoute(builder: (context) =>  ScreenParant()),
           (route) => false);
     } else {
       //Token Expirity checking

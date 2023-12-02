@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/resources/api_urls/host_url.dart';
 
 import 'package:second_project/resources/components/list_tile.dart';
 
@@ -7,13 +8,19 @@ import 'package:second_project/resources/constants/text_styles.dart';
 import 'package:second_project/utils/logout_confirm.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
-import 'package:second_project/view/profile_edit.dart';
+import 'package:second_project/view/profile/profile_edit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+  bool profileimage = false;
 
   @override
   Widget build(BuildContext context) {
+    if (hostModelData?.profile == null) {
+      profileimage = false;
+    } else {
+      profileimage = true;
+    }
     double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: customAppBarH('PROFILE'),
@@ -51,8 +58,11 @@ class ProfileScreen extends StatelessWidget {
                             tag: "profilePhoto",
                             child: CircleAvatar(
                               radius: 50,
-                              backgroundImage:
-                                  AssetImage(image.profilePhotoDemo),
+                              backgroundImage: hostModelData!.profile.isNotEmpty
+                                  ? NetworkImage(
+                                      '${HostUrl.baseUrl}/${hostModelData?.profile}')
+                                  : NetworkImage(
+                                      image.profilePhotodemo),
                             ),
                           ),
                         ),

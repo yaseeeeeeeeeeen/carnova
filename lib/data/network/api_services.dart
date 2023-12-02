@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 
 class ApiServiceHost {
@@ -17,7 +20,7 @@ class ApiServiceHost {
     final response = await http.post(url, body: body, headers: headers);
     // ignore: avoid_print
     print(response.statusCode);
-
+    print(response.body);
     return response;
   }
 
@@ -43,6 +46,29 @@ class ApiServiceHost {
       'Cookie': 'jwtHost=$token'
     };
     final response = await http.get(url, headers: header);
+    return response;
+  }
+
+  Future<http.StreamedResponse> profileUpdate(File image) async {
+    final token = SharedPreference.instance.getToken();
+    final url = Uri.parse(HostUrl.addProfile);
+    var request = http.MultipartRequest('POST', url);
+    // final header = {
+    //   'Authorization': 'Bearer $token',
+    //   'Cookie': 'jwtHost=$token'
+    // };
+    request.headers['Authorization'] = 'Bearer $token';
+    request.headers['Cookie'] = 'jwtHost=$token';
+    var profilePhotoStream = http.ByteStream(image.openRead());
+    var profilePhotoLength = await image.length();
+    var profilePhotoMultipartFile = http.MultipartFile(
+      'file',
+      profilePhotoStream,
+      profilePhotoLength,
+      filename: 'profilephoto${hostModelData!.name}.jpg',
+    );
+    request.files.add(profilePhotoMultipartFile);
+    final response = await request.send();
     return response;
   }
 }

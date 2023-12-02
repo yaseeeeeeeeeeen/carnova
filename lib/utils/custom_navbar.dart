@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/view/home_screen.dart';
-import 'package:second_project/view/profile_screen.dart';
+import 'package:second_project/view/profile/profile_screen.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_screen.dart';
 
 class ScreenParant extends StatefulWidget {
-  const ScreenParant({super.key});
-
+  ScreenParant({super.key, this.index});
+  int? index = 0;
   @override
   State<ScreenParant> createState() => _ScreenParantState();
 }
@@ -18,8 +18,13 @@ class _ScreenParantState extends State<ScreenParant> {
   List<Widget> pages = [
     const HomeScreen(),
     const MyVehicles(),
-    const ProfileScreen()
+    ProfileScreen()
   ];
+  @override
+  void initState() {
+    currentPage = widget.index ?? 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -77,8 +82,8 @@ class NavBar extends StatelessWidget {
     return Expanded(
         child: InkWell(
       onTap: ontap,
-      child:
-          Icon(icon, color: selected ? mainColorH : mainColorH.withOpacity(0.4)),
+      child: Icon(icon,
+          color: selected ? mainColorH : mainColorH.withOpacity(0.4)),
     ));
   }
 }

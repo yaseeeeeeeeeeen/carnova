@@ -106,7 +106,7 @@ class SignupOtpScreen extends StatelessWidget {
                             if (state is HostOtpVerificationSuccsessState) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                    builder: (context) => const ScreenParant(),
+                                    builder: (context) =>  ScreenParant(),
                                   ),
                                   (route) => false);
                             } else if (state
