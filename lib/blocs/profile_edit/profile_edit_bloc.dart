@@ -35,13 +35,10 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     emit(SubmitLoadingState());
     await Future.delayed(const Duration(seconds: 2));
     final response = await ApiServiceHost.instance.profileUpdate(event.image);
-    final responsBody = await response.stream.bytesToString();
-    print(responsBody);
-    print(response.statusCode);
+    // final responsBody = await response.stream.bytesToString();
     if (response.statusCode == 200) {
       final hostData = await HostDataRepo().getHostData();
       if (hostData != null) {
-        print('hostData get');
         HostModel data = HostModel.fromJson(hostData);
         hostModelData = data;
         emit(SubmitSuccsessState());

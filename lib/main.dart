@@ -7,9 +7,9 @@ import 'package:second_project/blocs/otp_verifiaction/otp_verfication_bloc.dart'
 import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:second_project/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
+import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/view/splash/splash_screen.dart';
-
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HostOtpVerficationBloc()),
         BlocProvider(create: (context) => DocumentUploadBloc()),
         BlocProvider(create: (context) => ProfileEditBloc()),
-        BlocProvider(create: (context) => VehicleAddBloc())
+        BlocProvider(create: (context) => VehicleAddBloc()),
+        BlocProvider(create: (context) => VehicleFetchBloc())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

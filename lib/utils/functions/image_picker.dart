@@ -2,6 +2,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickService {
+   
   Future<XFile?> pickCropImage(
       {required CropAspectRatio cropAspectRatio,
       required ImageSource imageSource}) async {

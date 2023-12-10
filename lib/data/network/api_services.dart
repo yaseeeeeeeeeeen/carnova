@@ -16,19 +16,15 @@ class ApiServiceHost {
   Future<http.Response> hostSignup(Map<String, dynamic> hostDetails) async {
     final url = Uri.parse(HostUrl.signUpHost);
     final body = jsonEncode(hostDetails);
-
     final response = await http.post(url, body: body, headers: headers);
-    // ignore: avoid_print
-    print(response.statusCode);
-    print(response.body);
     return response;
   }
 
   Future<http.Response> hostOtp(Map<String, int?> otp) async {
     final url = Uri.parse(HostUrl.verifyOtpHost);
+
     final body = jsonEncode(otp);
     final response = await http.post(url, body: body, headers: headers);
-    // print(response.body);
     return response;
   }
 
@@ -53,10 +49,6 @@ class ApiServiceHost {
     final token = SharedPreference.instance.getToken();
     final url = Uri.parse(HostUrl.addProfile);
     var request = http.MultipartRequest('POST', url);
-    // final header = {
-    //   'Authorization': 'Bearer $token',
-    //   'Cookie': 'jwtHost=$token'
-    // };
     request.headers['Authorization'] = 'Bearer $token';
     request.headers['Cookie'] = 'jwtHost=$token';
     var profilePhotoStream = http.ByteStream(image.openRead());
@@ -69,6 +61,17 @@ class ApiServiceHost {
     );
     request.files.add(profilePhotoMultipartFile);
     final response = await request.send();
+    return response;
+  }
+
+  Future<http.Response> vehicleDataFetching() async {
+    final token = SharedPreference.instance.getToken();
+    final url = Uri.parse(HostUrl.fetchVehicles);
+    final header = {
+      'Authorization': 'Bearer $token',
+      'Cookie': 'jwtHost=$token'
+    };
+    final response = await http.get(url, headers: header);
     return response;
   }
 }

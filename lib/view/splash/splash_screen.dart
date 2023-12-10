@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    loginCheck(context);
+    loginCheck( context);
     super.initState();
   }
 
@@ -39,13 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (hostData != null) {
       HostModel data = HostModel.fromJson(hostData);
       hostModelData = data;
-      print(hostData);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) =>  ScreenParant()),
+          MaterialPageRoute(builder: (context) => ScreenParant()),
           (route) => false);
     } else {
-      //Token Expirity checking
-      print('hostData not get');
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const LoginScreen(),

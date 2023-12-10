@@ -48,6 +48,7 @@ class VehicleAddData {
         "fuel": fuel,
         "price": price,
         "model": model,
+        "seat": seat,
         // "images": images,
         "brand": brand,
       };

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:second_project/resources/components/car_container.dart';
 import 'package:second_project/resources/components/preview_revenue.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -58,15 +56,15 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                   left: 0,
                   top: 10),
-              ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: 2,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return const TrendigContainer();
-                },
-              )
+              // ListView.separated(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   separatorBuilder: (context, index) => const Divider(),
+              //   itemCount: 2,
+              //   shrinkWrap: true,
+              //   itemBuilder: (context, index) {
+              //     return  TrendigContainer();
+              //   },
+              // )
             ],
           ),
         ),

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/view/home_screen.dart';
 import 'package:second_project/view/profile/profile_screen.dart';
-import 'package:second_project/view/vehicles_screen/vehicle_screen.dart';
+
+import '../view/vehicles_screen/vehicle_show/vehicle_screen.dart';
+
 
 class ScreenParant extends StatefulWidget {
   ScreenParant({super.key, this.index});
@@ -22,6 +24,7 @@ class _ScreenParantState extends State<ScreenParant> {
   ];
   @override
   void initState() {
+    super.initState();
     currentPage = widget.index ?? 0;
   }
 

@@ -10,6 +10,7 @@ import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 import 'package:second_project/view/profile/profile_edit.dart';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   bool profileimage = false;
@@ -57,12 +58,12 @@ class ProfileScreen extends StatelessWidget {
                           child: Hero(
                             tag: "profilePhoto",
                             child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
                               radius: 50,
                               backgroundImage: hostModelData!.profile.isNotEmpty
                                   ? NetworkImage(
                                       '${HostUrl.baseUrl}/${hostModelData?.profile}')
-                                  : NetworkImage(
-                                      image.profilePhotodemo),
+                                  : NetworkImage(image.profilePhotodemo),
                             ),
                           ),
                         ),

@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/modals/host_data_modal.dart';
-import 'package:second_project/resources/components/car_container.dart';
 import 'package:second_project/resources/constants/colors.dart';
-import 'package:second_project/view/vehicles_screen/account_underverification.dart';
-import 'package:second_project/view/vehicles_screen/vehicle_add1.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_add/account_underverification.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_show/my_vehicles.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_show/verification_pending.dart';
 
 class MyVehicles extends StatelessWidget {
   const MyVehicles({super.key});
@@ -55,43 +56,13 @@ class MyVehicles extends StatelessWidget {
               Text('My Vehicles'),
               Text('Processing'),
             ],
-            views: const [MyvehiclesList(), PendingVerificationList()],
+            views:  [MyvehiclesList(),const PendingVerificationList()],
             onChange: (index) {},
           ),
         ));
   }
 }
 
-class MyvehiclesList extends StatelessWidget {
-  const MyvehiclesList({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [TrendigContainer(), Divider(), TrendigContainer()],
-      ),
-    );
-  }
-}
 
-class PendingVerificationList extends StatelessWidget {
-  const PendingVerificationList({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          TrendigContainer(),
-          Divider(),
-          TrendigContainer(),
-          Divider(),
-          TrendigContainer()
-        ],
-      ),
-    );
-  }
-}
