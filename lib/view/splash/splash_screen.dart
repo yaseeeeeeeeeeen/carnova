@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    loginCheck( context);
+    loginCheck(context);
     super.initState();
   }
 
@@ -34,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loginCheck(context) async {
     await Future.delayed(const Duration(seconds: 2));
-
     final hostData = await HostDataRepo().getHostData();
     if (hostData != null) {
       HostModel data = HostModel.fromJson(hostData);

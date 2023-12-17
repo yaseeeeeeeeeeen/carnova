@@ -64,9 +64,8 @@ class ApiServiceHost {
     return response;
   }
 
-  Future<http.Response> vehicleDataFetching() async {
-    final token = SharedPreference.instance.getToken();
-    final url = Uri.parse(HostUrl.fetchVehicles);
+  Future<http.Response> vehicleDataFetching(String token) async {
+       final url = Uri.parse(HostUrl.fetchVehicles);
     final header = {
       'Authorization': 'Bearer $token',
       'Cookie': 'jwtHost=$token'

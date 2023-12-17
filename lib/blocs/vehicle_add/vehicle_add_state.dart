@@ -34,3 +34,5 @@ class ImageRemovedSuccsessState extends VehicleAddState{
     required this.index
   });
 }
+
+class ImagesFetchSuccsessState extends VehicleAddState{}

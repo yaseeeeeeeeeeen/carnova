@@ -7,7 +7,6 @@ import 'package:second_project/view/profile/profile_screen.dart';
 
 import '../view/vehicles_screen/vehicle_show/vehicle_screen.dart';
 
-
 class ScreenParant extends StatefulWidget {
   ScreenParant({super.key, this.index});
   int? index = 0;
@@ -20,7 +19,7 @@ class _ScreenParantState extends State<ScreenParant> {
   List<Widget> pages = [
     const HomeScreen(),
     const MyVehicles(),
-    ProfileScreen()
+    const UserProfile()
   ];
   @override
   void initState() {

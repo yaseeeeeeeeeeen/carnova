@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/location_modal.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
+import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
@@ -14,7 +15,8 @@ import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add2.dar
 
 // ignore: must_be_immutable
 class AddVehicle extends StatelessWidget {
-  AddVehicle({Key? key}) : super(key: key);
+  VehicleFetchModal? vehilcledata;
+  AddVehicle({Key? key, this.vehilcledata}) : super(key: key);
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _brandController = TextEditingController();
   final TextEditingController _modalController = TextEditingController();
@@ -28,6 +30,9 @@ class AddVehicle extends StatelessWidget {
   num? logitude;
   @override
   Widget build(BuildContext context) {
+    if (vehilcledata != null) {
+      vehicledatanotEmpty();
+    }
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -161,13 +166,32 @@ class AddVehicle extends StatelessWidget {
 
       print(vehicleDataobj.seat);
       print(vehicleDataobj.brand);
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AddVehicle2(
-                vehicledatas: vehicleDataobj,
-              )));
+      if (vehilcledata != null) {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => AddVehicle2(
+                  vehicledatas: vehicleDataobj,
+                  vehicledata: vehilcledata,
+                )));
+      } else {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => AddVehicle2(
+                  vehicledatas: vehicleDataobj,
+                )));
+      }
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(customSnackbar(context, false, "Add all datas"));
     }
+  }
+
+  vehicledatanotEmpty() {
+    _nameController.text = vehilcledata!.name;
+    _brandController.text = vehilcledata!.brand;
+    _locationController.text = vehilcledata!.location;
+    _numberController.text = vehilcledata!.number;
+    _seatController.text = vehilcledata!.seat.toString();
+    _modalController.text = vehilcledata!.model.toString();
+    logitude = vehilcledata!.long;
+    latitude = vehilcledata!.lat;
   }
 }

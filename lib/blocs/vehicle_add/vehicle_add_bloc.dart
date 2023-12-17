@@ -12,6 +12,7 @@ part 'vehicle_add_state.dart';
 
 class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
   VehicleAddBloc() : super(VehicleAddInitial()) {
+    on<VehicleUpdateImageFetched>(vehicleUpdateImageFetched);
     on<LocationPickerVehilceAddEvent>(locationPickerVehilceAdd);
     on<ImageAddingButtonClicked>(imageAddingButtonClicked);
     on<ImageRemoveButtonClicked>(imageRemoveButtonClicked);
@@ -32,6 +33,7 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
         imageSource: ImageSource.gallery);
     if (pickedXfile != null) {
       File image = File(pickedXfile.path);
+      emit(ImagesFetchSuccsessState());
       emit(ImagePickingSuccsess(
           pickedImage: image)); // Emitting the picked image
     } else {
@@ -42,7 +44,11 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
 
   FutureOr<void> imageRemoveButtonClicked(
       ImageRemoveButtonClicked event, Emitter<VehicleAddState> emit) {
-    
     emit(ImageRemovedSuccsessState(index: event.index));
+  }
+
+  FutureOr<void> vehicleUpdateImageFetched(
+      VehicleUpdateImageFetched event, Emitter<VehicleAddState> emit) {
+    emit(ImagesFetchSuccsessState());
   }
 }

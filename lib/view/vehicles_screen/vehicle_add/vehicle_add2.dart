@@ -6,27 +6,33 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
+import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
+import 'package:second_project/utils/functions/string_to_file.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
 // ignore: must_be_immutable
 class AddVehicle2 extends StatelessWidget {
-  AddVehicle2({Key? key, required this.vehicledatas}) : super(key: key);
+  AddVehicle2({Key? key, required this.vehicledatas, this.vehicledata})
+      : super(key: key);
   VehicleAddData vehicledatas;
   XFile? imageee;
+  VehicleFetchModal? vehicledata;
 
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController fuelController = TextEditingController();
   final TextEditingController transmissionController = TextEditingController();
   List<File> selectedImages = [];
-
   @override
   Widget build(BuildContext context) {
+    if (vehicledata != null) {
+      vehicledatanotEmpty(context);
+    }
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -42,8 +48,16 @@ class AddVehicle2 extends StatelessWidget {
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.start,
                 children: [
-                  DropDownWid(listIndex:0 , controller: fuelController,hinttext: 'Select Fuel Type',titletext: "Fuel Type"),
-                  DropDownWid(listIndex: 1, controller: transmissionController,hinttext: "Select Transmission Type",titletext: "Transmission"),
+                  DropDownWid(
+                      listIndex: 0,
+                      controller: fuelController,
+                      hinttext: 'Select Fuel Type',
+                      titletext: "Fuel Type"),
+                  DropDownWid(
+                      listIndex: 1,
+                      controller: transmissionController,
+                      hinttext: "Select Transmission Type",
+                      titletext: "Transmission"),
                   CustomTextfield(
                       keybordtype: TextInputType.number,
                       hint: 'Price',
@@ -99,50 +113,54 @@ class AddVehicle2 extends StatelessWidget {
                   BlocConsumer<VehicleAddBloc, VehicleAddState>(
                     listener: (context, state) {
                       if (state is ImageRemovedSuccsessState) {
-                        selectedImages.removeAt(state.index);
+                        {
+                          selectedImages.removeAt(state.index);
+                        }
                       }
                     },
                     builder: (context, state) {
-                      return GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: selectedImages.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3, crossAxisSpacing: 1),
-                          itemBuilder: (context, index) {
-                            {
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10)),
-                                      child: Image.file(
-                                        selectedImages[index],
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                      ),
+                      if (state is ImagesFetchSuccsessState) {
+                        return GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: selectedImages.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3, crossAxisSpacing: 1),
+                            itemBuilder: (context, index) {
+                              {
+                                return Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          child: Image.file(
+                                            selectedImages[index],
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                          )),
                                     ),
-                                  ),
-                                  Center(
-                                    child: IconButton(
-                                        onPressed: () {
-                                          context.read<VehicleAddBloc>().add(
-                                              ImageRemoveButtonClicked(
-                                                  index: index));
-                                        },
-                                        icon: const Icon(
-                                          Icons.delete,
-                                          size: 40,
-                                          color: Colors.red,
-                                        )),
-                                  )
-                                ],
-                              );
-                            }
-                          });
+                                    Center(
+                                      child: IconButton(
+                                          onPressed: () {
+                                            context.read<VehicleAddBloc>().add(
+                                                ImageRemoveButtonClicked(
+                                                    index: index));
+                                          },
+                                          icon: const Icon(
+                                            Icons.delete,
+                                            size: 40,
+                                            color: Colors.red,
+                                          )),
+                                    )
+                                  ],
+                                );
+                              }
+                            });
+                      }
+                      return const SizedBox();
                     },
                   ),
                 ],
@@ -178,12 +196,31 @@ class AddVehicle2 extends StatelessWidget {
       vehicledatas.fuel = fuelController.text;
       vehicledatas.price = double.parse(_priceController.text);
       vehicledatas.transmission = transmissionController.text;
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DocumetUpload(
-              vehicledatas: vehicledatas, selecedImages: selectedImages)));
+      if (vehicledata != null) {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DocumetUpload(
+                imageSelected: true,
+                vehicledata: vehicledata,
+                vehicledatas: vehicledatas,
+                selecedImages: selectedImages)));
+      } else {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DocumetUpload(
+                imageSelected: false,
+                vehicledatas: vehicledatas,
+                selecedImages: selectedImages)));
+      }
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(customSnackbar(context, false, "Add all datas"));
     }
   }
+
+  vehicledatanotEmpty(context) async {
+    _priceController.text = vehicledata!.price.toString();
+    fuelController.text = vehicledata!.fuel;
+    transmissionController.text = vehicledata!.transmission;
+    selectedImages = await convertingStringtoImage(vehicledata!.images);
+    print(selectedImages);
+      }
 }

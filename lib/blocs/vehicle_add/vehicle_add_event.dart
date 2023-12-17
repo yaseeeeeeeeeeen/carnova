@@ -3,6 +3,8 @@ part of 'vehicle_add_bloc.dart';
 
 abstract class VehicleAddEvent {}
 
+class VehicleUpdateImageFetched extends VehicleAddEvent{}
+
 class LocationPickerVehilceAddEvent extends VehicleAddEvent {}
 
 class ImageAddingButtonClicked extends VehicleAddEvent {}

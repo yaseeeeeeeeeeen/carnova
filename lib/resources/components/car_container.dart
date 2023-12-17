@@ -30,8 +30,8 @@ class TrendigContainer extends StatelessWidget {
                           color: Colors.white,
                           image: DecorationImage(
                               image: NetworkImage(
-                                  "${HostUrl.baseUrl}/${data.images[0]}}"),
-                              fit: BoxFit.fill))))),
+                                  "${HostUrl.baseUrl}/${data.images.first}"),
+                              fit: BoxFit.cover))))),
           Container(
               padding: const EdgeInsets.only(right: 5),
               width: width / 2.3,
@@ -50,9 +50,9 @@ class TrendigContainer extends StatelessWidget {
                         top: 2),
                     PopinsTextWidget(
                         isBold: true,
-                        text: '\$${data.price.toString()}',
+                        text: '₹ ${data.price.toString()}',
                         size: 18,
-                        color: Colors.red,
+                        color: Colors.black,
                         left: 4,
                         top: 5),
                     Row(
@@ -78,25 +78,6 @@ class TrendigContainer extends StatelessWidget {
                       data.location,
                       overflow: TextOverflow.ellipsis,
                     )
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     HindTextWidget(
-                    //         isBold: false,
-                    //         text: 'Booking: 10',
-                    //         size: 14,
-                    //         color: Colors.black,
-                    //         left: 4,
-                    //         top: 5),
-                    //     HindTextWidget(
-                    //         isBold: false,
-                    //         text: 'Amount : 10000',
-                    //         size: 14,
-                    //         color: Colors.black,
-                    //         left: 4,
-                    //         top: 5)
-                    //   ],
-                    // )
                   ]))
         ]));
   }
