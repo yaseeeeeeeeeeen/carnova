@@ -5,6 +5,11 @@ abstract class VehicleAddState {}
 
 final class VehicleAddInitial extends VehicleAddState {}
 
+class VehicleUpdateImageSuccsess extends VehicleAddState {
+  List<File> images;
+  VehicleUpdateImageSuccsess({required this.images});
+}
+
 class LoadingState extends VehicleAddState {}
 
 class LocationPickingFaildState extends VehicleAddState {}
@@ -27,12 +32,16 @@ class ImagePickingSuccsess extends VehicleAddState {
 
 class ImagePickingFailed extends VehicleAddState {}
 
+class ImageRemovedSuccsessState extends VehicleAddState {
+  int index;
+  ImageRemovedSuccsessState({required this.index});
+}
 
-class ImageRemovedSuccsessState extends VehicleAddState{
-    int index;
-  ImageRemovedSuccsessState({
-    required this.index
+class ImageRemovedFailedState extends VehicleAddState {
+  String messege;
+  ImageRemovedFailedState({
+    required this.messege
   });
 }
 
-class ImagesFetchSuccsessState extends VehicleAddState{}
+class ImagesFetchSuccsessState extends VehicleAddState {}

@@ -163,9 +163,6 @@ class AddVehicle extends StatelessWidget {
         model: _modalController.text,
         number: _numberController.text,
       );
-
-      print(vehicleDataobj.seat);
-      print(vehicleDataobj.brand);
       if (vehilcledata != null) {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddVehicle2(

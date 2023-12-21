@@ -11,7 +11,6 @@ import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
-import 'package:second_project/utils/functions/string_to_file.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -31,6 +30,9 @@ class AddVehicle2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (vehicledata != null) {
+      context
+          .read<VehicleAddBloc>()
+          .add(VehicleUpdateImages(imageUrls: vehicledata!.images));
       vehicledatanotEmpty(context);
     }
     double height = MediaQuery.sizeOf(context).height;
@@ -68,7 +70,6 @@ class AddVehicle2 extends StatelessWidget {
                     listener: (context, state) {
                       if (state is ImagePickingSuccsess) {
                         selectedImages.add(state.pickedImage);
-                        print(selectedImages);
                       } else if (state is ImagePickingFailed) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             customSnackbar(
@@ -112,7 +113,9 @@ class AddVehicle2 extends StatelessWidget {
                   ),
                   BlocConsumer<VehicleAddBloc, VehicleAddState>(
                     listener: (context, state) {
-                      if (state is ImageRemovedSuccsessState) {
+                      if (state is VehicleUpdateImageSuccsess) {
+                        selectedImages = state.images;
+                      } else if (state is ImageRemovedSuccsessState) {
                         {
                           selectedImages.removeAt(state.index);
                         }
@@ -128,35 +131,36 @@ class AddVehicle2 extends StatelessWidget {
                                     crossAxisCount: 3, crossAxisSpacing: 1),
                             itemBuilder: (context, index) {
                               {
-                                return Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                          child: Image.file(
-                                            selectedImages[index],
-                                            fit: BoxFit.cover,
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                          )),
-                                    ),
-                                    Center(
-                                      child: IconButton(
-                                          onPressed: () {
-                                            context.read<VehicleAddBloc>().add(
-                                                ImageRemoveButtonClicked(
-                                                    index: index));
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            size: 40,
-                                            color: Colors.red,
-                                          )),
-                                    )
-                                  ],
-                                );
+                                return Stack(children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Image.file(
+                                          selectedImages[index],
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                        )),
+                                  ),
+                                  Center(
+                                    child: IconButton(
+                                        onPressed: () {
+                                          context.read<VehicleAddBloc>().add(
+                                              ImageRemoveButtonClicked(
+                                                  imageId: vehicledata!
+                                                      .images[index],
+                                                  vehicleId: vehicledata!.id,
+                                                  index: index));
+                                        },
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          size: 40,
+                                          color: Colors.red,
+                                        )),
+                                  )
+                                ]);
                               }
                             });
                       }
@@ -165,19 +169,28 @@ class AddVehicle2 extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  nextpage2(context);
+              BlocConsumer<VehicleAddBloc, VehicleAddState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      nextpage2(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      fixedSize: Size(width, 50),
+                    ),
+                    child: vehicledata != null
+                        ? Text('UPDATE',
+                            style: GoogleFonts.aBeeZee(
+                                fontSize: 18, fontWeight: FontWeight.w500))
+                        : Text('NEXT',
+                            style: GoogleFonts.aBeeZee(
+                                fontSize: 18, fontWeight: FontWeight.w500)),
+                  );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  fixedSize: Size(width, 50),
-                ),
-                child: Text('NEXT',
-                    style: GoogleFonts.aBeeZee(
-                        fontSize: 18, fontWeight: FontWeight.w500)),
               )
             ],
           ),
@@ -188,21 +201,20 @@ class AddVehicle2 extends StatelessWidget {
 
   nextpage2(context) {
     if (_priceController.text.isNotEmpty &&
-            fuelController.text.isNotEmpty &&
-            transmissionController.text.isNotEmpty
-        // &&
-        // selectedImages.isNotEmpty
-        ) {
+        fuelController.text.isNotEmpty &&
+        transmissionController.text.isNotEmpty &&
+        selectedImages.isNotEmpty) {
       vehicledatas.fuel = fuelController.text;
       vehicledatas.price = double.parse(_priceController.text);
       vehicledatas.transmission = transmissionController.text;
       if (vehicledata != null) {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DocumetUpload(
-                imageSelected: true,
-                vehicledata: vehicledata,
-                vehicledatas: vehicledatas,
-                selecedImages: selectedImages)));
+        // Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (context) => DocumetUpload(
+        //         imageSelected: true,
+        //         vehicledata: vehicledata,
+        //         vehicledatas: vehicledatas,
+        //         selecedImages: selectedImages)));
+        context.read<VehicleAddBloc>().add(VehicleUpdateEvent());
       } else {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => DocumetUpload(
@@ -220,7 +232,5 @@ class AddVehicle2 extends StatelessWidget {
     _priceController.text = vehicledata!.price.toString();
     fuelController.text = vehicledata!.fuel;
     transmissionController.text = vehicledata!.transmission;
-    selectedImages = await convertingStringtoImage(vehicledata!.images);
-    print(selectedImages);
-      }
+  }
 }

@@ -40,7 +40,7 @@ class ProfileCardWid extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "   ${hostModelData!.name.toUpperCase()}",
+            " ${hostModelData!.name.toUpperCase()}",
             style: CustomFontStyles.profileName,
           ),
           Row(
@@ -49,7 +49,8 @@ class ProfileCardWid extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.sizeOf(context).width / 1.8,
                 child: Text(hostModelData!.email,
-                    style: CustomFontStyles.mailstyle, overflow: TextOverflow.ellipsis),
+                    style: CustomFontStyles.mailstyle,
+                    overflow: TextOverflow.ellipsis),
               ),
               TextButton(
                   onPressed: () {

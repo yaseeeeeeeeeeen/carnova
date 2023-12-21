@@ -7,7 +7,7 @@ import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/account_underverification.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_show/my_vehicles.dart';
-import 'package:second_project/view/vehicles_screen/vehicle_show/verification_pending.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_show/pending_vehicles.dart';
 
 class MyVehicles extends StatelessWidget {
   const MyVehicles({super.key});
@@ -56,7 +56,7 @@ class MyVehicles extends StatelessWidget {
               Text('My Vehicles'),
               Text('Processing'),
             ],
-            views:  [MyvehiclesList(),const PendingVerificationList()],
+            views:  [MyvehiclesList(), PendigVerification()],
             onChange: (index) {},
           ),
         ));

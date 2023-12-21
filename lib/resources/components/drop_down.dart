@@ -73,7 +73,7 @@ class _DropDownWidState extends State<DropDownWid> {
           selectedStyle: GoogleFonts.poppins(color: Colors.black),
           hintText: widget.hinttext,
           hintStyle: GoogleFonts.poppins(),
-          items: widget.mainList![widget.listIndex],
+          items: widget.mainList?[widget.listIndex],
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
             color: Colors.black,

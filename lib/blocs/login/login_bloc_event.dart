@@ -8,3 +8,5 @@ Map<String, String> mailandpass;
   LoginClickedEvent({required this.mailandpass});
   
 }
+
+class HostDetailsFetch extends LoginBlocEvent{}

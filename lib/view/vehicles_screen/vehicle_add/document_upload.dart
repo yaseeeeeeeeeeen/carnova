@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/document_upload/document_upload_bloc.dart';
+import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
-import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/custom_navbar.dart';
@@ -21,19 +21,25 @@ import 'package:second_project/utils/snackbar.dart';
 class DocumetUpload extends StatelessWidget {
   DocumetUpload(
       {super.key,
-      required this.imageSelected,      required this.vehicledatas,
+      required this.imageSelected,
+      required this.vehicledatas,
       required this.selecedImages,
       this.vehicledata});
   VehicleAddData vehicledatas;
   List<File> selecedImages;
   VehicleFetchModal? vehicledata;
-  bool imageSelected ;
+  bool imageSelected;
 
   File? selectImagePath;
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+    if (vehicledata != null) {
+      context
+          .read<DocumentUploadBloc>()
+          .add(VehicleUpdateDocumnet(imageUrl: vehicledata!.document));
+    }
+    return Scaffold(
         appBar: customAppBarH("Upload Vehicle Document"),
         extendBodyBehindAppBar: true,
         body: Padding(
@@ -72,49 +78,44 @@ class DocumetUpload extends StatelessWidget {
                               }
                             },
                             builder: (context, state) {
-                              return vehicledata != null
-                                  ? Container(
-                                      color: Colors.grey.shade300,
-                                      height:
-                                          MediaQuery.sizeOf(context).height /
-                                              4.5,
-                                      width: MediaQuery.sizeOf(context).width,
-                                      child: Image(
-                                          image: NetworkImage(
-                                              "${HostUrl.baseUrl}/${vehicledata!.document}"),
-                                          fit: BoxFit.cover))
-                                  : Container(
-                                      color: Colors.grey.shade300,
-                                      height:
-                                          MediaQuery.sizeOf(context).height /
-                                              4.5,
-                                      width: MediaQuery.sizeOf(context).width,
-                                      child: selectImagePath != null
-                                          ? Image(
-                                              image: FileImage(
-                                                  File(selectImagePath!.path)),
-                                              fit: BoxFit.cover)
-                                          : Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  const SizedBox(),
-                                                  const Icon(
-                                                      Icons
-                                                          .file_upload_outlined,
-                                                      color: Colors.black,
-                                                      size: 80),
-                                                  Text(
-                                                    'Browse to upload',
-                                                    style: GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 20),
-                                                  )
-                                                ],
-                                              ),
-                                            ));
+                              if (state is LoadingState) {
+                                return Container(
+                                    color: Colors.grey.shade300,
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 4.5,
+                                    width: MediaQuery.sizeOf(context).width,
+                                    child: const Center(
+                                        child: CircularProgressIndicator()));
+                              }
+                              return Container(
+                                  color: Colors.grey.shade300,
+                                  height:
+                                      MediaQuery.sizeOf(context).height / 4.5,
+                                  width: MediaQuery.sizeOf(context).width,
+                                  child: selectImagePath != null
+                                      ? Image(
+                                          image: FileImage(
+                                              File(selectImagePath!.path)),
+                                          fit: BoxFit.cover)
+                                      : Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              const SizedBox(),
+                                              const Icon(
+                                                  Icons.file_upload_outlined,
+                                                  color: Colors.black,
+                                                  size: 80),
+                                              Text(
+                                                'Browse to upload',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.black,
+                                                    fontSize: 20),
+                                              )
+                                            ],
+                                          ),
+                                        ));
                             },
                           ),
                           Positioned(
@@ -187,22 +188,25 @@ class DocumetUpload extends StatelessWidget {
                 return MyLoadingButton(
                     isLoading: isLoading,
                     onTap: () {
-                      if (selectImagePath != null) {
-                        context.read<DocumentUploadBloc>().add(
-                            DocumentSubmitClicked(
-                                vehicledata: vehicledatas,
-                                vehicleImages: selecedImages,
-                                doc: selectImagePath!));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            customSnackbar(context, false, "ADD DOCUMENT"));
-                      }
+                      buttonClicked(context);
                     },
-                    title: 'SUBMIT');
+                    title: vehicledata != null ? 'UPDATE' : 'SUBMIT');
               }),
               const SizedBox()
             ],
           ),
         ));
+  }
+
+  buttonClicked(context) {
+    if (selectImagePath != null) {
+      context.read<DocumentUploadBloc>().add(DocumentSubmitClicked(
+          vehicledata: vehicledatas,
+          vehicleImages: selecedImages,
+          doc: selectImagePath!));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(customSnackbar(context, false, "ADD DOCUMENT"));
+    }
   }
 }

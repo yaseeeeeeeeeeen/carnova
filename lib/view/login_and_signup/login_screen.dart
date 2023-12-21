@@ -152,7 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             BlocConsumer<LoginBloc, LoginBlocState>(
                               listener: (context, state) {
                                 if (state is LoginSuccsessState) {
-                                  navigateToHome(context);
+                                  context
+                                      .read<LoginBloc>()
+                                      .add(HostDetailsFetch());
                                 } else if (state is LoginProcessState) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       customSnackbar(context, false,
@@ -169,6 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       customSnackbar(context, false,
                                           "Some Erorr Try again"));
+                                } else if (state is LoginDataFetchState) {
+                                  navigateToHome(context);
                                 }
                               },
                               builder: (context, state) {
@@ -223,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   navigateToHome(context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) =>  ScreenParant()),
+        MaterialPageRoute(builder: (context) => ScreenParant()),
         (route) => false);
   }
 }

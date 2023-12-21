@@ -3,6 +3,11 @@ part of 'document_upload_bloc.dart';
 
 abstract class DocumentUploadEvent {}
 
+class VehicleUpdateDocumnet extends DocumentUploadEvent {
+  String imageUrl;
+  VehicleUpdateDocumnet({required this.imageUrl});
+}
+
 class DocumentUploadClicked extends DocumentUploadEvent {
   bool imageUploaded;
   DocumentUploadClicked({required this.imageUploaded});
@@ -20,3 +25,5 @@ class DocumentSubmitClicked extends DocumentUploadEvent {
     required this.doc,
   });
 }
+
+class UpdateVehicleClicked extends DocumentUploadEvent{}

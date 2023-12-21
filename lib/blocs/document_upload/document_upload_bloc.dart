@@ -5,8 +5,9 @@ import 'package:bloc/bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
-import 'package:second_project/repositories/vehicle_add_repo.dart';
+import 'package:second_project/repositories/vehicle_repo.dart';
 import 'package:second_project/utils/functions/image_picker.dart';
+import 'package:second_project/utils/functions/string_to_file.dart';
 
 part 'document_upload_event.dart';
 part 'document_upload_state.dart';
@@ -17,6 +18,8 @@ class DocumentUploadBloc
     on<DocumentUploadClicked>(documentUploadClicked);
     on<ImageClearButton>(imageClearButtonClicked);
     on<DocumentSubmitClicked>(documentSubmitClicked);
+    on<VehicleUpdateDocumnet>(vehicleUpdateDocumnet);
+    on<UpdateVehicleClicked>(updateVehicleClicked);
   }
 
   FutureOr<void> documentUploadClicked(
@@ -48,5 +51,23 @@ class DocumentUploadBloc
     //api upload
 
     emit(DocumentAllSuccsessState());
+  }
+
+  FutureOr<void> vehicleUpdateDocumnet(
+      VehicleUpdateDocumnet event, Emitter<DocumentUploadState> emit) async {
+    emit(DocumentUploadLoadingState());
+    List<String> imgUrl = [event.imageUrl];
+    final data = await convertingStringtoImage(imgUrl);
+
+    if (data.isNotEmpty) {
+      File document = data[0];
+      emit(DocumentUploadSuccsessState(imagePath: document));
+    } else {
+      emit(DocumentUploadFailedState());
+    }
+  }
+
+  FutureOr<void> updateVehicleClicked(UpdateVehicleClicked event, Emitter<DocumentUploadState> emit)async {
+    
   }
 }

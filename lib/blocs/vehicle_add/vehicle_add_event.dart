@@ -3,17 +3,24 @@ part of 'vehicle_add_bloc.dart';
 
 abstract class VehicleAddEvent {}
 
-class VehicleUpdateImageFetched extends VehicleAddEvent{}
+class VehicleUpdateImages extends VehicleAddEvent {
+  List<String> imageUrls;
+  VehicleUpdateImages({required this.imageUrls});
+}
+
+class VehicleUpdateImageFetched extends VehicleAddEvent {}
 
 class LocationPickerVehilceAddEvent extends VehicleAddEvent {}
 
 class ImageAddingButtonClicked extends VehicleAddEvent {}
 
 class ImageRemoveButtonClicked extends VehicleAddEvent {
+  String vehicleId;
+  String imageId;
   int index;
-  ImageRemoveButtonClicked({
-    required this.index
-  });
+  ImageRemoveButtonClicked({required this.index,required this.imageId,required this.vehicleId});
 }
 
 class FirstPageFinishVehilceAddEvent extends VehicleAddEvent {}
+
+class VehicleUpdateEvent extends VehicleAddEvent {}

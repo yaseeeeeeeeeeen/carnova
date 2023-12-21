@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:either_dart/either.dart';
 
-import 'package:second_project/data/network/api_services.dart';
+
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/host_data_modal.dart';
-import 'package:second_project/repositories/host_data_repo.dart';
+
+import '../../repositories/host_repo.dart';
 
 part 'otp_verfication_event.dart';
 part 'otp_verfication_state.dart';
@@ -20,20 +22,21 @@ class HostOtpVerficationBloc
   FutureOr<void> otpVerifyButtonClicked(OtpVerifyButtonClicked event,
       Emitter<HostOtpVerficationState> emit) async {
     emit(HostOtpVerificationLoadingState());
-    final response = await ApiServiceHost.instance.hostOtp(event.otp);
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      String token = body['token'];
-     // print(token);
-      await SharedPreference.instance.storeToken(token);
-      final userData = await HostDataRepo().getHostData();
-      // print('user data $userData');
-      if (userData == null) return null;
-      final data = HostModel.fromJson(userData);
-      hostModelData = data;
-      emit(HostOtpVerificationSuccsessState());
-    } else {
-      emit(HostOtpVerificationFailedState());
+    final response = await HostRepo().otpverificatio(event.otp);
+    response.fold((left) {
+       emit(HostOtpVerificationFailedState(message: left.message));
+    }, (right) {
+                String token = right['token'];
+                 SharedPreference.instance.storeToken(token);
+                   final response =  HostRepo().fetchHostData();
+                      response.fold((left) {
+        emit(HostOtpVerificationFailedState(message: left.message));
+      }, (right) {
+        final data = HostModel.fromJson(right);
+        hostModelData = data;
+      });
+    });
+  
     }
   }
-}
+

@@ -4,11 +4,12 @@
 
 import 'dart:convert';
 
-List<VehicleFetchModal> vehicleFetchModalFromJson(String str) {
-  final jsonData = json.decode(str);
-  return List<VehicleFetchModal>.from(
-      jsonData.map((x) => VehicleFetchModal.fromJson(x)));
-}
+// List<VehicleFetchModal> vehicleFetchModalFromJson(String str) {
+//   final List<Map<String, dynamic>> jsonData = json.decode(str);
+//   return jsonData.map((e) => VehicleFetchModal.fromJson(e)).toList();
+//   // return List<VehicleFetchModal>.from(
+//   //     jsonData.map((x) => VehicleFetchModal.fromJson(x)));
+// }
 
 String vehicleFetchModalToJson(List<VehicleFetchModal> data) {
   final dyn = List<dynamic>.from(data.map((x) => x.toJson()));
@@ -99,4 +100,3 @@ class VehicleFetchModal {
         "document": document,
       };
 }
-

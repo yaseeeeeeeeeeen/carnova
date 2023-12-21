@@ -53,3 +53,50 @@ class VehicleAddRepo {
     return response;
   }
 }
+
+Future<http.StreamedResponse> editVehicle(
+      String id, Map<String, dynamic> vehicleData, List<File> images) async {
+    final url = Uri.parse('${HostUrl.baseUrl}/${HostUrl.editVehicle}/$id');
+    var request = http.MultipartRequest('PATCH', url);
+    final token = SharedPreference.instance.getToken();
+    // HEADERS
+    request.headers['Authorization'] = 'Bearer $token';
+    request.headers['Cookie'] = 'jwtHost=$token';
+    // SET SENDING IMAGES
+    for (var i = 0; i < images.length; i++) {
+      var stream = http.ByteStream(images[i].openRead());
+      var length = await images[i].length();
+
+      var multipartFile = http.MultipartFile(
+        'files',
+        stream,
+        length,
+        filename: 'image$i.jpg',
+      );
+
+      request.files.add(multipartFile);
+    }
+    request.fields['name'] = vehicleData['name'];
+    request.fields['brand'] = vehicleData['brand'];
+    request.fields['location'] = vehicleData['location'];
+    request.fields['price'] = vehicleData['price'].toString();
+    request.fields['model'] = vehicleData['model'].toString();
+    request.fields['transmission'] = vehicleData['transmission'];
+    request.fields['fuel'] = vehicleData['fuel'];
+
+    var response = await request.send();
+
+    return response;
+  }
+
+  // deleteVehicleImages(String vehicleId, String imageId, String token) async {
+  //   final url = Uri.parse(
+  //       '${HostUrl.baseUrl}/${HostUrl.deleteVehicleImage}/$vehicleId?file=$imageId');
+  //   final header = {
+  //     'Authorization': 'Bearer $token',
+  //     'Cookie': 'jwtHost=$token',
+  //     'Content-Type': 'application/json'
+  //   };
+  //   final body = await http.patch(url, headers: header);
+  //   print(body.statusCode);
+  // }

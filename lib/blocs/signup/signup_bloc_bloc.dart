@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_project/repositories/host_data_repo.dart';
-import 'package:second_project/repositories/signup_host_repo.dart';
+import 'package:second_project/repositories/host_repo.dart';
 
 part 'signup_bloc_event.dart';
 part 'signup_bloc_state.dart';
@@ -15,12 +14,12 @@ class SignupBloc extends Bloc<SignupBlocEvent, SignupBlocState> {
   FutureOr<void> signupClickedEvent(
       SignupClickedEvent event, Emitter<SignupBlocState> emit) async {
     emit(SignupLoadingState());
-    final response = await HostSignupRepo().hostSignup(event.signupData);
-    if (response.statusCode == 200) {
-   await HostDataRepo().getHostData();
-      emit(SignupSuccsessState());
-    } else {
+    final response = await HostRepo().signup(event.signupData);
+    response.fold((left) {
       emit(SignupFaildState());
-    }
+    }, (right)  {
+     HostRepo().fetchHostData();
+      emit(SignupSuccsessState());
+    });
   }
 }

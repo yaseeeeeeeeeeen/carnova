@@ -21,7 +21,6 @@ class ProfileEditScreen extends StatelessWidget {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   File? imagePath;
-  bool? loadingBool;
   @override
   Widget build(BuildContext context) {
     nameController.text = hostModelData!.name.toString();
@@ -31,6 +30,7 @@ class ProfileEditScreen extends StatelessWidget {
       appBar: AppBar(
           leading: IconButton(
               onPressed: () {
+                
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (context) => ScreenParant(index: 2)),
@@ -55,37 +55,34 @@ class ProfileEditScreen extends StatelessWidget {
                     context.read<ProfileEditBloc>().add(ImageAddedClicked());
                   },
                   child: Hero(
-                    tag: "profilePhoto",
-                    child: CircleAvatar(
-                        radius: 85,
-                        backgroundColor: appbarColorH,
-                        child: imagePath != null
-                            ? CircleAvatar(
-                                backgroundImage:
-                                    FileImage(File(imagePath!.path)),
-                                radius: 80,
-                              )
-                            : CircleAvatar(
-                                //show previews profile photo
-                                backgroundImage: hostModelData!
-                                        .profile.isNotEmpty
-                                    ? NetworkImage(
-                                        '${HostUrl.baseUrl}/${hostModelData?.profile}')
-                                    : NetworkImage(image.profilePhotodemo),
-                                radius: 80,
-                              )),
-                  ),
+                      tag: "profilePhoto",
+                      child: CircleAvatar(
+                          radius: 85,
+                          backgroundColor: appbarColorH,
+                          child: imagePath != null
+                              ? CircleAvatar(
+                                  backgroundImage:
+                                      FileImage(File(imagePath!.path)),
+                                  radius: 80,
+                                )
+                              : hostModelData!.profile.isNotEmpty
+                                  ? CircleAvatar(
+                                      radius: 80,
+                                      backgroundImage: NetworkImage(
+                                          '${HostUrl.baseUrl}/${hostModelData!.profile}'),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 80,
+                                      backgroundImage: AssetImage(
+                                        image.profilePhotodemo,
+                                      ),
+                                    ))),
                 );
               },
             ),
             const SizedBox(height: 10),
             CustomTextfield(
                 hint: "NAME", isSufix: false, controller: nameController),
-            // const SizedBox(height: 10),
-            // CustomTextfield(
-            //     hint: EMAIL,
-            //     isSufix: false,
-            //     controller: emailController),
             const SizedBox(height: 10),
             CustomTextfield(
                 keybordtype: TextInputType.number,

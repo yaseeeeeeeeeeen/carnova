@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/host_data_modal.dart';
-import 'package:second_project/repositories/host_data_repo.dart';
+import 'package:second_project/repositories/host_repo.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
@@ -34,18 +35,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loginCheck(context) async {
     await Future.delayed(const Duration(seconds: 2));
-    final hostData = await HostDataRepo().getHostData();
-    if (hostData != null) {
-      HostModel data = HostModel.fromJson(hostData);
-      hostModelData = data;
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => ScreenParant()),
-          (route) => false);
+    final token = SharedPreference.instance.getToken();
+    if (token != null) {
+      final response = await HostRepo().fetchHostData();
+      print(response);
+      response.fold((left) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            (route) => false);
+      }, (right) {
+        print(right);
+        if (right["_id"] != null) {
+          HostModel host = HostModel.fromJson(right);
+          print("modal data $host");
+          hostModelData = host;
+          print(hostModelData?.name);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => ScreenParant()),
+              (route) => false);
+          /////////////////////////////// blocked host screen create/////////////////////////////
+        }
+      });
     } else {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
           (route) => false);
     }
   }

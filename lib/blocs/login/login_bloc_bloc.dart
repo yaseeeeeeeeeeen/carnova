@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
+import 'package:either_dart/either.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/repositories/host_data_repo.dart';
-import 'package:second_project/repositories/login_host_repo.dart';
+import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/repositories/host_repo.dart';
 
 part 'login_bloc_event.dart';
 part 'login_bloc_state.dart';
@@ -12,30 +12,37 @@ part 'login_bloc_state.dart';
 class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
   LoginBloc() : super(LoginBlocInitial()) {
     on<LoginClickedEvent>(loginClickedEvent);
+    on<HostDetailsFetch>(hostDetailsFetch);
   }
 
   FutureOr<void> loginClickedEvent(
       LoginClickedEvent event, Emitter<LoginBlocState> emit) async {
     emit(LoginLoadingState());
 
-    final response = await HostLoginRepo().hostLogin(event.mailandpass);
+    final response = await HostRepo().loginData(event.mailandpass);
+    response.fold((error) {
+      emit(LoginErrorState(messege: error.message));
+    }, (response) {
+      final token = response["token"];
+      SharedPreference.instance.storeToken(token);
+    });
+    emit(LoginSuccsessState());
+  }
 
-    // ignore: avoid_print
-    print("body:  ${response.body}---- statusCode: ${response.statusCode}");
-    final body = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      await SharedPreference.instance.storeToken(body['token']);
-      HostDataRepo().getHostData();
-      emit(LoginSuccsessState());
-    } else if (response.statusCode == 400 &&
-        body["message"] == "Wrong Password") {
-      emit(LoginWrongPasswordState());
-    } else if (response.statusCode == 400) {
-      emit(LoginProcessState());
-    } else if (response.statusCode == 404) {
-      emit(LoginFailedState());
+  FutureOr<void> hostDetailsFetch(
+      HostDetailsFetch event, Emitter<LoginBlocState> emit) async {
+    final token = SharedPreference.instance.getToken();
+    if (token != null) {
+      final respo = await HostRepo().fetchHostData();
+      respo.fold((left) {
+        emit(LoginErrorState(messege: left.message));
+      }, (right) {
+        HostModel host = HostModel.fromJson(right);
+        hostModelData = host;
+        emit(LoginDataFetchState());
+      });
     } else {
-      emit(LoginErrorState());
+      emit(LoginFailedState());
     }
   }
 }
