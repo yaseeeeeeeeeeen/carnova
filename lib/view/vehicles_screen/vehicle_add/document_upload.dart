@@ -188,25 +188,22 @@ class DocumetUpload extends StatelessWidget {
                 return MyLoadingButton(
                     isLoading: isLoading,
                     onTap: () {
-                      buttonClicked(context);
+                      if (selectImagePath != null) {
+                        context.read<DocumentUploadBloc>().add(
+                            DocumentSubmitClicked(
+                                vehicledata: vehicledatas,
+                                vehicleImages: selecedImages,
+                                doc: selectImagePath!));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            customSnackbar(context, false, "ADD DOCUMENT"));
+                      }
                     },
-                    title: vehicledata != null ? 'UPDATE' : 'SUBMIT');
+                    title: 'SUBMIT');
               }),
               const SizedBox()
             ],
           ),
         ));
-  }
-
-  buttonClicked(context) {
-    if (selectImagePath != null) {
-      context.read<DocumentUploadBloc>().add(DocumentSubmitClicked(
-          vehicledata: vehicledatas,
-          vehicleImages: selecedImages,
-          doc: selectImagePath!));
-    } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(customSnackbar(context, false, "ADD DOCUMENT"));
-    }
   }
 }

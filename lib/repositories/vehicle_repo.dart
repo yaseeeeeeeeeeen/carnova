@@ -52,9 +52,8 @@ class VehicleAddRepo {
 
     return response;
   }
-}
 
-Future<http.StreamedResponse> editVehicle(
+  Future<http.StreamedResponse> editVehicle(
       String id, Map<String, dynamic> vehicleData, List<File> images) async {
     final url = Uri.parse('${HostUrl.baseUrl}/${HostUrl.editVehicle}/$id');
     var request = http.MultipartRequest('PATCH', url);
@@ -78,7 +77,11 @@ Future<http.StreamedResponse> editVehicle(
     }
     request.fields['name'] = vehicleData['name'];
     request.fields['brand'] = vehicleData['brand'];
+    request.fields['lat'] = vehicleData['lat'].toString();
+    request.fields['long'] = vehicleData['long'].toString();
     request.fields['location'] = vehicleData['location'];
+    request.fields["seat"] = vehicleData["seat"].toString();
+    request.fields['number'] = vehicleData['number'].toString();
     request.fields['price'] = vehicleData['price'].toString();
     request.fields['model'] = vehicleData['model'].toString();
     request.fields['transmission'] = vehicleData['transmission'];
@@ -88,6 +91,9 @@ Future<http.StreamedResponse> editVehicle(
 
     return response;
   }
+}
+
+
 
   // deleteVehicleImages(String vehicleId, String imageId, String token) async {
   //   final url = Uri.parse(

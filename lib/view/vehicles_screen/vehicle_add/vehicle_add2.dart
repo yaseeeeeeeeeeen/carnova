@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
+import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
@@ -27,6 +26,7 @@ class AddVehicle2 extends StatelessWidget {
   final TextEditingController fuelController = TextEditingController();
   final TextEditingController transmissionController = TextEditingController();
   List<File> selectedImages = [];
+  List<File> updateImages = [];
   @override
   Widget build(BuildContext context) {
     if (vehicledata != null) {
@@ -69,6 +69,9 @@ class AddVehicle2 extends StatelessWidget {
                   BlocConsumer<VehicleAddBloc, VehicleAddState>(
                     listener: (context, state) {
                       if (state is ImagePickingSuccsess) {
+                        if (vehicledata != null) {
+                          updateImages.add(state.pickedImage);
+                        }
                         selectedImages.add(state.pickedImage);
                       } else if (state is ImagePickingFailed) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -172,24 +175,20 @@ class AddVehicle2 extends StatelessWidget {
               BlocConsumer<VehicleAddBloc, VehicleAddState>(
                 listener: (context, state) {},
                 builder: (context, state) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      nextpage2(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      fixedSize: Size(width, 50),
-                    ),
-                    child: vehicledata != null
-                        ? Text('UPDATE',
-                            style: GoogleFonts.aBeeZee(
-                                fontSize: 18, fontWeight: FontWeight.w500))
-                        : Text('NEXT',
-                            style: GoogleFonts.aBeeZee(
-                                fontSize: 18, fontWeight: FontWeight.w500)),
-                  );
+                  return ElevetedLoadingBtn(
+                      isLoading: false,
+                      title: vehicledata != null ? 'UPDATE' : 'NEXT',
+                      onPressed: () {
+                        if (vehicledata != null) {
+                          print("1.1");
+                          context.read<VehicleAddBloc>().add(VehicleUpdateEvent(
+                              data: vehicledata!,
+                              newaddedImages: updateImages,
+                              vehicleId: vehicledata!.id));
+                        } else {
+                          nextpage2(context);
+                        }
+                      });
                 },
               )
             ],
@@ -200,6 +199,7 @@ class AddVehicle2 extends StatelessWidget {
   }
 
   nextpage2(context) {
+    print("1.2");
     if (_priceController.text.isNotEmpty &&
         fuelController.text.isNotEmpty &&
         transmissionController.text.isNotEmpty &&
@@ -207,21 +207,12 @@ class AddVehicle2 extends StatelessWidget {
       vehicledatas.fuel = fuelController.text;
       vehicledatas.price = double.parse(_priceController.text);
       vehicledatas.transmission = transmissionController.text;
-      if (vehicledata != null) {
-        // Navigator.of(context).push(MaterialPageRoute(
-        //     builder: (context) => DocumetUpload(
-        //         imageSelected: true,
-        //         vehicledata: vehicledata,
-        //         vehicledatas: vehicledatas,
-        //         selecedImages: selectedImages)));
-        context.read<VehicleAddBloc>().add(VehicleUpdateEvent());
-      } else {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DocumetUpload(
-                imageSelected: false,
-                vehicledatas: vehicledatas,
-                selecedImages: selectedImages)));
-      }
+
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => DocumetUpload(
+              imageSelected: false,
+              vehicledatas: vehicledatas,
+              selecedImages: selectedImages)));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(customSnackbar(context, false, "Add all datas"));

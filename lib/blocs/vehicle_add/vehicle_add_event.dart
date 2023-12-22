@@ -18,9 +18,19 @@ class ImageRemoveButtonClicked extends VehicleAddEvent {
   String vehicleId;
   String imageId;
   int index;
-  ImageRemoveButtonClicked({required this.index,required this.imageId,required this.vehicleId});
+  ImageRemoveButtonClicked(
+      {required this.index, required this.imageId, required this.vehicleId});
 }
 
 class FirstPageFinishVehilceAddEvent extends VehicleAddEvent {}
 
-class VehicleUpdateEvent extends VehicleAddEvent {}
+class VehicleUpdateEvent extends VehicleAddEvent {
+  VehicleFetchModal data;
+  List<File> newaddedImages;
+  String vehicleId;
+  VehicleUpdateEvent({
+    required this.data,
+    required this.newaddedImages,
+    required this.vehicleId,
+  });
+  }
