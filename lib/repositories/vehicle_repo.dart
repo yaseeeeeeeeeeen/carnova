@@ -55,7 +55,7 @@ class VehicleAddRepo {
 
   Future<http.StreamedResponse> editVehicle(
       String id, Map<String, dynamic> vehicleData, List<File> images) async {
-    final url = Uri.parse('${HostUrl.baseUrl}/${HostUrl.editVehicle}/$id');
+    final url = Uri.parse('${HostUrl.editVehicle}/$id');
     var request = http.MultipartRequest('PATCH', url);
     final token = SharedPreference.instance.getToken();
     // HEADERS

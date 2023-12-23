@@ -39,9 +39,11 @@ class ImageRemovedSuccsessState extends VehicleAddState {
 
 class ImageRemovedFailedState extends VehicleAddState {
   String messege;
-  ImageRemovedFailedState({
-    required this.messege
-  });
+  ImageRemovedFailedState({required this.messege});
 }
 
 class ImagesFetchSuccsessState extends VehicleAddState {}
+
+class VehicleUpdateSuccsessState extends VehicleAddState {}
+
+class VehicleUpdateFailedState extends VehicleAddState {}

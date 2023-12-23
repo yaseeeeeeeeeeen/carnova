@@ -23,11 +23,9 @@ class AddVehicle extends StatelessWidget {
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _seatController = TextEditingController();
-
   bool isloading = false;
-  // final GlobalKey<FormState> addvehicle1 = GlobalKey<FormState>();
-  num? latitude;
-  num? logitude;
+  double? latitude;
+  double? logitude;
   @override
   Widget build(BuildContext context) {
     if (vehilcledata != null) {
@@ -152,6 +150,7 @@ class AddVehicle extends StatelessWidget {
         _nameController.text.isNotEmpty &&
         _seatController.text.isNotEmpty &&
         _numberController.text.isNotEmpty &&
+        latitude != null &&
         _locationController.text.isNotEmpty) {
       VehicleAddData? vehicleDataobj = VehicleAddData(
         seat: _seatController.text,
@@ -164,6 +163,16 @@ class AddVehicle extends StatelessWidget {
         number: _numberController.text,
       );
       if (vehilcledata != null) {
+        vehilcledata!.name = _nameController.text;
+        vehilcledata!.model = int.parse(_modalController.text);
+        vehilcledata!.brand = _brandController.text;
+        vehilcledata!.seat = int.parse(_seatController.text);
+        vehilcledata!.location = _locationController.text;
+        vehilcledata!.lat = latitude!;
+        vehilcledata!.long = logitude!;
+
+              print(vehilcledata);
+  
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddVehicle2(
                   vehicledatas: vehicleDataobj,

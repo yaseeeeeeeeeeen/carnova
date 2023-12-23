@@ -10,6 +10,7 @@ import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
 import 'package:second_project/utils/appbar.dart';
+import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/document_upload.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -173,14 +174,29 @@ class AddVehicle2 extends StatelessWidget {
                 ],
               ),
               BlocConsumer<VehicleAddBloc, VehicleAddState>(
-                listener: (context, state) {},
+                listener: (context, state) {
+                  if (state is VehicleUpdateSuccsessState) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => ScreenParant(index: 1)),
+                        (route) => false);
+                    topSnackbar(context, "Vehicle Update Succsess",
+                        Colors.green.shade600, true);
+                  } else if (state is VehicleUpdateFailedState) {
+                    topSnackbar(
+                        context, "Vehicle Update Failed", Colors.red, false);
+                  }
+                },
                 builder: (context, state) {
                   return ElevetedLoadingBtn(
-                      isLoading: false,
+                      isLoading: state is LoadingState,
                       title: vehicledata != null ? 'UPDATE' : 'NEXT',
                       onPressed: () {
                         if (vehicledata != null) {
-                          print("1.1");
+                          vehicledata!.price = int.parse(_priceController.text);
+                          vehicledata!.transmission =
+                              transmissionController.text;
+                          vehicledata!.fuel = fuelController.text;
                           context.read<VehicleAddBloc>().add(VehicleUpdateEvent(
                               data: vehicledata!,
                               newaddedImages: updateImages,
@@ -199,7 +215,6 @@ class AddVehicle2 extends StatelessWidget {
   }
 
   nextpage2(context) {
-    print("1.2");
     if (_priceController.text.isNotEmpty &&
         fuelController.text.isNotEmpty &&
         transmissionController.text.isNotEmpty &&

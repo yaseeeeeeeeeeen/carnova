@@ -70,16 +70,15 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
 
   FutureOr<void> vehicleUpdateEvent(
       VehicleUpdateEvent event, Emitter<VehicleAddState> emit) async {
-    print("1.3");
     emit(LoadingState());
-
     Map<String, dynamic> vehicleData = event.data.toJson();
-    print(vehicleData);
-    print("1.4");
     final response = await VehicleAddRepo()
         .editVehicle(event.vehicleId, vehicleData, event.newaddedImages);
-    print("1.5");
     final body = await response.stream.bytesToString();
-    print(body);
+    if (response.statusCode == 200) {
+      emit(VehicleUpdateSuccsessState());
+    } else {
+      emit(VehicleUpdateFailedState());
+    }
   }
 }
