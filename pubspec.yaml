@@ -44,6 +44,7 @@ dependencies:
   geocoding: ^2.1.1
   geolocator: ^10.1.0
   google_fonts: ^6.1.0
+  google_maps_flutter: ^2.5.0
   http: ^1.1.0
   image_cropper: ^5.0.0
   image_picker: ^1.0.1

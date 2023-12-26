@@ -73,25 +73,28 @@ class MyvehiclesList extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text("Are You Sure...?"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<VehicleFetchBloc>()
-                                    .add(VehicleDeleteEvent(id: id));
-                              },
-                              child: const Text("OK")),
-                          ElevatedButton(
-                              onPressed: () {}, child: const Text("CANCEL")),
-                        ],
-                      )
-                    ]);
+                return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text("Are You Sure...?"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<VehicleFetchBloc>()
+                                      .add(VehicleDeleteEvent(id: id));
+                                },
+                                child: const Text("OK")),
+                            ElevatedButton(
+                                onPressed: () {}, child: const Text("CANCEL")),
+                          ],
+                        )
+                      ]),
+                );
               },
             ),
           );
