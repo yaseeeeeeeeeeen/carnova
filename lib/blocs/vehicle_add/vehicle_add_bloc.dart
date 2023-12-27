@@ -74,7 +74,6 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
     Map<String, dynamic> vehicleData = event.data.toJson();
     final response = await VehicleAddRepo()
         .editVehicle(event.vehicleId, vehicleData, event.newaddedImages);
-    final body = await response.stream.bytesToString();
     if (response.statusCode == 200) {
       emit(VehicleUpdateSuccsessState());
     } else {

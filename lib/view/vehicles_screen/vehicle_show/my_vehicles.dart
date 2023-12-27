@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/car_container.dart';
+import 'package:second_project/resources/components/empty_list_lottie.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
@@ -47,7 +51,7 @@ class MyvehiclesList extends StatelessWidget {
                       },
                       separatorBuilder: (context, index) => const Divider(),
                       itemCount: verifiedList.length)
-                  : const Center(child: Text("DATA IS EMPTY"));
+                  : Center(child: EmptyListLottie(text: "LIST IS EMPTY"));
         },
       ),
     );
@@ -58,8 +62,7 @@ class MyvehiclesList extends StatelessWidget {
         context: context,
         builder: (context) {
           return Container(
-            height: 150,
-            color: Colors.amber,
+            height: 110,
             child: BlocConsumer<VehicleFetchBloc, VehicleFetchState>(
               listener: (context, state) {
                 if (state is VehicleDeletedState) {
@@ -76,13 +79,24 @@ class MyvehiclesList extends StatelessWidget {
                 return SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text("Are You Sure...?"),
+                        SizedBox(height: 10),
+                        Text(
+                          "Are You Sure...?",
+                          style: GoogleFonts.outfit(fontSize: 20),
+                        ),
+                        SizedBox(height: 10),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                        40)),
                                 onPressed: () {
                                   context
                                       .read<VehicleFetchBloc>()
@@ -90,7 +104,13 @@ class MyvehiclesList extends StatelessWidget {
                                 },
                                 child: const Text("OK")),
                             ElevatedButton(
-                                onPressed: () {}, child: const Text("CANCEL")),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                        40)),
+                                onPressed: () {},
+                                child: const Text("CANCEL")),
                           ],
                         )
                       ]),

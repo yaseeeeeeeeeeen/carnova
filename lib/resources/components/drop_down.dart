@@ -1,6 +1,7 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/resources/constants/static_data.dart';
 
 class DropDownWid extends StatefulWidget {
   DropDownWid(
@@ -22,36 +23,7 @@ class _DropDownWidState extends State<DropDownWid> {
   @override
   void initState() {
     //main List of List
-    final List<String> fuelList = ['Electric', 'Petrol', 'Disel', 'hybraid'];
-
-    final List<String> transList = [
-      'Automatic',
-      'Manual',
-      'Semi-Auto',
-      'Other'
-    ];
-
-    final List<String> seats = ['2', '4', '5', '7'];
-
-    final List<String> brand = [
-      'Toyota',
-      'Volkswagen',
-      'Ford',
-      'Honda',
-      'Chevrolet',
-      'Nissan',
-      'Mercedes-Benz',
-      'BMW',
-      'Audi',
-      'Hyundai',
-      'Kia',
-      'Tesla',
-      'TATA',
-      'Porsche',
-      'Jaguar'
-    ];
-
-    widget.mainList = [fuelList, transList, seats, brand];
+    widget.mainList = [StaticData.fuelList, StaticData.transList, StaticData.seats, StaticData.brand];
     super.initState();
   }
 

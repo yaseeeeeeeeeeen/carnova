@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/car_container.dart';
+import 'package:second_project/resources/components/empty_list_lottie.dart';
 import 'package:second_project/utils/snackbar.dart';
 
 class PendigVerification extends StatelessWidget {
@@ -44,7 +45,7 @@ class PendigVerification extends StatelessWidget {
                         },
                         separatorBuilder: (context, index) => const Divider(),
                         itemCount: pendingList.length)
-                    : const Center(child: Text("DATA IS EMPTY"));
+                    : Center(child: EmptyListLottie(text: "LIST IS EMPTY"));
           },
         ),
       ),
