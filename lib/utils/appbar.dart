@@ -9,5 +9,18 @@ PreferredSizeWidget customAppBarH(
       backgroundColor: appbarColorH,
       centerTitle: true,
       elevation: 0,
-      title: Text(title, style: GoogleFonts.poppins()));
+      title: Text(title, style: GoogleFonts.outfit()));
+}
+
+PreferredSizeWidget carDetailsScreen(void Function()? onPressed) {
+  return AppBar(
+      actions: [
+        IconButton(
+            onPressed: onPressed,
+            icon: const Icon(Icons.edit, color: Colors.white))
+      ],
+      backgroundColor: appbarColorH,
+      centerTitle: true,
+      elevation: 0,
+      title: Text("CAR DETAILS", style: GoogleFonts.outfit()));
 }

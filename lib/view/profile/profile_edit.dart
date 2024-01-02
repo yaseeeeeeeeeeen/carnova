@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
-import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
@@ -23,14 +23,13 @@ class ProfileEditScreen extends StatelessWidget {
   File? imagePath;
   @override
   Widget build(BuildContext context) {
-    nameController.text = hostModelData!.name.toString();
-    phoneController.text = hostModelData!.phone.toString();
-    emailController.text = hostModelData!.email.toString();
+    final hostModelData = getLoggedInHost();
+    nameController.text = hostModelData.name.toString();
+    phoneController.text = hostModelData.phone.toString();
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (context) => ScreenParant(index: 2)),
@@ -65,11 +64,11 @@ class ProfileEditScreen extends StatelessWidget {
                                       FileImage(File(imagePath!.path)),
                                   radius: 80,
                                 )
-                              : hostModelData!.profile.isNotEmpty
+                              : hostModelData.profile.isNotEmpty
                                   ? CircleAvatar(
                                       radius: 80,
                                       backgroundImage: NetworkImage(
-                                          '${HostUrl.baseUrl}/${hostModelData!.profile}'),
+                                          '${HostUrl.baseUrl}/${hostModelData.profile}'),
                                     )
                                   : CircleAvatar(
                                       radius: 80,
@@ -92,12 +91,14 @@ class ProfileEditScreen extends StatelessWidget {
             const SizedBox(height: 10),
             BlocConsumer<ProfileEditBloc, ProfileEditState>(
               listener: (context, state) {
-                if (state is SubmitSuccsessState) {
+                if (state is HostDataUpdateSuccsess) {
+                  context.read<ProfileEditBloc>().add(UpdataHostDetails());
+                } else if (state is SubmitSuccsessState) {
                   ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-                      context, true, "Profile Added Succsesfull"));
+                      context, true, "Profile Updated Succsesfull"));
                 } else if (state is SubmitFailedState) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      customSnackbar(context, false, "Profile Added Failed"));
+                      customSnackbar(context, false, state.messege));
                 }
               },
               builder: (context, state) {
@@ -105,13 +106,8 @@ class ProfileEditScreen extends StatelessWidget {
                   isLoading: state is SubmitLoadingState,
                   title: "Update",
                   onTap: () {
-                    if (imagePath != null) {
-                      updateButtonClicked(nameController.text,
-                          phoneController.text, imagePath!, context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-                          context, false, "Add Your Profile Photo"));
-                    }
+                    updateButtonClicked(
+                        nameController.text, phoneController.text, context);
                   },
                 );
               },
@@ -122,13 +118,21 @@ class ProfileEditScreen extends StatelessWidget {
     );
   }
 
-  updateButtonClicked(
-      String name, String phone, File image, BuildContext context) {
-    if (name.isNotEmpty && phone.isNotEmpty) {
-      context.read<ProfileEditBloc>().add(SubmitClicked(image: image));
+  updateButtonClicked(String name, String phone, BuildContext context) {
+    final hostModelData = getLoggedInHost();
+    if (hostModelData.profile.isNotEmpty) {
+      if (name.isNotEmpty && phone.length == 10) {
+        Map<String, dynamic> data = {"phone": phone, "name": name};
+        context
+            .read<ProfileEditBloc>()
+            .add(SubmitClicked(image: imagePath, data: data));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(customSnackbar(context, false, "Something Wrong"));
+      }
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(customSnackbar(context, false, "Something Wrong"));
+          .showSnackBar(customSnackbar(context, false, "Add a Profile Photo"));
     }
   }
 }

@@ -6,6 +6,9 @@ abstract class ProfileEditEvent {}
 class ImageAddedClicked extends ProfileEditEvent {}
 
 class SubmitClicked extends ProfileEditEvent {
-  File image;
-  SubmitClicked({required this.image});
+  File? image;
+  Map<String, dynamic> data;
+  SubmitClicked({this.image,required this.data});
 }
+
+class UpdataHostDetails extends ProfileEditEvent{}

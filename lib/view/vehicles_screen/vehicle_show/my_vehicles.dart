@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
-import 'package:second_project/resources/components/car_container.dart';
 import 'package:second_project/resources/components/empty_list_lottie.dart';
-import 'package:second_project/resources/constants/font_styles.dart';
+import 'package:second_project/resources/components/vehicle/car_tile.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_show/car_detailed.dart';
 
 class MyvehiclesList extends StatelessWidget {
   MyvehiclesList({super.key});
@@ -42,12 +41,18 @@ class MyvehiclesList extends StatelessWidget {
                             onLongPress: () {
                               deleteBottomSheet(context, data.id);
                             },
-                            onDoubleTap: () {
+                            onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
-                                      AddVehicle(vehilcledata: data)));
+                                      CarDataShow(vehicleData: data)));
                             },
-                            child: TrendigContainer(data: data));
+                            onDoubleTap: () {
+                              //Editttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         AddVehicle(vehilcledata: data)));
+                            },
+                            child: CarListTile(data: data));
                       },
                       separatorBuilder: (context, index) => const Divider(),
                       itemCount: verifiedList.length)
@@ -61,7 +66,7 @@ class MyvehiclesList extends StatelessWidget {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
-          return Container(
+          return SizedBox(
             height: 110,
             child: BlocConsumer<VehicleFetchBloc, VehicleFetchState>(
               listener: (context, state) {

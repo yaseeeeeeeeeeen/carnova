@@ -3,6 +3,7 @@ import 'package:second_project/resources/components/profile_components/listiles_
 import 'package:second_project/resources/components/profile_components/profile_card.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/logout_confirm.dart';
+import 'package:second_project/view/profile/change_password.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -19,6 +20,16 @@ class UserProfile extends StatelessWidget {
               children: [
                 const ProfileCardWid(),
                 const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ChangePasswordScreen()));
+                  },
+                  child: ProfileScreenListtile(
+                    text: "Change Password",
+                    isLogout: false,
+                  ),
+                ),
                 ProfileScreenListtile(text: "App info", isLogout: false),
                 ProfileScreenListtile(
                     text: "Terms & Conditions", isLogout: false),

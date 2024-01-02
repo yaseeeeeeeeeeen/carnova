@@ -22,6 +22,13 @@ class ImageRemoveButtonClicked extends VehicleAddEvent {
       {required this.index, required this.imageId, required this.vehicleId});
 }
 
+class ImageRemoveVehicleAddTime extends VehicleAddEvent {
+  int index;
+  ImageRemoveVehicleAddTime({
+    required this.index
+  });
+}
+
 class FirstPageFinishVehilceAddEvent extends VehicleAddEvent {}
 
 class VehicleUpdateEvent extends VehicleAddEvent {
@@ -33,4 +40,4 @@ class VehicleUpdateEvent extends VehicleAddEvent {
     required this.newaddedImages,
     required this.vehicleId,
   });
-  }
+}

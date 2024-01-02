@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -8,9 +8,10 @@ import 'package:second_project/view/profile/profile_edit.dart';
 
 class ProfileCardWid extends StatelessWidget {
   const ProfileCardWid({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
+  final hostModelData = getLoggedInHost();
     double heigth = MediaQuery.sizeOf(context).height;
     return Container(
       decoration: BoxDecoration(
@@ -27,12 +28,12 @@ class ProfileCardWid extends StatelessWidget {
         children: [
           Hero(
             tag: "profilePhoto",
-            child: hostModelData!.profile.isNotEmpty
+            child: hostModelData.profile.isNotEmpty
                 ? CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
                     backgroundImage: NetworkImage(
-                        "${HostUrl.baseUrl}/${hostModelData!.profile}"))
+                        "${HostUrl.baseUrl}/${hostModelData.profile}"))
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
@@ -40,7 +41,7 @@ class ProfileCardWid extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            " ${hostModelData!.name.toUpperCase()}",
+            " ${hostModelData.name.toUpperCase()}",
             style: CustomFontStyles.profileName,
           ),
           Row(
@@ -48,7 +49,7 @@ class ProfileCardWid extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.sizeOf(context).width / 1.8,
-                child: Text(hostModelData!.email,
+                child: Text(hostModelData.email,
                     style: CustomFontStyles.mailstyle,
                     overflow: TextOverflow.ellipsis),
               ),

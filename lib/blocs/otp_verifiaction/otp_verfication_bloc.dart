@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
-
+import 'package:second_project/data/get_it/get_it.dart';
 
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/host_data_modal.dart';
@@ -23,19 +23,17 @@ class HostOtpVerficationBloc
     emit(HostOtpVerificationLoadingState());
     final response = await HostRepo().otpverificatio(event.otp);
     response.fold((left) {
-       emit(HostOtpVerificationFailedState(message: left.message));
+      emit(HostOtpVerificationFailedState(message: left.message));
     }, (right) {
-                String token = right['token'];
-                 SharedPreference.instance.storeToken(token);
-                   final response =  HostRepo().fetchHostData();
-                      response.fold((left) {
+      String token = right['token'];
+      SharedPreference.instance.storeToken(token);
+      final response = HostRepo().fetchHostData();
+      response.fold((left) {
         emit(HostOtpVerificationFailedState(message: left.message));
       }, (right) {
         final data = HostModel.fromJson(right);
-        hostModelData = data;
+        replaceUserData(data);
       });
     });
-  
-    }
   }
-
+}

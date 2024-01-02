@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:either_dart/either.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/repositories/host_repo.dart';
@@ -10,6 +10,7 @@ part 'login_bloc_event.dart';
 part 'login_bloc_state.dart';
 
 class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
+  late HostModel hostModelData;
   LoginBloc() : super(LoginBlocInitial()) {
     on<LoginClickedEvent>(loginClickedEvent);
     on<HostDetailsFetch>(hostDetailsFetch);
@@ -38,7 +39,7 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
         emit(LoginErrorState(messege: left.message));
       }, (right) {
         HostModel host = HostModel.fromJson(right);
-        hostModelData = host;
+        locator<LoginBloc>().hostModelData = host;
         emit(LoginDataFetchState());
       });
     } else {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/blocs/login/login_bloc_bloc.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/repositories/host_repo.dart';
@@ -21,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Center(
           child: Container(
@@ -38,18 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = SharedPreference.instance.getToken();
     if (token != null) {
       final response = await HostRepo().fetchHostData();
-      print(response);
       response.fold((left) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => false);
       }, (right) {
-        print(right);
         if (right["_id"] != null) {
           HostModel host = HostModel.fromJson(right);
-          print("modal data $host");
-          hostModelData = host;
-          print(hostModelData?.name);
+        locator<LoginBloc>().hostModelData = host;
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => ScreenParant()),
               (route) => false);

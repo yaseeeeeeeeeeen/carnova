@@ -21,4 +21,3 @@ class ProfileScreenListtile extends StatelessWidget {
         ));
   }
 }
-

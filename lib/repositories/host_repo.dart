@@ -3,6 +3,7 @@ import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 
 class HostRepo {
+  String? token = SharedPreference.instance.getToken();
   EitherResponse loginData(Map<String, String> mailandpass) {
     const url = HostUrl.hostLogin;
     return ApiService.postApi(mailandpass, url);
@@ -24,6 +25,13 @@ class HostRepo {
     return ApiService.postApi(otp, url);
   }
 
+  EitherResponse updateData(Map<String, dynamic> data) {
+    const url = HostUrl.updateProfile;
+    final token = SharedPreference.instance.getToken();
+    return ApiService.patchApi(data, url, token);
+  }
+
+
   EitherResponse vehicleDataFetching() {
     const url = HostUrl.fetchVehicles;
     final token = SharedPreference.instance.getToken();
@@ -38,9 +46,13 @@ class HostRepo {
 
   EitherResponse vehicleImageDelete(String vehicleId, String imageId) {
     final url = '${HostUrl.deleteVehicleImage}/$vehicleId?file=$imageId';
-    print(url);
     final token = SharedPreference.instance.getToken();
-    print(token);
     return ApiService.patchApi(url, token!);
+  }
+
+  
+  EitherResponse resetPassword(Map<String, dynamic> data) {
+    const url = HostUrl.changepass;
+    return ApiService.patchApi(data, url, token);
   }
 }

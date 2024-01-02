@@ -22,6 +22,7 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
     on<ImageRemoveButtonClicked>(imageRemoveButtonClicked);
     on<VehicleUpdateImages>(vehicleUpdateImages);
     on<VehicleUpdateEvent>(vehicleUpdateEvent);
+    on<ImageRemoveVehicleAddTime>(imageRemoveVehicleAddTime);
   }
 
   FutureOr<void> locationPickerVehilceAdd(LocationPickerVehilceAddEvent event,
@@ -33,7 +34,6 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
 
   FutureOr<void> imageAddingButtonClicked(
       ImageAddingButtonClicked event, Emitter<VehicleAddState> emit) async {
-    emit(LoadingState());
     final pickedXfile = await ImagePickService().pickCropImage(
         cropAspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
         imageSource: ImageSource.gallery);
@@ -79,5 +79,11 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
     } else {
       emit(VehicleUpdateFailedState());
     }
+  }
+
+  FutureOr<void> imageRemoveVehicleAddTime(
+      ImageRemoveVehicleAddTime event, Emitter<VehicleAddState> emit) {
+    emit(ImageRemovedSuccsessState(index: event.index));
+    emit(ImagesFetchSuccsessState());
   }
 }

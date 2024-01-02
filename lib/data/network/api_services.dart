@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
-import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 
 ////////////////////////////
@@ -11,6 +11,7 @@ import 'package:either_dart/either.dart';
 import 'package:second_project/utils/app_exceptions.dart';
 
 class ApiServiceHost {
+  final hostModelData = getLoggedInHost();
   ApiServiceHost._();
   static final ApiServiceHost _instance = ApiServiceHost._();
   static ApiServiceHost get instance => _instance;
@@ -82,7 +83,8 @@ class ApiService {
     }
   }
 
- Future<http.Response> deleteVehicleImages(String vehicleId, String imageId, String token) async {
+  Future<http.Response> deleteVehicleImages(
+      String vehicleId, String imageId, String token) async {
     final url =
         Uri.parse('${HostUrl.deleteVehicleImage}/$vehicleId?file=$imageId');
     final header = {

@@ -2,7 +2,7 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/account_underverification.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
@@ -14,6 +14,7 @@ class MyVehicles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hostModelData = getLoggedInHost();
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -21,7 +22,7 @@ class MyVehicles extends StatelessWidget {
             IconButton(
                 tooltip: 'Vehicle Add',
                 onPressed: () {
-                  if (hostModelData!.isVerified) {
+                  if (hostModelData.isVerified) {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => AddVehicle()));
                   } else {

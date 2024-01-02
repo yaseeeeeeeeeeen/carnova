@@ -23,7 +23,12 @@ class _DropDownWidState extends State<DropDownWid> {
   @override
   void initState() {
     //main List of List
-    widget.mainList = [StaticData.fuelList, StaticData.transList, StaticData.seats, StaticData.brand];
+    widget.mainList = [
+      StaticData.fuelList,
+      StaticData.transList,
+      StaticData.seats,
+      StaticData.brand
+    ];
     super.initState();
   }
 

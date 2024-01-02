@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
-import 'package:second_project/resources/components/car_container.dart';
 import 'package:second_project/resources/components/empty_list_lottie.dart';
+import 'package:second_project/resources/components/vehicle/car_tile.dart';
 import 'package:second_project/utils/snackbar.dart';
+import 'package:second_project/view/vehicles_screen/vehicle_show/car_detailed.dart';
 
 class PendigVerification extends StatelessWidget {
   PendigVerification({super.key});
   List<VehicleFetchModal> pendingList = [];
   @override
   Widget build(BuildContext context) {
-    // context.read<VehicleFetchBloc>().add(VehicleDataFetchEvent());
+    context.read<VehicleFetchBloc>().add(VehicleDataFetchEvent());
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -22,8 +23,6 @@ class PendigVerification extends StatelessWidget {
               pendingList = state.pendingVehicles;
             } else if (state is VehileDataFailled) {
               topSnackbar(context, state.message, Colors.red, false);
-            } else if (state is VehicleListEmptyState) {
-              topSnackbar(context, "Vehicle List Empty", Colors.black, true);
             }
           },
           builder: (context, state) {
@@ -36,12 +35,15 @@ class PendigVerification extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final data = pendingList[index];
                           return GestureDetector(
-                              onLongPress: () {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         AddVehicle(vehilcledata: data)));
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => CarDataShow(vehicleData: data)));
                               },
-                              child: TrendigContainer(data: data));
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         AddVehicle(vehilcledata: data)));
+
+                              child: CarListTile(data: data));
                         },
                         separatorBuilder: (context, index) => const Divider(),
                         itemCount: pendingList.length)

@@ -151,12 +151,18 @@ class AddVehicle2 extends StatelessWidget {
                                   Center(
                                     child: IconButton(
                                         onPressed: () {
-                                          context.read<VehicleAddBloc>().add(
-                                              ImageRemoveButtonClicked(
-                                                  imageId: vehicledata!
-                                                      .images[index],
-                                                  vehicleId: vehicledata!.id,
-                                                  index: index));
+                                          if (vehicledata != null) {
+                                            context.read<VehicleAddBloc>().add(
+                                                ImageRemoveButtonClicked(
+                                                    imageId: vehicledata!
+                                                        .images[index],
+                                                    vehicleId: vehicledata!.id,
+                                                    index: index));
+                                          } else {
+                                            context.read<VehicleAddBloc>().add(
+                                                ImageRemoveVehicleAddTime(
+                                                    index: index));
+                                          }
                                         },
                                         icon: const Icon(
                                           Icons.delete,
