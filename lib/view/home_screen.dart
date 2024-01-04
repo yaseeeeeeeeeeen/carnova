@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/components/preview_revenue.dart';
+import 'package:second_project/resources/components/vehicle/trending_wid.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
 
@@ -58,15 +59,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                   left: 0,
                   top: 10),
-              // ListView.separated(
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   separatorBuilder: (context, index) => const Divider(),
-              //   itemCount: 2,
-              //   shrinkWrap: true,
-              //   itemBuilder: (context, index) {
-              //     return  TrendigContainer();
-              //   },
-              // )
+              TrendingWid(data: data.trending)
             ],
           ),
         ),

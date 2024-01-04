@@ -56,9 +56,10 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     dashboardData.fold((left) {
       emit(LoginFailedState(message: left.message));
     }, (right) {
-       final dashboardData = DashbordModal.fromJson(right);
-       locator<VehicleFetchBloc>().dashboard = dashboardData;
-            emit(HostDashbordFetched());
+      print(right);
+      final dashboardData = DashbordModal.fromJson(right);
+      locator<VehicleFetchBloc>().dashboard = dashboardData;
+      emit(HostDashbordFetched());
     });
   }
 }
