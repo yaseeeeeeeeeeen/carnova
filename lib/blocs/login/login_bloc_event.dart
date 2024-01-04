@@ -10,3 +10,5 @@ Map<String, String> mailandpass;
 }
 
 class HostDetailsFetch extends LoginBlocEvent{}
+
+class HostDashboardFetchEvent extends LoginBlocEvent{}

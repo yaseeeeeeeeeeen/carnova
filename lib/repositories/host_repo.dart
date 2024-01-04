@@ -10,8 +10,12 @@ class HostRepo {
   }
 
   EitherResponse fetchHostData() {
-    final token = SharedPreference.instance.getToken();
     const url = HostUrl.getHostData;
+    return ApiService.getApi(url, token);
+  }
+
+  EitherResponse fetchDashboard() {
+    const url = HostUrl.dashbord;
     return ApiService.getApi(url, token);
   }
 
@@ -31,7 +35,6 @@ class HostRepo {
     return ApiService.patchApi(data, url, token);
   }
 
-
   EitherResponse vehicleDataFetching() {
     const url = HostUrl.fetchVehicles;
     final token = SharedPreference.instance.getToken();
@@ -50,7 +53,6 @@ class HostRepo {
     return ApiService.patchApi(url, token!);
   }
 
-  
   EitherResponse resetPassword(Map<String, dynamic> data) {
     const url = HostUrl.changepass;
     return ApiService.patchApi(data, url, token);

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:second_project/modals/dashboard_modal.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/repositories/host_repo.dart';
 
@@ -8,6 +9,7 @@ part 'vehicle_fetch_event.dart';
 part 'vehicle_fetch_state.dart';
 
 class VehicleFetchBloc extends Bloc<VehicleFetchEvent, VehicleFetchState> {
+  late DashbordModal dashboard;
   VehicleFetchBloc() : super(VehicleFetchInitial()) {
     on<VehicleDataFetchEvent>(vehicleDataFetchEvent);
     on<VehicleDeleteEvent>(vehicleDeleteEvent);

@@ -172,7 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                       customSnackbar(context, false,
                                           "Some Erorr Try again"));
                                 } else if (state is LoginDataFetchState) {
-                                  navigateToHome(context);
+                                  context
+                                      .read<LoginBloc>()
+                                      .add(HostDashboardFetchEvent());
+                                } else if (state is HostDashbordFetched) {
+                                                                    navigateToHome(context);
                                 }
                               },
                               builder: (context, state) {

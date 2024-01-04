@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/blocs/login/login_bloc_bloc.dart';
+import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/modals/dashboard_modal.dart';
 import 'package:second_project/modals/host_data_modal.dart';
 import 'package:second_project/repositories/host_repo.dart';
 import 'package:second_project/utils/custom_navbar.dart';
@@ -23,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Center(
           child: Container(
@@ -48,10 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
       }, (right) {
         if (right["_id"] != null) {
           HostModel host = HostModel.fromJson(right);
-        locator<LoginBloc>().hostModelData = host;
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => ScreenParant()),
-              (route) => false);
+          locator<LoginBloc>().hostModelData = host;
+          fetchDashboard();
+
           /////////////////////////////// blocked host screen create/////////////////////////////
         }
       });
@@ -60,5 +60,18 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => const LoginScreen()),
           (route) => false);
     }
+  }
+
+  fetchDashboard() async {
+    final dashboardData = await HostRepo().fetchDashboard();
+    dashboardData.fold((left) {
+      print(left.message);
+    }, (right) {
+      final dashboardData = DashbordModal.fromJson(right);
+      locator<VehicleFetchBloc>().dashboard = dashboardData;
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ScreenParant()),
+          (route) => false);
+    });
   }
 }

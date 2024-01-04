@@ -17,7 +17,7 @@ class ScreenParant extends StatefulWidget {
 class _ScreenParantState extends State<ScreenParant> {
   int currentPage = 0;
   List<Widget> pages = [
-    const HomeScreen(),
+     HomeScreen(),
     const MyVehicles(),
     const UserProfile()
   ];

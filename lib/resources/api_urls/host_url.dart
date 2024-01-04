@@ -17,5 +17,5 @@ class HostUrl {
   static const String deleteVehicleImage = "$baseUrlHost/delete-image";
   static const String editVehicle = "$baseUrlHost/edit-vehicle";
   static const String changepass = "$baseUrlHost/change-pass";
-
+  static const String dashbord = "$baseUrlHost/dashboard";
 }

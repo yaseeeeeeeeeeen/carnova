@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/components/preview_revenue.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
+  final data = getDashboard();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +28,11 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GridviewContainerWidget(
-                    value: '24,538',
+                    value: '₹ ${data.hostRevenue}',
                     title: 'Revenue Generated',
                   ),
                   GridviewContainerWidget(
-                    value: '30',
+                    value: '${data.bookedCount}',
                     title: 'Booking',
                   ),
                 ],
@@ -40,11 +42,11 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GridviewContainerWidget(
-                    value: '29',
+                    value: '${data.completedCount}',
                     title: 'Completed',
                   ),
                   GridviewContainerWidget(
-                    value: '11',
+                    value: '${data.cancelledBooking}',
                     title: 'Cancelled',
                   ),
                 ],

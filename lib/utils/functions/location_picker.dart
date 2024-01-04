@@ -44,7 +44,7 @@ class LocationPickService {
             _currentLocation!.latitude, _currentLocation!.longitude);
         Placemark place = placeMarks[0];
         String address =
-            "${place.name}, ${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.locality}, ${place.administrativeArea}, ${place.country}";
         return address;
       } else {
         print("Location is null");

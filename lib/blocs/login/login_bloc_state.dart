@@ -13,8 +13,16 @@ class LoginSuccsessState extends LoginBlocState {}
 
 class LoginWrongPasswordState extends LoginBlocState {}
 
-class LoginFailedState extends LoginBlocState {}
-class LoginDataFetchState extends LoginBlocState{}
+class LoginFailedState extends LoginBlocState {
+  String message;
+  LoginFailedState({
+    required this.message
+  });
+}
+
+class LoginDataFetchState extends LoginBlocState {}
+
+class HostDashbordFetched extends LoginBlocState {}
 
 class LoginErrorState extends LoginBlocState {
   String messege;
