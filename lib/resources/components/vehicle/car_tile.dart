@@ -3,6 +3,7 @@ import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 
+// ignore: must_be_immutable
 class CarListTile extends StatelessWidget {
   CarListTile({super.key, required this.data});
   VehicleFetchModal data;

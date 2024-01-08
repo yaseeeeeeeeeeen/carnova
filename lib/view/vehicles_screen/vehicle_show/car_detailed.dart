@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/components/text_widgets/sub_title.dart';
@@ -6,6 +9,8 @@ import 'package:second_project/resources/components/vehicle/car_details_card.dar
 import 'package:second_project/resources/components/vehicle/vehicle_image_wid.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/appbar.dart';
+import 'package:second_project/utils/custom_navbar.dart';
+import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
 
 // ignore: must_be_immutable
@@ -28,6 +33,8 @@ class CarDataShow extends StatelessWidget {
       appBar: carDetailsScreen(() {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddVehicle(vehilcledata: vehicleData)));
+      },() {
+                                      deleteBottomSheet(context, vehicleData.id);
       }),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -65,5 +72,68 @@ class CarDataShow extends StatelessWidget {
         ),
       ),
     );
+  }
+    deleteBottomSheet(context, String id) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            height: 110,
+            child: BlocConsumer<VehicleFetchBloc, VehicleFetchState>(
+              listener: (context, state) {
+                if (state is VehicleDeletedState) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => ScreenParant(index: 1)),
+                      (route) => false);
+                } else if (state is VehicleDeleteFailedState) {
+                  topSnackbar(context, state.messege,
+                      const Color.fromARGB(255, 173, 12, 0), true);
+                }
+              },
+              builder: (context, state) {
+                return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                       const SizedBox(height: 10),
+                        Text(
+                          "Are You Sure...?",
+                          style: GoogleFonts.outfit(fontSize: 20),
+                        ),
+                       const SizedBox(height: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                        40)),
+                                onPressed: () {
+                                  context
+                                      .read<VehicleFetchBloc>()
+                                      .add(VehicleDeleteEvent(id: id));
+                                },
+                                child: const Text("OK")),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                        40)),
+                                onPressed: () {},
+                                child: const Text("CANCEL")),
+                          ],
+                        )
+                      ]),
+                );
+              },
+            ),
+          );
+        });
   }
 }

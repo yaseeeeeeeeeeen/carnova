@@ -18,11 +18,11 @@ class TrendingWid extends StatelessWidget {
       height: heigth / 7.3,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Hero(
-          tag: data.name,
+          tag: data.vehicle.name,
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage("${HostUrl.baseUrl}/${data.images[0]}"),
+                    image: NetworkImage("${HostUrl.baseUrl}/${data.vehicle.images[0]}"),
                     fit: BoxFit.cover),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
@@ -41,17 +41,17 @@ class TrendingWid extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          child: Text(data.name,
+                          child: Text(data.vehicle.name,
                               style: CustomFontStyles.tabcardtext1,
                               overflow: TextOverflow.ellipsis)),
-                      Text("₹${data.price}",
+                      Text("₹${data.vehicle.price}",
                           style: CustomFontStyles.tabcardtext1)
                     ],
                   ),
-                  Text("${data.brand.toUpperCase()} (${data.model})",
+                  Text("${data.vehicle.brand.toUpperCase()} (${data.vehicle.model})",
                       style:
                           const TextStyle(color: Colors.black87, fontSize: 13)),
-                  Text(data.location,
+                  Text(data.vehicle.location,
                       style:
                           const TextStyle(color: Colors.black87, fontSize: 13)),
                 ]))

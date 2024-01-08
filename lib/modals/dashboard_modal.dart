@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final dashbordModal = dashbordModalFromJson(jsonString);
+
 import 'dart:convert';
 
 DashbordModal dashbordModalFromJson(String str) {
@@ -12,7 +16,7 @@ String dashbordModalToJson(DashbordModal data) {
 
 class DashbordModal {
   int hostRevenue;
-  Trending trending;
+  List<Trending> trending;
   int bookedCount;
   int completedCount;
   int cancelledBooking;
@@ -29,7 +33,8 @@ class DashbordModal {
 
   factory DashbordModal.fromJson(Map<String, dynamic> json) => DashbordModal(
         hostRevenue: json["hostRevenue"],
-        trending: Trending.fromJson(json["trending"]),
+        trending: List<Trending>.from(
+            json["trending"].map((x) => Trending.fromJson(x))),
         bookedCount: json["bookedCount"],
         completedCount: json["completedCount"],
         cancelledBooking: json["cancelledBooking"],
@@ -39,7 +44,7 @@ class DashbordModal {
 
   Map<String, dynamic> toJson() => {
         "hostRevenue": hostRevenue,
-        "trending": trending.toJson(),
+        "trending": List<dynamic>.from(trending.map((x) => x.toJson())),
         "bookedCount": bookedCount,
         "completedCount": completedCount,
         "cancelledBooking": cancelledBooking,
@@ -59,24 +64,24 @@ class LatestOrder {
   int grandTotal;
   String status;
   int v;
-  Trending vehicleDetails;
+  Vehicle vehicleDetails;
   UserDetails userDetails;
 
-  LatestOrder(
-      {required this.id,
-      required this.userId,
-      required this.vehicleId,
-      required this.startDate,
-      required this.endDate,
-      required this.pickup,
-      required this.dropoff,
-      required this.total,
-      required this.grandTotal,
-      required this.status,
-      required this.v,
-      required this.vehicleDetails,
-      required this.userDetails,
-      required});
+  LatestOrder({
+    required this.id,
+    required this.userId,
+    required this.vehicleId,
+    required this.startDate,
+    required this.endDate,
+    required this.pickup,
+    required this.dropoff,
+    required this.total,
+    required this.grandTotal,
+    required this.status,
+    required this.v,
+    required this.vehicleDetails,
+    required this.userDetails,
+  });
 
   factory LatestOrder.fromJson(Map<String, dynamic> json) => LatestOrder(
         id: json["_id"],
@@ -90,7 +95,7 @@ class LatestOrder {
         grandTotal: json["grandTotal"],
         status: json["status"],
         v: json["__v"],
-        vehicleDetails: Trending.fromJson(json["vehicleDetails"]),
+        vehicleDetails: Vehicle.fromJson(json["vehicleDetails"]),
         userDetails: UserDetails.fromJson(json["userDetails"]),
       );
 
@@ -119,7 +124,9 @@ class UserDetails {
   String password;
   bool isBlocked;
   int v;
-  String profile;
+  String? profile;
+  int wallet;
+  // Choices choices;
 
   UserDetails({
     required this.id,
@@ -129,7 +136,9 @@ class UserDetails {
     required this.password,
     required this.isBlocked,
     required this.v,
-    required this.profile,
+     this.profile,
+    required this.wallet,
+    // required this.choices,
   });
 
   factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
@@ -141,6 +150,8 @@ class UserDetails {
         isBlocked: json["isBlocked"],
         v: json["__v"],
         profile: json["profile"],
+        wallet: json["wallet"],
+        // choices: Choices.fromJson(json["choices"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -152,10 +163,40 @@ class UserDetails {
         "isBlocked": isBlocked,
         "__v": v,
         "profile": profile,
+        "wallet": wallet,
+        // "choices": choices.toJson(),
       };
 }
 
-class Trending {
+// class Choices {
+//   dynamic startDate;
+//   dynamic endDate;
+//   dynamic pickup;
+//   dynamic dropoff;
+
+//   Choices({
+//     required this.startDate,
+//     required this.endDate,
+//     required this.pickup,
+//     required this.dropoff,
+//   });
+
+//   factory Choices.fromJson(Map<String, dynamic> json) => Choices(
+//         startDate: json["startDate"],
+//         endDate: json["endDate"],
+//         pickup: json["pickup"],
+//         dropoff: json["dropoff"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "startDate": startDate,
+//         "endDate": endDate,
+//         "pickup": pickup,
+//         "dropoff": dropoff,
+//       };
+// }
+
+class Vehicle {
   String id;
   String name;
   int price;
@@ -175,7 +216,7 @@ class Trending {
   int v;
   String document;
 
-  Trending({
+  Vehicle({
     required this.id,
     required this.name,
     required this.price,
@@ -196,7 +237,7 @@ class Trending {
     required this.document,
   });
 
-  factory Trending.fromJson(Map<String, dynamic> json) => Trending(
+  factory Vehicle.fromJson(Map<String, dynamic> json) => Vehicle(
         id: json["_id"],
         name: json["name"],
         price: json["price"],
@@ -236,5 +277,21 @@ class Trending {
         "review": List<dynamic>.from(review.map((x) => x)),
         "__v": v,
         "document": document,
+      };
+}
+
+class Trending {
+  Vehicle vehicle;
+
+  Trending({
+    required this.vehicle,
+  });
+
+  factory Trending.fromJson(Map<String, dynamic> json) => Trending(
+        vehicle: Vehicle.fromJson(json["vehicle"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "vehicle": vehicle.toJson(),
       };
 }
