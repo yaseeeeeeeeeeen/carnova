@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_project/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
-
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -27,7 +28,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        title:  Text(
+        title: Text(
           "Forgot Password",
           style: TextStyle(
             color: secondColorH,
@@ -62,7 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: Icon(
-                        Icons.directions_car_filled,
+                            Icons.directions_car_filled,
                             color: mainColorH,
                             size: 35,
                           ),
@@ -83,7 +84,27 @@ class ForgotPasswordScreen extends StatelessWidget {
                   obscureText: false,
                 ),
                 const SizedBox(height: 25),
-                MyButton(onTap: () {}, title: "Send")
+                BlocConsumer<LoginBloc, LoginBlocState>(
+                  listener: (context, state) {
+                    if (state is LoginFailedState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          customSnackbar(context, false, state.message));
+                    } else if (state is ForgetPasswordSuccsessMail) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                    }
+                  },
+                  builder: (context, state) {
+                    return MyLoadingButton(
+                        onTap: () {
+                          context.read<LoginBloc>().add(
+                              ForgetPasswordMailSubmited(
+                                  email: emailController.text));
+                        },
+                        title: "Send",
+                        isLoading: state is LoginLoadingState);
+                  },
+                )
               ],
             ),
           ),

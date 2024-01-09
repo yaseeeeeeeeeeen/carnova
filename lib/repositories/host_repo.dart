@@ -57,4 +57,16 @@ class HostRepo {
     const url = HostUrl.changepass;
     return ApiService.patchApi(data, url, token);
   }
+
+  EitherResponse forgetPassword(String email) async {
+    Map<String, dynamic> data = {"email": email};
+    const url = HostUrl.forgetPassword;
+    return ApiService.postApi(data, url);
+  }
+
+  EitherResponse forgetPassChange(String pass1, String pass2, String id) async {
+    Map<String, dynamic> data = {"newpass": pass1, "confirmpass": pass2};
+    String url = "${HostUrl.resetPassword}$id";
+    return ApiService.patchApi(data, url);
+  }
 }

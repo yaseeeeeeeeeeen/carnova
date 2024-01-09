@@ -17,6 +17,8 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     on<LoginClickedEvent>(loginClickedEvent);
     on<HostDetailsFetch>(hostDetailsFetch);
     on<HostDashboardFetchEvent>(hostDashboardFetchEvent);
+    on<ForgetPasswordMailSubmited>(forgetPasswordMailSubmited);
+    on<ResetPasswordWithId>(resetPasswordWithId);
   }
 
   FutureOr<void> loginClickedEvent(
@@ -60,6 +62,31 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
       final dashboardData = DashbordModal.fromJson(right);
       locator<VehicleFetchBloc>().dashboard = dashboardData;
       emit(HostDashbordFetched());
+    });
+  }
+
+  FutureOr<void> forgetPasswordMailSubmited(
+      ForgetPasswordMailSubmited event, Emitter<LoginBlocState> emit) async {
+    emit(LoginLoadingState());
+    final resposne = await HostRepo().forgetPassword(event.email);
+    resposne.fold((left) {
+      print(left);
+      emit(LoginFailedState(message: left.message));
+    }, (right) {
+      print(right);
+      emit(ForgetPasswordSuccsessMail(id: right["user_id"]));
+    });
+  }
+
+  FutureOr<void> resetPasswordWithId(
+      ResetPasswordWithId event, Emitter<LoginBlocState> emit) async {
+    emit(LoginLoadingState());
+    final response =
+        await HostRepo().forgetPassChange(event.pass1, event.pass2, event.id);
+    response.fold((left) {
+      emit(LoginFailedState(message: left.message));
+    }, (right) {
+      emit(PasswordResetedSuccsess());
     });
   }
 }

@@ -15,9 +15,7 @@ class LoginWrongPasswordState extends LoginBlocState {}
 
 class LoginFailedState extends LoginBlocState {
   String message;
-  LoginFailedState({
-    required this.message
-  });
+  LoginFailedState({required this.message});
 }
 
 class LoginDataFetchState extends LoginBlocState {}
@@ -30,3 +28,11 @@ class LoginErrorState extends LoginBlocState {
     required this.messege,
   });
 }
+
+class ForgetPasswordSuccsessMail extends LoginBlocState {
+  String id;
+  ForgetPasswordSuccsessMail({
+    required this.id
+  });
+}
+class PasswordResetedSuccsess extends LoginBlocState{}

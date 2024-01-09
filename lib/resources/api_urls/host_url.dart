@@ -3,7 +3,7 @@ class HostUrl {
   // static const String baseUrlH = "http://localhost:3000";
 
   // url with my ipaddress for usb debugging
-  static const String baseUrl = "http://192.168.139.133:3000";
+  static const String baseUrl = "http://10.4.6.91:3000";
   static const String baseUrlHost = "$baseUrl/host";
   static const String signUpHost = "$baseUrlHost/signup";
   static const String verifyOtpHost = "$baseUrlHost/verify-otp";
@@ -18,4 +18,6 @@ class HostUrl {
   static const String editVehicle = "$baseUrlHost/edit-vehicle";
   static const String changepass = "$baseUrlHost/change-pass";
   static const String dashbord = "$baseUrlHost/dashboard";
+  static const String forgetPassword = "$baseUrlHost/forgot-password";
+  static const String resetPassword = "$baseUrlHost/reset-password/";
 }
