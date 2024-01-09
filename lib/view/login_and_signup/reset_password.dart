@@ -4,18 +4,22 @@ import 'package:second_project/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/snackbar.dart';
+import 'package:second_project/utils/validations.dart';
+import 'package:second_project/view/home_screen.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
-import 'package:second_project/view/login_and_signup/reset_password.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  ForgotPasswordScreen({super.key});
-
-  final emailController = TextEditingController();
+class PasswordResetScreen extends StatelessWidget {
+  PasswordResetScreen({super.key, required this.id});
+  String id;
+  TextEditingController pass1Controller = TextEditingController();
+  TextEditingController pass2Controller = TextEditingController();
+  final _formKey1 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.sizeOf(context).height;
+    final media = MediaQuery.sizeOf(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -30,7 +34,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "Forgot Password",
+          "Reset Password",
           style: TextStyle(
             color: secondColorH,
             fontWeight: FontWeight.w600,
@@ -47,12 +51,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 image: AssetImage(image.bg2), fit: BoxFit.cover)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-          child: SingleChildScrollView(
+          child: Form(
+            key: _formKey1,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: height / 6),
+                SizedBox(height: media.height / 6),
                 Hero(
                     tag: "registernow",
                     child: Container(
@@ -70,41 +75,55 @@ class ForgotPasswordScreen extends StatelessWidget {
                           ),
                         ))),
                 const SizedBox(height: 25),
-                const Text(
-                  "Enter your email & will send you instruction on how to reset it",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                  ),
+                Text(
+                  "Add new password and restart your journey",
+                  style: CustomFontStyles.listtilesText,
                 ),
                 const SizedBox(height: 25),
                 MyTextField(
-                  validation: (p0) => validations.emailValidation(p0)!,
-                  controller: emailController,
-                  hintText: "Email address",
-                  obscureText: false,
-                ),
+                    validation: (value) {
+                      return Validations().passwordValidations(value);
+                    },
+                    controller: pass1Controller,
+                    hintText: "Enter New Password",
+                    obscureText: true),
+                const SizedBox(height: 10),
+                MyTextField(
+                    validation: (value) {
+                      return Validations()
+                          .confirmpassValidations(value, pass1Controller.text);
+                    },
+                    controller: pass2Controller,
+                    hintText: "Confirm Password",
+                    obscureText: true),
                 const SizedBox(height: 25),
                 BlocConsumer<LoginBloc, LoginBlocState>(
                   listener: (context, state) {
-                    if (state is LoginFailedState) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          customSnackbar(context, false, state.message));
-                    } else if (state is ForgetPasswordSuccsessMail) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              PasswordResetScreen(id: state.id)));
+                    if (state is PasswordResetedSuccsess) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()),
+                          (route) => false);
+                      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                          context, true, "Password Changed.! Back To Login"));
                     }
                   },
                   builder: (context, state) {
                     return MyLoadingButton(
+                        title: "DONE",
+                        isLoading: state is LoginLoadingState,
                         onTap: () {
-                          context.read<LoginBloc>().add(
-                              ForgetPasswordMailSubmited(
-                                  email: emailController.text));
-                        },
-                        title: "Send",
-                        isLoading: state is LoginLoadingState);
+                          if (_formKey1.currentState!.validate()) {
+                            context.read<LoginBloc>().add(ResetPasswordWithId(
+                                id: id,
+                                pass1: pass1Controller.text,
+                                pass2: pass2Controller.text));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                customSnackbar(context, false,
+                                    "Somethig Wrong Try Again"));
+                          }
+                        });
                   },
                 )
               ],
