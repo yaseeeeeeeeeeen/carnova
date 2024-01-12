@@ -30,21 +30,31 @@ class MyvehiclesList extends StatelessWidget {
               ? const Center(
                   child: CircularProgressIndicator(color: Colors.black))
               : verifiedList.isNotEmpty
-                  ? ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final data = verifiedList[index];
-                        return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      CarDataShow(vehicleData: data)));
-                            },
-                            
-                            child: CarListTile(data: data));
-                      },
-                      separatorBuilder: (context, index) => const Divider(),
-                      itemCount: verifiedList.length)
+                  ? SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                final data = verifiedList[index];
+                                return GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) => CarDataShow(
+                                                  vehicleData: data)));
+                                    },
+                                    child: CarListTile(data: data));
+                              },
+                              separatorBuilder: (context, index) =>
+                                  const Divider(),
+                              itemCount: verifiedList.length),
+                          const SizedBox(height: 100)
+                        ],
+                      ),
+                    )
                   : Center(child: EmptyListLottie(text: "LIST IS EMPTY"));
         },
       ),

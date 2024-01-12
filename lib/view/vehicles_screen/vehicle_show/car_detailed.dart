@@ -33,8 +33,8 @@ class CarDataShow extends StatelessWidget {
       appBar: carDetailsScreen(() {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddVehicle(vehilcledata: vehicleData)));
-      },() {
-                                      deleteBottomSheet(context, vehicleData.id);
+      }, () {
+        deleteBottomSheet(context, vehicleData.id);
       }),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -73,7 +73,8 @@ class CarDataShow extends StatelessWidget {
       ),
     );
   }
-    deleteBottomSheet(context, String id) {
+
+  deleteBottomSheet(context, String id) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -97,12 +98,12 @@ class CarDataShow extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                       const SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           "Are You Sure...?",
                           style: GoogleFonts.outfit(fontSize: 20),
                         ),
-                       const SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

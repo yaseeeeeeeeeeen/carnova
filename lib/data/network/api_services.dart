@@ -105,7 +105,6 @@ class ApiService {
     final body = jsonEncode(data);
     try {
       final response = await http.patch(uri, body: body, headers: header);
-      print(response.statusCode);
       Map<String, dynamic> responseBody = getResponse(response);
       return Right(responseBody);
     } on SocketException {

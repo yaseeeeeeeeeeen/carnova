@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/utils/appbar.dart';
 
 class CarMoreImages extends StatelessWidget {
   const CarMoreImages({super.key, required this.images});
@@ -16,29 +17,8 @@ class CarMoreImages extends StatelessWidget {
           builder: (BuildContext context) {
             return GestureDetector(
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Stack(
-                        children: [
-                          Container(
-                              color: appbarColorH,
-                              padding: const EdgeInsets.all(10),
-                              height: MediaQuery.sizeOf(context).height / 3,
-                              width: MediaQuery.sizeOf(context).width,
-                              child: Image.network(
-                                "${HostUrl.baseUrl}/$i",
-                                fit: BoxFit.fitWidth,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: Icon(Icons.keyboard_arrow_left,
-                                  size: 25, color: mainColorH)),
-                        ],
-                      );
-                    });
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ImagePreviewWid(imagePath: i)));
               },
               child: Container(
                   margin: const EdgeInsets.all(5),
@@ -51,6 +31,21 @@ class CarMoreImages extends StatelessWidget {
           },
         );
       }).toList(),
+    );
+  }
+}
+
+class ImagePreviewWid extends StatelessWidget {
+  ImagePreviewWid({super.key, required this.imagePath});
+  String imagePath;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: customAppBarH("IMAGE PREVIEW"),
+      body: Center(
+        child: Image(image: NetworkImage("${HostUrl.baseUrl}/$imagePath")),
+      ),
     );
   }
 }

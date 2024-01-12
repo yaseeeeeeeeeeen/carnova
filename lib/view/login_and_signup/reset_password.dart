@@ -7,7 +7,6 @@ import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/utils/validations.dart';
-import 'package:second_project/view/home_screen.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
 class PasswordResetScreen extends StatelessWidget {
