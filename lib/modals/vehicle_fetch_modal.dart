@@ -12,7 +12,7 @@ import 'dart:convert';
 // }
 
 String vehicleFetchModalToJson(List<VehicleFetchModal> data) {
-  final dyn = List<dynamic>.from(data.map((x) => x.toJson()));
+  final dyn = List<dynamic>.from(data.map((x) => x.toJson()));  
   return json.encode(dyn);
 }
 
@@ -62,7 +62,7 @@ class VehicleFetchModal {
         id: json["_id"],
         name: json["name"],
         price: json["price"],
-        model: json["model"],
+        model: json["createdyear"],
         transmission: json["transmission"],
         brand: json["brand"],
         number: json["number"],
@@ -83,7 +83,7 @@ class VehicleFetchModal {
         "_id": id,
         "name": name,
         "price": price,
-        "model": model,
+        "createdyear": model,
         "transmission": transmission,
         "brand": brand,
         "number": number,
