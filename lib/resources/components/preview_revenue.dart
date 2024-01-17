@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
-
 
 // ignore: must_be_immutable
 class GridviewContainerWidget extends StatelessWidget {
@@ -15,8 +15,9 @@ class GridviewContainerWidget extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width / 2 - 15,
       height: MediaQuery.sizeOf(context).height / 8,
       decoration: BoxDecoration(
+          color: mainColorH,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 1, color: Colors.black)),
+          border: Border.all(width: 1, color: borderColor)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

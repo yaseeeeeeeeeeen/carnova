@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldBg,
       extendBody: true,
       appBar: AppBar(
           elevation: 0,
@@ -78,7 +79,11 @@ class HomeScreen extends StatelessWidget {
                     : const SizedBox(),
                 data.latestOrders.isNotEmpty
                     ? SizedBox(
-                        child: LatestOrderWid(latesOrders: data.latestOrders))
+                        height: MediaQuery.sizeOf(context).height / 4.3,
+                        child: SizedBox(
+                            child:
+                                LatestOrderWid(latesOrders: data.latestOrders)),
+                      )
                     : const SizedBox(),
                 SizedBox(height: MediaQuery.sizeOf(context).height / 8)
               ],

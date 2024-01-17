@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/resources/constants/colors.dart';
 
 SnackBar customSnackbar(context, bool error, String messege) {
   return SnackBar(
@@ -9,8 +10,7 @@ SnackBar customSnackbar(context, bool error, String messege) {
       messege,
       style: GoogleFonts.poppins(),
     ),
-    backgroundColor:
-        error ? CupertinoColors.activeGreen : CupertinoColors.destructiveRed,
+    backgroundColor: error ? appbarColorH : CupertinoColors.destructiveRed,
     duration: const Duration(seconds: 3),
     behavior: SnackBarBehavior.floating,
     margin: const EdgeInsets.all(10),

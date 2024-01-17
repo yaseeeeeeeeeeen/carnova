@@ -12,3 +12,6 @@ Color borderColor = Colors.grey.shade300;
 Color statusColor = Colors.teal;
 Color appbarColorH = const Color.fromARGB(255, 58, 77, 57);
 Color buttonColorsH = const Color.fromARGB(255, 58, 77, 57);
+
+Color shimmerbaseColor = Colors.grey.shade600;
+Color shimmerhighlightColor=Colors.grey.shade200;

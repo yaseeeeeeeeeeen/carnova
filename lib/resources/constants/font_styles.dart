@@ -74,6 +74,13 @@ class CustomFontStyles {
     fontWeight: FontWeight.w500,
     color: statusColor,
   );
+
+    static TextStyle tileStatusTextRed = TextStyle(
+    fontFamily: "Outfit",
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: Colors.red.shade800,
+  );
   static TextStyle tileDateText = const TextStyle(
     fontFamily: "Outfit",
     fontSize: 13,

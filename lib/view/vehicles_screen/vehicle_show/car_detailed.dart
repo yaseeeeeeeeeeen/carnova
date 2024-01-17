@@ -8,6 +8,7 @@ import 'package:second_project/resources/components/text_widgets/sub_title.dart'
 import 'package:second_project/resources/components/vehicle/car_details_card.dart';
 import 'package:second_project/resources/components/vehicle/vehicle_image_wid.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/utils/snackbar.dart';
@@ -23,7 +24,8 @@ class CarDataShow extends StatelessWidget {
       vehicleData.brand,
       vehicleData.fuel,
       vehicleData.transmission,
-      "4.5"
+      vehicleData.seat.toString(),
+      ""
       // vehicleData.rating.abs().toString()
     ];
     double heigth = MediaQuery.sizeOf(context).height;
@@ -61,8 +63,19 @@ class CarDataShow extends StatelessWidget {
               const SizedBox(height: 10),
               CarDetailsCard(cardetails: cardetails),
               const SizedBox(height: 10),
-              // HomeTitles(titles: "Contact"),
-              //  CarAgentTile(vehicledata: vehicleData),
+              HomeTitles(titles: "Location"),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: borderColor),
+                    borderRadius: BorderRadius.circular(10)),
+                child: ListTile(
+                  tileColor: mainColorH,
+                  title: Text(
+                    vehicleData.location,
+                    style: CustomFontStyles.style5,
+                  ),
+                ),
+              ),
               const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
               const SizedBox(height: 10),
@@ -126,7 +139,9 @@ class CarDataShow extends StatelessWidget {
                                     fixedSize: Size(
                                         MediaQuery.sizeOf(context).width / 2.1,
                                         40)),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                                 child: const Text("CANCEL")),
                           ],
                         )
