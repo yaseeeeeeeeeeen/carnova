@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:second_project/resources/constants/colors.dart';
 
 class CustomFontStyles {
+  static TextStyle normalOutfit = const TextStyle(fontFamily: "Outfit");
+
   static TextStyle style1 = const TextStyle(
     fontFamily: "Outfit",
     fontSize: 23,
@@ -75,7 +77,7 @@ class CustomFontStyles {
     color: statusColor,
   );
 
-    static TextStyle tileStatusTextRed = TextStyle(
+  static TextStyle tileStatusTextRed = TextStyle(
     fontFamily: "Outfit",
     fontSize: 13,
     fontWeight: FontWeight.w500,

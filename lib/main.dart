@@ -11,6 +11,7 @@ import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/view/privacy/privacy_policy.dart';
 import 'package:second_project/view/splash/splash_screen.dart';
 
 main() async {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: PrivacyPolicy(),
       ),
     );
   }

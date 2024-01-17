@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:second_project/modals/dashboard_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
@@ -53,32 +52,29 @@ class MostRatedDemo extends StatelessWidget {
       child: GestureDetector(
           child: Column(
         children: [
-          Hero(
-            tag: vehicledata.vehicleDetails.name,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: CachedNetworkImage(
-                width: width / 1.5 - 10,
-                height: heigth / 6,
-                fit: BoxFit.cover,
-                imageUrl:
-                    "${HostUrl.baseUrl}/${vehicledata.vehicleDetails.images[0]}",
-                placeholder: (context, url) => Shimmer.fromColors(
-                  baseColor: shimmerbaseColor,
-                  highlightColor: shimmerhighlightColor,
-                  child: Container(
-                    width: width / 1.5 - 10,
-                    height: heigth / 6,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "${HostUrl.baseUrl}/${vehicledata.vehicleDetails.images[0]}"),
-                            fit: BoxFit.cover)),
-                  ),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            child: CachedNetworkImage(
+              width: width / 1.5 - 10,
+              height: heigth / 6,
+              fit: BoxFit.cover,
+              imageUrl:
+                  "${HostUrl.baseUrl}/${vehicledata.vehicleDetails.images[0]}",
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: shimmerbaseColor,
+                highlightColor: shimmerhighlightColor,
+                child: Container(
+                  width: width / 1.5 - 10,
+                  height: heigth / 6,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "${HostUrl.baseUrl}/${vehicledata.vehicleDetails.images[0]}"),
+                          fit: BoxFit.cover)),
                 ),
               ),
             ),

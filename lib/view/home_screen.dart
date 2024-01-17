@@ -5,6 +5,7 @@ import 'package:second_project/resources/components/preview_revenue.dart';
 import 'package:second_project/resources/components/vehicle/latest_order_wid.dart';
 import 'package:second_project/resources/components/vehicle/trending_wid.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,8 +18,8 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: scaffoldBg,
       extendBody: true,
       appBar: AppBar(
-          elevation: 0,
-          title: Text('HOME', style: GoogleFonts.poppins()),
+          elevation: 10,
+          title: Text('HOME', style: CustomFontStyles.normalOutfit),
           centerTitle: true,
           backgroundColor: appbarColorH),
       body: SingleChildScrollView(
