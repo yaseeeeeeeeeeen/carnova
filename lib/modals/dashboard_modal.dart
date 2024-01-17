@@ -125,7 +125,7 @@ class UserDetails {
   bool isBlocked;
   int v;
   String? profile;
-  int wallet;
+  int? wallet;
   // Choices choices;
 
   UserDetails({
@@ -137,7 +137,7 @@ class UserDetails {
     required this.isBlocked,
     required this.v,
      this.profile,
-    required this.wallet,
+     this.wallet,
     // required this.choices,
   });
 
