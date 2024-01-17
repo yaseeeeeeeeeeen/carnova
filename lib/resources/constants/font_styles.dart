@@ -88,4 +88,9 @@ class CustomFontStyles {
     fontSize: 13,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle policyText = const TextStyle(
+    fontFamily: "Outfit",
+    fontSize: 17,
+    color: Colors.black,
+  );
 }

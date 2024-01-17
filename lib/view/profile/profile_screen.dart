@@ -3,6 +3,8 @@ import 'package:second_project/resources/components/profile_components/listiles_
 import 'package:second_project/resources/components/profile_components/profile_card.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/logout_confirm.dart';
+import 'package:second_project/view/privacy/privacy_policy.dart';
+import 'package:second_project/view/privacy/terms_and_condition.dart';
 import 'package:second_project/view/profile/change_password.dart';
 
 class UserProfile extends StatelessWidget {
@@ -31,10 +33,22 @@ class UserProfile extends StatelessWidget {
                   ),
                 ),
                 ProfileScreenListtile(text: "App info", isLogout: false),
-                ProfileScreenListtile(
-                    text: "Terms & Conditions", isLogout: false),
-                ProfileScreenListtile(
-                    text: "Privacy & Policy", isLogout: false),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const TermsAndConditionScreen()));
+                  },
+                  child: ProfileScreenListtile(
+                      text: "Terms & Conditions", isLogout: false),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PrivacyPolicy()));
+                  },
+                  child: ProfileScreenListtile(
+                      text: "Privacy & Policy", isLogout: false),
+                ),
                 ProfileScreenListtile(text: "Help", isLogout: false),
                 const Divider(thickness: 1.5),
                 ProfileScreenListtile(text: "Clear App Data", isLogout: false),
