@@ -135,12 +135,14 @@ class SignupScreen extends StatelessWidget {
                                                     email: userData["email"]
                                                         .toString())));
                                   } else if (state is SignupFaildState) {
-                                    customSnackbar(context, false,
-                                        "SignIn Failed Try again");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(context, false,
+                                            "SignIn Failed Try again"));
                                   } else if (state is SignupErrorState) {
-                                    customSnackbar(
-                                        context, false, "Something Wrong");
-                                  }
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(
+                                            context, false, "Something Wrong"));
+                                  } else {}
                                 },
                                 builder: (context, state) {
                                   bool isLoading = state is SignupLoadingState;

@@ -7,6 +7,14 @@ final class HostOtpVerficationInitial extends HostOtpVerficationState {}
 
 class HostOtpVerificationLoadingState extends HostOtpVerficationState {}
 
+class HostOtpVerificationTokenGetState extends HostOtpVerficationState {
+  String token;
+  HostOtpVerificationTokenGetState({
+    required this.token
+  });
+  
+}
+
 class HostOtpVerificationSuccsessState extends HostOtpVerficationState {}
 
 class HostOtpVerificationFailedState extends HostOtpVerficationState {

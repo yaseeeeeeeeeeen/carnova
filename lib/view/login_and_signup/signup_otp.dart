@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:second_project/blocs/otp_verifiaction/otp_verfication_bloc.dart';
+import 'package:second_project/blocs/signup/signup_bloc_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 
@@ -103,10 +104,10 @@ class SignupOtpScreen extends StatelessWidget {
                           BlocConsumer<HostOtpVerficationBloc,
                                   HostOtpVerficationState>(
                               listener: (context, state) {
-                            if (state is HostOtpVerificationSuccsessState) {
+                            if (state is SignupSuccsessState) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                    builder: (context) =>  ScreenParant(),
+                                    builder: (context) => ScreenParant(),
                                   ),
                                   (route) => false);
                             } else if (state
@@ -114,6 +115,11 @@ class SignupOtpScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   customSnackbar(context, false,
                                       "Verification Failed Try again"));
+                            } else if (state
+                                is HostOtpVerificationTokenGetState) {
+                              context
+                                  .read<HostOtpVerficationBloc>()
+                                  .add(DataGettedEvent(token: state.token));
                             }
                           }, builder: (context, state) {
                             bool isLoading =

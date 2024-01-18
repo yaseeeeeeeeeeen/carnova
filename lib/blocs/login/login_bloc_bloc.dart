@@ -58,7 +58,6 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     dashboardData.fold((left) {
       emit(LoginFailedState(message: left.message));
     }, (right) {
-      print(right);
       final dashboardData = DashbordModal.fromJson(right);
       locator<VehicleFetchBloc>().dashboard = dashboardData;
       emit(HostDashbordFetched());
@@ -70,10 +69,8 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     emit(LoginLoadingState());
     final resposne = await HostRepo().forgetPassword(event.email);
     resposne.fold((left) {
-      print(left);
       emit(LoginFailedState(message: left.message));
     }, (right) {
-      print(right);
       emit(ForgetPasswordSuccsessMail(id: right["user_id"]));
     });
   }

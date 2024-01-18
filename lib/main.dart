@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => SignupBloc()),
         BlocProvider(create: (context) => LoginBloc()),
-        BlocProvider(create: (context) => HostOtpVerficationBloc()),
+        BlocProvider(create: (context) => HostOtpVerficationBloc(context.read<LoginBloc>())),
         BlocProvider(create: (context) => DocumentUploadBloc()),
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => VehicleAddBloc()),
