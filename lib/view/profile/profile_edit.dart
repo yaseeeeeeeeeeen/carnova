@@ -21,8 +21,10 @@ class ProfileEditScreen extends StatelessWidget {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   File? imagePath;
+  bool imageChange = false;
   @override
   Widget build(BuildContext context) {
+    imagePath = null;
     final hostModelData = getLoggedInHost();
     nameController.text = hostModelData.name.toString();
     phoneController.text = hostModelData.phone.toString();
@@ -30,6 +32,7 @@ class ProfileEditScreen extends StatelessWidget {
       appBar: AppBar(
           leading: IconButton(
               onPressed: () {
+                imagePath = null;
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (context) => ScreenParant(index: 2)),
@@ -47,7 +50,9 @@ class ProfileEditScreen extends StatelessWidget {
             BlocBuilder<ProfileEditBloc, ProfileEditState>(
               builder: (context, state) {
                 if (state is ProfileImageAddedState) {
-                  imagePath = state.imagePath;
+                imageChange = true;
+                imagePath = state.imagePath;
+                  
                 }
                 return GestureDetector(
                   onTap: () {
@@ -119,8 +124,9 @@ class ProfileEditScreen extends StatelessWidget {
   }
 
   updateButtonClicked(String name, String phone, BuildContext context) {
-    final hostModelData = getLoggedInHost();
-    if (hostModelData.profile.isNotEmpty) {
+    // final hostModelData = getLoggedInHost();
+    // imagePath = File(hostModelData.profile);
+    if (imageChange) {
       if (name.isNotEmpty && phone.length == 10) {
         Map<String, dynamic> data = {"phone": phone, "name": name};
         context
@@ -128,7 +134,15 @@ class ProfileEditScreen extends StatelessWidget {
             .add(SubmitClicked(image: imagePath, data: data));
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(customSnackbar(context, false, "Something Wrong"));
+            .showSnackBar(customSnackbar(context, false, "Add All Details"));
+      }
+    } else if (imageChange == false) {
+      if (name.isNotEmpty && phone.length == 10) {
+        Map<String, dynamic> data = {"phone": phone, "name": name};
+        context.read<ProfileEditBloc>().add(SubmitClicked(data: data));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(customSnackbar(context, false, "Add All Details"));
       }
     } else {
       ScaffoldMessenger.of(context)

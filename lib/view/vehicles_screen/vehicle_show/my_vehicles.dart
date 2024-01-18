@@ -22,7 +22,7 @@ class MyvehiclesList extends StatelessWidget {
           } else if (state is VehileDataFailled) {
             topSnackbar(context, state.message, Colors.red, false);
           } else if (state is VehicleListEmptyState) {
-            topSnackbar(context, "Vehicle List Empty", Colors.black, true);
+            // topSnackbar(context, "Vehicle List Empty", Colors.black, true);
           }
         },
         builder: (context, state) {

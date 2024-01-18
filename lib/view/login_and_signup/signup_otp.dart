@@ -8,6 +8,7 @@ import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/utils/functions/permissions.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 import 'package:otp_text_field/otp_text_field.dart';
@@ -105,11 +106,7 @@ class SignupOtpScreen extends StatelessWidget {
                                   HostOtpVerficationState>(
                               listener: (context, state) {
                             if (state is SignupSuccsessState) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (context) => ScreenParant(),
-                                  ),
-                                  (route) => false);
+                              navigateToHome(context);
                             } else if (state
                                 is HostOtpVerificationFailedState) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -140,5 +137,17 @@ class SignupOtpScreen extends StatelessWidget {
                 ])),
           )),
     );
+  }
+
+  navigateToHome(context) async {
+    Permissions permissions = Permissions();
+    await permissions.locationPermissionChecking(context);
+    await permissions.phoneCallPermissionChecking(context);
+    await permissions.galleryPermissionChecking(context);
+    await permissions.filesPermissionChecking(context);
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => ScreenParant()),
+        (route) => false);
   }
 }
