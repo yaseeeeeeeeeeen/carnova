@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/resources/components/profile_components/listiles_pr.dart';
 import 'package:second_project/resources/components/profile_components/profile_card.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/logout_confirm.dart';
 import 'package:second_project/view/privacy/privacy_policy.dart';
@@ -13,7 +14,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white60,
+        backgroundColor: mainColorH.withOpacity(0.7),
         appBar: customAppBarH("PROFILE"),
         body: Padding(
           padding: const EdgeInsets.all(15),
@@ -32,7 +33,6 @@ class UserProfile extends StatelessWidget {
                     isLogout: false,
                   ),
                 ),
-                ProfileScreenListtile(text: "App info", isLogout: false),
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -49,9 +49,7 @@ class UserProfile extends StatelessWidget {
                   child: ProfileScreenListtile(
                       text: "Privacy & Policy", isLogout: false),
                 ),
-                ProfileScreenListtile(text: "Help", isLogout: false),
                 const Divider(thickness: 1.5),
-                ProfileScreenListtile(text: "Clear App Data", isLogout: false),
                 GestureDetector(
                     onTap: () {
                       signoutConfirmation(context);

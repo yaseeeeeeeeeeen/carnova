@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 
 PreferredSizeWidget customAppBarH(
   String title,
@@ -9,20 +9,21 @@ PreferredSizeWidget customAppBarH(
       backgroundColor: appbarColorH,
       centerTitle: true,
       elevation: 0,
-      title: Text(title, style: GoogleFonts.outfit()));
+      title: Text(title, style: CustomFontStyles.normalOutfit));
 }
 
-PreferredSizeWidget carDetailsScreen(void Function()? onPressed,void Function()? delete,) {
+PreferredSizeWidget carDetailsScreen(
+  void Function()? onPressed,
+  void Function()? delete,
+) {
   return AppBar(
       actions: [
         IconButton(
-            onPressed: onPressed,
-            icon: const Icon(Icons.edit, color: Colors.white)),        IconButton(
-            onPressed: delete,
-            icon: const Icon(Icons.delete, color: Colors.red))
+            onPressed: onPressed, icon: Icon(Icons.edit, color: mainColorH)),
+        IconButton(onPressed: delete, icon: Icon(Icons.delete, color: red))
       ],
       backgroundColor: appbarColorH,
       centerTitle: true,
       elevation: 0,
-      title: Text("CAR DETAILS", style: GoogleFonts.outfit()));
+      title: Text("CAR DETAILS", style: CustomFontStyles.normalOutfit));
 }

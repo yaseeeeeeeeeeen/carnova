@@ -25,7 +25,7 @@ class CarMoreImages extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          image: NetworkImage("${HostUrl.baseUrl}/$i"),
+                          image: NetworkImage("${HostUrl.imagegettingUrl}$i"),
                           fit: BoxFit.cover))),
             );
           },
@@ -41,10 +41,10 @@ class ImagePreviewWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: mainColorH,
       appBar: customAppBarH("IMAGE PREVIEW"),
       body: Center(
-        child: Image(image: NetworkImage("${HostUrl.baseUrl}/$imagePath")),
+        child: Image(image: NetworkImage("${HostUrl.imagegettingUrl}$imagePath")),
       ),
     );
   }

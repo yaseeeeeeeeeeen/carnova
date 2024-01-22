@@ -1,6 +1,8 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/static_data.dart';
 
 class DropDownWid extends StatefulWidget {
@@ -32,8 +34,7 @@ class _DropDownWidState extends State<DropDownWid> {
     super.initState();
   }
 
-  final TextStyle _labelStyle =
-      GoogleFonts.poppins(fontWeight: FontWeight.w600);
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +44,17 @@ class _DropDownWidState extends State<DropDownWid> {
         const SizedBox(height: 8),
         Text(
           widget.titletext,
-          style: GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w500),
+          style: CustomFontStyles.tabcardtext1,
         ),
         const SizedBox(height: 8),
         CustomDropdown(
-          selectedStyle: GoogleFonts.poppins(color: Colors.black),
+          selectedStyle: CustomFontStyles.normalOutfit,
           hintText: widget.hinttext,
           hintStyle: GoogleFonts.poppins(),
           items: widget.mainList?[widget.listIndex],
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: Colors.black,
+          borderSide:  BorderSide(
+            color: borderColor,
             width: 1,
           ),
           controller: widget.controller,
@@ -62,7 +63,7 @@ class _DropDownWidState extends State<DropDownWid> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(result, style: _labelStyle),
+                Text(result, style: CustomFontStyles.labelStyle),
                 const Icon(Icons.circle_outlined)
               ],
             );

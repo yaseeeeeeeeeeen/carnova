@@ -93,4 +93,8 @@ class CustomFontStyles {
     fontSize: 17,
     color: Colors.black,
   );
+  static TextStyle labelStyle = const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontFamily: "Outfit",
+  );
 }

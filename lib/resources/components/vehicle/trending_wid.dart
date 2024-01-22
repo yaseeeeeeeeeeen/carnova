@@ -22,7 +22,7 @@ class TrendingWid extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage("${HostUrl.baseUrl}/${data.vehicle.images[0]}"),
+                    image: NetworkImage("${HostUrl.imagegettingUrl}${data.vehicle.images[0]}"),
                     fit: BoxFit.cover),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),

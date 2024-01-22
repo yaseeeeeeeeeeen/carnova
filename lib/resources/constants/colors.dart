@@ -16,3 +16,5 @@ Color buttonColorsH = const Color.fromARGB(255, 58, 77, 57);
 
 Color shimmerbaseColor = Colors.grey.shade600;
 Color shimmerhighlightColor = Colors.grey.shade200;
+Color black87 = Colors.black87;
+Color red = Colors.red;

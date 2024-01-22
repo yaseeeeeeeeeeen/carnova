@@ -33,7 +33,7 @@ class ProfileCardWid extends StatelessWidget {
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
                     backgroundImage: NetworkImage(
-                        "${HostUrl.baseUrl}/${hostModelData.profile}"))
+                        "${HostUrl.imagegettingUrl}${hostModelData.profile}"))
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,

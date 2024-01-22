@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 
 // ignore: must_be_immutable
 class CustomTextfield extends StatelessWidget {
@@ -34,14 +34,14 @@ class CustomTextfield extends StatelessWidget {
               controller: controller,
               textInputAction: TextInputAction.next,
               keyboardType: keybordtype,
-              style: GoogleFonts.poppins(color: Colors.black),
+              style: CustomFontStyles.normalOutfit,
               decoration: InputDecoration(
                 isDense: true,
                 border: const OutlineInputBorder(),
                 fillColor: Colors.transparent,
                 filled: true,
                 label: Text(hint),
-                labelStyle: GoogleFonts.poppins(color: Colors.black),
+                labelStyle: CustomFontStyles.normalOutfit,
                 errorBorder: const OutlineInputBorder(),
                 focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black)),
@@ -50,7 +50,7 @@ class CustomTextfield extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
                 ),
                 hintText: hint,
-                hintStyle: GoogleFonts.poppins(color: Colors.black),
+                hintStyle: CustomFontStyles.normalOutfit,
               ),
             )));
   }

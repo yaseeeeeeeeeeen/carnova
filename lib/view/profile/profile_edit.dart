@@ -73,7 +73,7 @@ class ProfileEditScreen extends StatelessWidget {
                                   ? CircleAvatar(
                                       radius: 80,
                                       backgroundImage: NetworkImage(
-                                          '${HostUrl.baseUrl}/${hostModelData.profile}'),
+                                          '${HostUrl.imagegettingUrl}${hostModelData.profile}'),
                                     )
                                   : CircleAvatar(
                                       radius: 80,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 
 // ignore: must_be_immutable
@@ -13,9 +14,9 @@ class CarListTile extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: mainColorH,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey.shade300)),
+          border: Border.all(color: borderColor)),
       height: heigth / 7.3,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Hero(
@@ -23,7 +24,7 @@ class CarListTile extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage("${HostUrl.baseUrl}/${data.images[0]}"),
+                    image: NetworkImage("${HostUrl.imagegettingUrl}${data.images[0]}"),
                     fit: BoxFit.cover),
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
@@ -51,10 +52,10 @@ class CarListTile extends StatelessWidget {
                   ),
                   Text("${data.brand.toUpperCase()} (${data.model})",
                       style:
-                          const TextStyle(color: Colors.black87, fontSize: 13)),
+                           TextStyle(color: black87, fontSize: 13)),
                   Text(data.location,
                       style:
-                          const TextStyle(color: Colors.black87, fontSize: 13)),
+                           TextStyle(color: black87, fontSize: 13)),
                 ]))
       ]),
     );

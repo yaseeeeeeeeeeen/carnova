@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/components/preview_revenue.dart';
 import 'package:second_project/resources/components/vehicle/latest_order_wid.dart';
@@ -58,11 +57,11 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 data.trending.isNotEmpty
-                    ? const HindTextWidget(
+                    ?  HindTextWidget(
                         isBold: true,
                         text: 'Trending',
                         size: 20,
-                        color: Colors.black,
+                        color: black,
                         left: 0,
                         top: 10)
                     : const SizedBox(),
@@ -70,11 +69,11 @@ class HomeScreen extends StatelessWidget {
                     ? TrendingWid(data: data.trending[0])
                     : const SizedBox(),
                 data.latestOrders.isNotEmpty
-                    ? const HindTextWidget(
+                    ?  HindTextWidget(
                         isBold: true,
                         text: 'Lastest Updates',
                         size: 20,
-                        color: Colors.black,
+                        color: black,
                         left: 0,
                         top: 10)
                     : const SizedBox(),
