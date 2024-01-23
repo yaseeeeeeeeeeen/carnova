@@ -21,7 +21,6 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
-
    def keystoreProperties = new Properties()
    def keystorePropertiesFile = rootProject.file('key.properties')
    if (keystorePropertiesFile.exists()) {
@@ -29,7 +28,7 @@ if (flutterVersionName == null) {
    }
 
 android {
-    namespace "com.example.second_project"
+    namespace "com.carnova.carnova_host"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
@@ -52,6 +51,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 20
+        multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -78,7 +78,7 @@ flutter {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:2.0.1'
     implementation 'com.google.android.material:material:1.10.0'
 }
-
 
