@@ -5,6 +5,7 @@ import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/static_data.dart';
 
+// ignore: must_be_immutable
 class DropDownWid extends StatefulWidget {
   DropDownWid(
       {super.key,

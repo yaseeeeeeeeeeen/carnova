@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/policies/policy_dataa.dart';

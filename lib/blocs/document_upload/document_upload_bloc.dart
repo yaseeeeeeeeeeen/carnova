@@ -44,12 +44,7 @@ class DocumentUploadBloc
     emit(DocumentUploadLoadingState());
     Future.delayed(const Duration(seconds: 2));
     final data = event.vehicledata.toJson();
-    final response =
-        await VehicleAddRepo().addVehicle(data, event.vehicleImages, event.doc);
-    print(response.statusCode);
-
-    //api upload
-
+    await VehicleAddRepo().addVehicle(data, event.vehicleImages, event.doc);
     emit(DocumentAllSuccsessState());
   }
 

@@ -8,6 +8,7 @@ import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_show/car_detailed.dart';
 
+// ignore: must_be_immutable
 class MyvehiclesList extends StatelessWidget {
   MyvehiclesList({super.key});
   List<VehicleFetchModal> verifiedList = [];

@@ -170,9 +170,6 @@ class AddVehicle extends StatelessWidget {
         vehilcledata!.location = _locationController.text;
         vehilcledata!.lat = latitude!;
         vehilcledata!.long = logitude!;
-
-              print(vehilcledata);
-  
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddVehicle2(
                   vehicledatas: vehicleDataobj,

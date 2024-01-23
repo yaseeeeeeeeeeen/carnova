@@ -7,6 +7,7 @@ import 'package:second_project/resources/components/vehicle/car_tile.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_show/car_detailed.dart';
 
+// ignore: must_be_immutable
 class PendigVerification extends StatelessWidget {
   PendigVerification({super.key});
   List<VehicleFetchModal> pendingList = [];

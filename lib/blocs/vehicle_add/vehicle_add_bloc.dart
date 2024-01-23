@@ -57,7 +57,7 @@ class VehicleAddBloc extends Bloc<VehicleAddEvent, VehicleAddState> {
       emit(ImageRemovedSuccsessState(index: event.index));
       emit(ImagesFetchSuccsessState());
     } else {
-      print("${response.statusCode} Something Wrong");
+
     }
   }
 

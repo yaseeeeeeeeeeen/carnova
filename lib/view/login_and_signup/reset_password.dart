@@ -9,6 +9,7 @@ import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/utils/validations.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 
+// ignore: must_be_immutable
 class PasswordResetScreen extends StatelessWidget {
   PasswordResetScreen({super.key, required this.id});
   String id;

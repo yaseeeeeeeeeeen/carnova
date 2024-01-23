@@ -65,9 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
   fetchDashboard() async {
     final dashboardData = await HostRepo().fetchDashboard();
     dashboardData.fold((left) {
-      print(left.message);
     }, (right) {
-      print(right);
       final dashboardData = DashbordModal.fromJson(right);
       locator<VehicleFetchBloc>().dashboard = dashboardData;
       Navigator.of(context).pushAndRemoveUntil(

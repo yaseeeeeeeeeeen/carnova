@@ -27,7 +27,6 @@ class LocationPickService {
     _currentLocation = await Geolocator.getCurrentPosition();
     if (_currentLocation != null) {
       _currentAddress = await _getAddress();
-      print(_currentAddress);
     }
     dynamicMap = {
       "latitude": _currentLocation!.latitude,
@@ -47,11 +46,9 @@ class LocationPickService {
             "${place.locality}, ${place.administrativeArea}, ${place.country}";
         return address;
       } else {
-        print("Location is null");
         return "";
       }
     } catch (e) {
-      print(e);
       return "";
     }
   }

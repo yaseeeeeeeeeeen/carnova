@@ -27,7 +27,7 @@ class ApiServiceHost {
       'file',
       profilePhotoStream,
       profilePhotoLength,
-      filename: 'profilephoto${hostModelData!.name}.jpg',
+      filename: 'profilephoto${hostModelData.name}.jpg',
     );
     request.files.add(profilePhotoMultipartFile);
     final response = await request.send();

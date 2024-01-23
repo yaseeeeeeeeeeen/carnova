@@ -35,6 +35,7 @@ class CarMoreImages extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ImagePreviewWid extends StatelessWidget {
   ImagePreviewWid({super.key, required this.imagePath});
   String imagePath;

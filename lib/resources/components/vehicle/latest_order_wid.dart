@@ -7,6 +7,7 @@ import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
+// ignore: must_be_immutable
 class LatestOrderWid extends StatelessWidget {
   LatestOrderWid({super.key, required this.latesOrders});
   List<LatestOrder> latesOrders;

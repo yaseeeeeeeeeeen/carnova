@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 
+// ignore: must_be_immutable
 class EmptyListLottie extends StatelessWidget {
   EmptyListLottie({super.key, required this.text});
   String text;
