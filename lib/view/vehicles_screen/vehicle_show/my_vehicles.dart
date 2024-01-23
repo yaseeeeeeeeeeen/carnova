@@ -4,6 +4,7 @@ import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/empty_list_lottie.dart';
 import 'package:second_project/resources/components/vehicle/car_tile.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_show/car_detailed.dart';
 
@@ -27,8 +28,8 @@ class MyvehiclesList extends StatelessWidget {
         },
         builder: (context, state) {
           return state is VehileDataLoading
-              ? const Center(
-                  child: CircularProgressIndicator(color: Colors.black))
+              ?  Center(
+                  child: CircularProgressIndicator(color: black))
               : verifiedList.isNotEmpty
                   ? SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),

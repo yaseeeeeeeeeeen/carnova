@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/account_underverification.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_add/vehicle_add1.dart';
 import 'package:second_project/view/vehicles_screen/vehicle_show/my_vehicles.dart';
@@ -53,17 +54,13 @@ class MyVehicles extends StatelessWidget {
                 indicatorColor: appbarColorH,
                 unselectedLabelColor: Colors.black.withOpacity(0.3),
                 labelColor: Colors.black),
-            tabs: const [
-              Text('My Vehicles'),
-              Text('Processing'),
+            tabs: [
+              Text('My Vehicles', style: CustomFontStyles.tileDateText),
+              Text('Processing', style: CustomFontStyles.tileDateText),
             ],
-            views:  [MyvehiclesList(), PendigVerification()],
+            views: [MyvehiclesList(), PendigVerification()],
             onChange: (index) {},
           ),
         ));
   }
 }
-
-
-
-
