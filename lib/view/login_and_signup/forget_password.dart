@@ -56,19 +56,17 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Hero(
                     tag: "registernow",
                     child: Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: secondColorH,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.directions_car_filled,
-                            color: mainColorH,
-                            size: 35,
-                          ),
-                        ))),
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: secondColorH,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Image.asset("assets/image/Frame 2.png",
+                            fit: BoxFit.cover),
+                      ),
+                    )),
                 const SizedBox(height: 25),
                 const Text(
                   "Enter your email & will send you instruction on how to reset it",
