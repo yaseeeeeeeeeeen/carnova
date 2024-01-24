@@ -1,10 +1,7 @@
 
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:second_project/utils/snackbar.dart';
 
 
 class Permissions {
@@ -14,11 +11,11 @@ class Permissions {
   Future<void> locationPermissionChecking(BuildContext context) async {
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-        context,
-        false,
-        "Location Permission Denied...! Open settings and change this",
-      ));
+      // ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+      //   context,
+      //   false,
+      //   "Location Permission Denied...! Open settings and change this",
+      // ));
       return;
     }
 
@@ -37,11 +34,11 @@ class Permissions {
       // Request phone call permission
       status = await Permission.phone.request();
       if (status.isDenied) {
-        ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-          context,
-          false,
-          "Phone Call Permission Denied...! Open settings and change this",
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+        //   context,
+        //   false,
+        //   "Phone Call Permission Denied...! Open settings and change this",
+        // ));
         return false;
       }
     }

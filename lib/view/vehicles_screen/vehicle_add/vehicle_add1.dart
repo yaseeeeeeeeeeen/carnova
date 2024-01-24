@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/location_modal.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
@@ -9,7 +8,6 @@ import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
-import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';

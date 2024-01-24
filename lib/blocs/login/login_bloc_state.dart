@@ -31,8 +31,10 @@ class LoginErrorState extends LoginBlocState {
 
 class ForgetPasswordSuccsessMail extends LoginBlocState {
   String id;
+  String otp;
   ForgetPasswordSuccsessMail({
-    required this.id
+    required this.id,
+    required this.otp
   });
 }
 class PasswordResetedSuccsess extends LoginBlocState{}

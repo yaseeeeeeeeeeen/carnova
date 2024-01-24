@@ -57,22 +57,18 @@ class PasswordResetScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: media.height / 6),
+                SizedBox(height: media.height / 7),
                 Hero(
                     tag: "registernow",
                     child: Container(
                         height: 60,
                         width: 60,
                         decoration: BoxDecoration(
-                          color: secondColorH,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Center(
-                          child: Icon(
-                            Icons.directions_car_filled,
-                            color: mainColorH,
-                            size: 35,
-                          ),
+                          child: Image.asset("assets/image/Frame 2.png",
+                              fit: BoxFit.cover),
                         ))),
                 const SizedBox(height: 25),
                 Text(

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/api_urls/host_url.dart';

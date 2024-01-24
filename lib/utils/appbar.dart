@@ -16,19 +16,15 @@ PreferredSizeWidget customAppBarH(String title, Function()? onPressed) {
 }
 
 PreferredSizeWidget carDetailsScreen(
-  void Function()? onPressed,
-  void Function()? delete,
-     BuildContext context
-) {
+    void Function()? onPressed, void Function()? delete, BuildContext context) {
   return AppBar(
-      leading: IconButton(
-          onPressed: () {
-         
-            Navigator.of(context).pop();
-          },
-          icon: IconButton(
-              onPressed: onPressed,
-              icon: Icon(Icons.arrow_back, color: mainColorH))),
+      // leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.of(context).pop();
+      //     },
+      //     icon: IconButton(
+      //         onPressed: onPressed,
+      //         icon: Icon(Icons.arrow_back, color: mainColorH))),
       actions: [
         IconButton(
             onPressed: onPressed, icon: Icon(Icons.edit, color: mainColorH)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/resources/components/preview_revenue.dart';
 import 'package:second_project/resources/components/vehicle/latest_order_wid.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   final data = getDashboard();
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: scaffoldBg,
       extendBody: true,
@@ -64,7 +66,24 @@ class HomeScreen extends StatelessWidget {
                     : const SizedBox(),
                 data.trending.isNotEmpty
                     ? TrendingWid(data: data.trending[0])
-                    : const SizedBox(),
+                    : data.trending.isEmpty && data.latestOrders.isEmpty
+                        ? ListView(
+                            shrinkWrap: true,
+                            children: [
+                              Container(
+                                  padding: const EdgeInsets.only(top: 30),
+                                  height: media.height / 3,
+                                  child: SvgPicture.asset(
+                                      "assets/svg/driving-bro.svg")),
+                              const SizedBox(height: 10),
+                              Text(
+                                "Turn Your Wheels into Wealth: Rent Out Your Ride,\n Earn on the Side!",
+                                style: CustomFontStyles.hintstyleOne,
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          )
+                        : const SizedBox(),
                 data.latestOrders.isNotEmpty
                     ? HindTextWidget(
                         isBold: true,

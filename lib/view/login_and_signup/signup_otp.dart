@@ -12,11 +12,14 @@ import 'package:second_project/utils/functions/permissions.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
 import 'package:otp_text_field/otp_text_field.dart';
+import 'package:second_project/view/login_and_signup/reset_password.dart';
 
 // ignore: must_be_immutable
 class SignupOtpScreen extends StatelessWidget {
-  SignupOtpScreen({super.key, required this.email});
+  SignupOtpScreen({super.key, required this.email, this.otpppp, this.otppppId});
   final String email;
+  String? otpppp;
+  String? otppppId;
   final otpController = TextEditingController();
   int? otp;
   bool complete = false;
@@ -31,7 +34,7 @@ class SignupOtpScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(color: Colors.blue),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: mainColorH,
           body: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -53,15 +56,11 @@ class SignupOtpScreen extends StatelessWidget {
                               height: 60,
                               width: 60,
                               decoration: BoxDecoration(
-                                color: secondColorH,
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: Center(
-                                child: Icon(
-                                  color: mainColorH,
-                                  Icons.person,
-                                  size: 35,
-                                ),
+                                child: Image.asset("assets/image/Frame 2.png",
+                                    fit: BoxFit.cover),
                               ),
                             ),
                           ),
@@ -126,8 +125,12 @@ class SignupOtpScreen extends StatelessWidget {
                               isLoading: isLoading,
                               onTap: () {
                                 if (complete) {
-                                  context.read<HostOtpVerficationBloc>().add(
-                                      OtpVerifyButtonClicked(intOtp: otp!));
+                                  if (otpppp != null) {
+                                    forgotPasswordFunction(context);
+                                  } else {
+                                    context.read<HostOtpVerficationBloc>().add(
+                                        OtpVerifyButtonClicked(intOtp: otp!));
+                                  }
                                 }
                               },
                             );
@@ -137,6 +140,14 @@ class SignupOtpScreen extends StatelessWidget {
                 ])),
           )),
     );
+  }
+
+  forgotPasswordFunction(context) {
+    final otpppOne = int.parse(otpppp!);
+    if (otpppOne == otp) {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => PasswordResetScreen(id: otppppId!)));
+    }
   }
 
   navigateToHome(context) async {

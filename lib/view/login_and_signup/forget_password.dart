@@ -6,7 +6,7 @@ import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
-import 'package:second_project/view/login_and_signup/reset_password.dart';
+import 'package:second_project/view/login_and_signup/signup_otp.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -59,7 +59,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: secondColorH,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Center(
@@ -90,8 +89,11 @@ class ForgotPasswordScreen extends StatelessWidget {
                           customSnackbar(context, false, state.message));
                     } else if (state is ForgetPasswordSuccsessMail) {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              PasswordResetScreen(id: state.id)));
+                          builder: (context) => SignupOtpScreen(
+                                email: emailController.text,
+                                otpppp: state.otp,
+                                otppppId: state.id,
+                              )));
                     }
                   },
                   builder: (context, state) {

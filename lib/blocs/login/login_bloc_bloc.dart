@@ -71,7 +71,8 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     resposne.fold((left) {
       emit(LoginFailedState(message: left.message));
     }, (right) {
-      emit(ForgetPasswordSuccsessMail(id: right["user_id"]));
+      emit(ForgetPasswordSuccsessMail(
+          id: right["user_id"] ?? right["h_id"], otp: right["otp"]));
     });
   }
 

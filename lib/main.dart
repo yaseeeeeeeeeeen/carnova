@@ -11,6 +11,7 @@ import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/blocs/vehicle_fetch/vehicle_fetch_bloc.dart';
 import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/view/splash/splash_screen.dart';
 
 main() async {
@@ -31,16 +32,21 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => SignupBloc()),
         BlocProvider(create: (context) => LoginBloc()),
-        BlocProvider(create: (context) => HostOtpVerficationBloc(context.read<LoginBloc>())),
+        BlocProvider(
+            create: (context) =>
+                HostOtpVerficationBloc(context.read<LoginBloc>())),
         BlocProvider(create: (context) => DocumentUploadBloc()),
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => VehicleAddBloc()),
         BlocProvider(create: (context) => VehicleFetchBloc()),
         BlocProvider(create: (context) => PasswordSettingsBloc())
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
+        theme: ThemeData().copyWith(
+            appBarTheme:
+                AppBarTheme(iconTheme: IconThemeData(color: mainColorH))),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -56,12 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 60,
                                 width: 60,
                                 decoration: BoxDecoration(
-                                  color: secondColorH,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
-                                  child:
-                                      Image.asset("assets/image/Frame 2.png",fit: BoxFit.cover),
+                                  child: Image.asset("assets/image/Frame 2.png",
+                                      fit: BoxFit.cover),
                                 ),
                               ),
                             ),
