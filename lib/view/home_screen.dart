@@ -6,6 +6,7 @@ import 'package:second_project/resources/components/vehicle/trending_wid.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/text_styles.dart';
+import 'package:second_project/utils/appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -16,11 +17,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBg,
       extendBody: true,
-      appBar: AppBar(
-          elevation: 10,
-          title: Text('HOME', style: CustomFontStyles.normalOutfit),
-          centerTitle: true,
-          backgroundColor: appbarColorH),
+      appBar: customAppBarText("HOME"),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -57,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 data.trending.isNotEmpty
-                    ?  HindTextWidget(
+                    ? HindTextWidget(
                         isBold: true,
                         text: 'Trending',
                         size: 20,
@@ -69,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                     ? TrendingWid(data: data.trending[0])
                     : const SizedBox(),
                 data.latestOrders.isNotEmpty
-                    ?  HindTextWidget(
+                    ? HindTextWidget(
                         isBold: true,
                         text: 'Lastest Updates',
                         size: 20,

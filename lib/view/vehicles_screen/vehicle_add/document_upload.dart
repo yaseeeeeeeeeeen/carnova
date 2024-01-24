@@ -40,7 +40,9 @@ class DocumetUpload extends StatelessWidget {
           .add(VehicleUpdateDocumnet(imageUrl: vehicledata!.document));
     }
     return Scaffold(
-        appBar: customAppBarH("Upload Vehicle Document"),
+        appBar: customAppBarH("Upload Vehicle Document" ,() {
+        Navigator.of(context).pop();
+      }),
         extendBodyBehindAppBar: true,
         body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),

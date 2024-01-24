@@ -1,4 +1,4 @@
-package com.example.second_project
+package com.carnova.carnova_host
 
 import io.flutter.embedding.android.FlutterActivity
 

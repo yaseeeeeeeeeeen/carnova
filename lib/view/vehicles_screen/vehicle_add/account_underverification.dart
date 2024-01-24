@@ -12,7 +12,9 @@ class AccountUnderverificationScreen extends StatelessWidget {
     double h = MediaQuery.sizeOf(context).height;
     double w = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      appBar: customAppBarH("UNDER VERIFICATION"),
+      appBar: customAppBarH("UNDER VERIFICATION", () {
+        Navigator.of(context).pop();
+      }),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,

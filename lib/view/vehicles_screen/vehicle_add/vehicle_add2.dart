@@ -39,7 +39,9 @@ class AddVehicle2 extends StatelessWidget {
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      appBar: customAppBarH('Add Vehicle Details'),
+      appBar: customAppBarH('Add Vehicle Details', () {
+        Navigator.of(context).pop();
+      }),
       body: Container(
         padding: const EdgeInsets.all(10),
         height: height,
@@ -194,10 +196,10 @@ class AddVehicle2 extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  return ElevetedLoadingBtn(
-                      isLoading: state is LoadingState,
+                  return MyLoadingButton(
                       title: vehicledata != null ? 'UPDATE' : 'NEXT',
-                      onPressed: () {
+                      isLoading: false,
+                      onTap: () {
                         if (vehicledata != null) {
                           vehicledata!.price = int.parse(_priceController.text);
                           vehicledata!.transmission =

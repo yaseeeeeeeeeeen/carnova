@@ -1,6 +1,5 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/resources/constants/static_data.dart';
@@ -35,8 +34,6 @@ class _DropDownWidState extends State<DropDownWid> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,12 +46,12 @@ class _DropDownWidState extends State<DropDownWid> {
         ),
         const SizedBox(height: 8),
         CustomDropdown(
-          selectedStyle: CustomFontStyles.normalOutfit,
+          selectedStyle: CustomFontStyles.hintstyleOne,
           hintText: widget.hinttext,
-          hintStyle: GoogleFonts.poppins(),
+          hintStyle: CustomFontStyles.hintstyleOne,
           items: widget.mainList?[widget.listIndex],
           borderRadius: BorderRadius.circular(10),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             color: borderColor,
             width: 1,
           ),

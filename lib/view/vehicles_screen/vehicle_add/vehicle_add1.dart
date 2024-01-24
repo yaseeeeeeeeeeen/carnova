@@ -6,8 +6,10 @@ import 'package:second_project/blocs/vehicle_add/vehicle_add_bloc.dart';
 import 'package:second_project/modals/location_modal.dart';
 import 'package:second_project/modals/vehicle_add_modal.dart';
 import 'package:second_project/modals/vehicle_fetch_modal.dart';
+import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/components/drop_down.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/utils/appbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -34,7 +36,9 @@ class AddVehicle extends StatelessWidget {
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      appBar: customAppBarH('Add Vehicle Details'),
+      appBar: customAppBarH('Add Vehicle Details', () {
+        Navigator.of(context).pop();
+      }),
       body: Container(
         padding: const EdgeInsets.all(10),
         height: height,
@@ -123,19 +127,12 @@ class AddVehicle extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
+              MyLoadingButton(
+                title: "NEXT",
+                isLoading: false,
+                onTap: () {
                   nextpage(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  fixedSize: Size(width, 50),
-                ),
-                child: Text('NEXT',
-                    style: GoogleFonts.aBeeZee(
-                        fontSize: 18, fontWeight: FontWeight.w500)),
               )
             ],
           ),

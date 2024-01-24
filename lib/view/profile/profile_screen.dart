@@ -15,7 +15,7 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: mainColorH.withOpacity(0.7),
-        appBar: customAppBarH("PROFILE"),
+        appBar: customAppBarText("PROFILE"),
         body: Padding(
           padding: const EdgeInsets.all(15),
           child: SingleChildScrollView(

@@ -43,7 +43,9 @@ class ImagePreviewWid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainColorH,
-      appBar: customAppBarH("IMAGE PREVIEW"),
+      appBar: customAppBarH("IMAGE PREVIEW", () {
+        Navigator.of(context).pop();
+      }),
       body: Center(
         child: Image(image: NetworkImage("${HostUrl.imagegettingUrl}$imagePath")),
       ),

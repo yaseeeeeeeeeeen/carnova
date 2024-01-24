@@ -9,6 +9,7 @@ import 'package:second_project/resources/api_urls/host_url.dart';
 import 'package:second_project/resources/components/custom_button.dart';
 import 'package:second_project/resources/components/custom_textfield2.dart';
 import 'package:second_project/resources/constants/colors.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/utils/snackbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -38,11 +39,14 @@ class ProfileEditScreen extends StatelessWidget {
                         builder: (context) => ScreenParant(index: 2)),
                     (route) => false);
               },
-              icon: const Icon(Icons.arrow_back)),
+              icon: Icon(
+                Icons.arrow_back,
+                color: mainColorH,
+              )),
           backgroundColor: appbarColorH,
           centerTitle: true,
           elevation: 0,
-          title: Text("PROFILE EDIT", style: GoogleFonts.poppins())),
+          title: Text("PROFILE EDIT", style: CustomFontStyles.normalOutfit)),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -50,9 +54,8 @@ class ProfileEditScreen extends StatelessWidget {
             BlocBuilder<ProfileEditBloc, ProfileEditState>(
               builder: (context, state) {
                 if (state is ProfileImageAddedState) {
-                imageChange = true;
-                imagePath = state.imagePath;
-                  
+                  imageChange = true;
+                  imagePath = state.imagePath;
                 }
                 return GestureDetector(
                   onTap: () {

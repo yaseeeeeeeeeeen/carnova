@@ -32,18 +32,19 @@ class MyVehicles extends StatelessWidget {
                             const AccountUnderverificationScreen()));
                   }
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.add,
                   size: 30,
+                  color: mainColorH,
                 )),
             const SizedBox(width: 10),
           ],
           centerTitle: true,
           backgroundColor: appbarColorH,
-          title: Text('MY VEHICLES', style: GoogleFonts.poppins()),
+          title: Text('MY VEHICLES', style: CustomFontStyles.normalOutfit),
         ),
         body: Container(
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: scaffoldBg,
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: ContainedTabBarView(
@@ -53,7 +54,7 @@ class MyVehicles extends StatelessWidget {
                 indicatorWeight: 4,
                 indicatorColor: appbarColorH,
                 unselectedLabelColor: Colors.black.withOpacity(0.3),
-                labelColor: Colors.black),
+                labelColor: black),
             tabs: [
               Text('My Vehicles', style: CustomFontStyles.tileDateText),
               Text('Processing', style: CustomFontStyles.tileDateText),

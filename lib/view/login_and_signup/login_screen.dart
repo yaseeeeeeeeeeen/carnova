@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:second_project/blocs/login/login_bloc_bloc.dart';
 import 'package:second_project/resources/components/custom_button.dart';
+import 'package:second_project/resources/constants/font_styles.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/resources/components/custom_textfield.dart';
 import 'package:second_project/resources/constants/colors.dart';
@@ -59,11 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Center(
-                                  child: Icon(
-                                    Icons.directions_car_filled,
-                                    color: mainColorH,
-                                    size: 35,
-                                  ),
+                                  child:
+                                      Image.asset("assets/image/Frame 2.png"),
                                 ),
                               ),
                             ),
@@ -72,12 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             Row(
                               children: [
-                                const Text(
+                                Text(
                                   'Welcome back to',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500),
+                                  style: CustomFontStyles.profileName,
                                 ),
                                 Text(
                                   ' CARNOVA.',

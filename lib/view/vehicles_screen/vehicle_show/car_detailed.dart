@@ -37,7 +37,7 @@ class CarDataShow extends StatelessWidget {
             builder: (context) => AddVehicle(vehilcledata: vehicleData)));
       }, () {
         deleteBottomSheet(context, vehicleData.id);
-      }),
+      }, context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -123,7 +123,7 @@ class CarDataShow extends StatelessWidget {
                           children: [
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor:black,
+                                    backgroundColor: black,
                                     fixedSize: Size(
                                         MediaQuery.sizeOf(context).width / 2.1,
                                         40)),

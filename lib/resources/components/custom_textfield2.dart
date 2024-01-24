@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/resources/constants/colors.dart';
 import 'package:second_project/resources/constants/font_styles.dart';
 
 // ignore: must_be_immutable
@@ -34,23 +35,23 @@ class CustomTextfield extends StatelessWidget {
               controller: controller,
               textInputAction: TextInputAction.next,
               keyboardType: keybordtype,
-              style: CustomFontStyles.normalOutfit,
+              style: CustomFontStyles.hintstyleOne,
               decoration: InputDecoration(
                 isDense: true,
                 border: const OutlineInputBorder(),
                 fillColor: Colors.transparent,
                 filled: true,
                 label: Text(hint),
-                labelStyle: CustomFontStyles.normalOutfit,
+                labelStyle: CustomFontStyles.hintstyleOne,
                 errorBorder: const OutlineInputBorder(),
-                focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
+                focusedBorder:
+                    OutlineInputBorder(borderSide: BorderSide(color: black)),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(7)),
-                  borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
+                  borderSide: BorderSide(color: borderColor, width: 1),
                 ),
                 hintText: hint,
-                hintStyle: CustomFontStyles.normalOutfit,
+                hintStyle: CustomFontStyles.hintstyleOne,
               ),
             )));
   }
