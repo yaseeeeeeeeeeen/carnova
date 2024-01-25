@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
     on<ForgetPasswordMailSubmited>(forgetPasswordMailSubmited);
     on<ResetPasswordWithId>(resetPasswordWithId);
   }
-
+  final vehicleFetchBlc = VehicleFetchBloc();
   FutureOr<void> loginClickedEvent(
       LoginClickedEvent event, Emitter<LoginBlocState> emit) async {
     emit(LoginLoadingState());
@@ -45,6 +45,7 @@ class LoginBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
       }, (right) {
         HostModel host = HostModel.fromJson(right);
         locator<LoginBloc>().hostModelData = host;
+        vehicleFetchBlc.add(VehicleDataFetchEvent());
         emit(LoginDataFetchState());
       });
     } else {

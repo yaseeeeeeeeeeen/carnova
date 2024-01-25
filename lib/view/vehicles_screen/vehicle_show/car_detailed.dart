@@ -96,13 +96,15 @@ class CarDataShow extends StatelessWidget {
             child: BlocConsumer<VehicleFetchBloc, VehicleFetchState>(
               listener: (context, state) {
                 if (state is VehicleDeletedState) {
+                  context.read<VehicleFetchBloc>().add(UpdateVehicleLists());
+                } else if (state is VehicleDeleteFailedState) {
+                  topSnackbar(context, state.messege,
+                      const Color.fromARGB(255, 173, 12, 0), true);
+                } else if (state is VehileDataSuccsess) {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (context) => ScreenParant(index: 1)),
                       (route) => false);
-                } else if (state is VehicleDeleteFailedState) {
-                  topSnackbar(context, state.messege,
-                      const Color.fromARGB(255, 173, 12, 0), true);
                 }
               },
               builder: (context, state) {

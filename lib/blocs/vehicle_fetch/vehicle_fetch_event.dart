@@ -11,3 +11,5 @@ class VehicleDeleteEvent extends VehicleDataFetchEvent {
     required this.id
   });
 }
+
+class UpdateVehicleLists extends VehicleFetchEvent{}

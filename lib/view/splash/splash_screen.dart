@@ -5,6 +5,7 @@ import 'package:second_project/data/get_it/get_it.dart';
 import 'package:second_project/data/shared_preferance/shared_preferance.dart';
 import 'package:second_project/modals/dashboard_modal.dart';
 import 'package:second_project/modals/host_data_modal.dart';
+import 'package:second_project/modals/vehicle_fetch_modal.dart';
 import 'package:second_project/repositories/host_repo.dart';
 import 'package:second_project/utils/custom_navbar.dart';
 import 'package:second_project/view/login_and_signup/login_screen.dart';
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   loginCheck(context) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final token = SharedPreference.instance.getToken();
     if (token != null) {
       final response = await HostRepo().fetchHostData();
@@ -64,10 +65,26 @@ class _SplashScreenState extends State<SplashScreen> {
 
   fetchDashboard() async {
     final dashboardData = await HostRepo().fetchDashboard();
-    dashboardData.fold((left) {
-    }, (right) {
+    dashboardData.fold((left) {}, (right) {
       final dashboardData = DashbordModal.fromJson(right);
       locator<VehicleFetchBloc>().dashboard = dashboardData;
+      fetchVehicleChart();
+    });
+  }
+
+  fetchVehicleChart() async {
+    final response = await HostRepo().vehicleDataFetching();
+    response.fold((left) {}, (right) {
+      final vehiclelist = right as List;
+      final data =
+          vehiclelist.map((e) => VehicleFetchModal.fromJson(e)).toList();
+      List<VehicleFetchModal> pending =
+          data.where((element) => element.isVerified == false).toList();
+      List<VehicleFetchModal> verified =
+          data.where((element) => element.isVerified == true).toList();
+
+      locator<VehicleFetchBloc>().pendingList = pending;
+      locator<VehicleFetchBloc>().verifiedList = verified;
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => ScreenParant()),
           (route) => false);
